@@ -32,6 +32,7 @@ export const siteData = {
             {
               name: 'CadQuery',
               url: 'https://github.com/CadQuery/cadquery',
+              year: 2014,
               description: 'Python parametric CAD with a chainable fluent API on top of OpenCASCADE. Large community, mature. See also <a href="https://github.com/CadQuery/awesome-cadquery" target="_blank" rel="noopener">awesome-cadquery</a>.',
               tags: ['python', 'opencascade', 'open-source', 'brep', 'parametric'],
               tech: ['Python'],
@@ -39,6 +40,7 @@ export const siteData = {
             {
               name: 'Build123d',
               url: 'https://github.com/gumyr/build123d',
+              year: 2022,
               description: 'Next-gen Python CAD evolved from CadQuery. Pythonic context managers, both CSG tree and feature-stack workflows. Heading toward stable 1.0. See <a href="https://github.com/gumyr/bd_warehouse" target="_blank" rel="noopener">bd_warehouse</a> for a parametric parts library.',
               tags: ['python', 'opencascade', 'open-source', 'brep', 'parametric'],
               tech: ['Python'],
@@ -46,6 +48,7 @@ export const siteData = {
             {
               name: 'pythonOCC',
               url: 'https://github.com/tpaviot/pythonocc-core',
+              year: 2008,
               description: 'Low-level Python bindings to nearly all OpenCASCADE classes. STEP/IGES/STL/GLTF I/O. 400+ academic citations.',
               tags: ['python', 'opencascade', 'open-source', 'brep', 'academic'],
               tech: ['Python'],
@@ -53,6 +56,7 @@ export const siteData = {
             {
               name: 'FreeCAD',
               url: 'https://github.com/FreeCAD/FreeCAD',
+              year: 2002,
               description: 'Full parametric CAD application with deeply integrated Python API. Nearly everything is scriptable. Milestone v1.0 released.',
               links: { website: 'https://www.freecad.org/' },
               tags: ['python', 'opencascade', 'open-source', 'brep', 'parametric', 'gui'],
@@ -61,6 +65,8 @@ export const siteData = {
             {
               name: 'Dune3D',
               url: 'https://dune3d.org/',
+              year: 2023,
+              github: 'https://github.com/dune3d/dune3d',
               description: 'Parametric 3D CAD combining SolveSpace\'s constraint solver with OpenCASCADE geometry. Modern Gtk4 UI. STEP import/export.',
               tags: ['c++', 'opencascade', 'open-source', 'brep', 'parametric', 'gui'],
               tech: ['C++', 'Gtk4'],
@@ -68,6 +74,7 @@ export const siteData = {
             {
               name: 'SolveSpace',
               url: 'https://solvespace.com/',
+              year: 2008,
               links: { github: 'https://github.com/solvespace/solvespace' },
               description: 'Lightweight parametric 2D/3D CAD with a powerful geometric constraint solver. Exports STEP, STL, DXF, PDF. Also usable as a C library.',
               tags: ['c++', 'open-source', 'brep', 'parametric', 'constraint-solver', 'gui'],
@@ -76,6 +83,7 @@ export const siteData = {
             {
               name: 'BRL-CAD',
               url: 'https://brlcad.org/',
+              year: 1979,
               links: { github: 'https://github.com/BRL-CAD/brlcad' },
               description: 'One of the oldest open-source CAD systems (since 1979). CSG solid modeling, ray tracing, geometric analysis. Originally developed by the U.S. Army Research Laboratory.',
               tags: ['c', 'open-source', 'csg', 'ray-tracing', 'military', 'historic'],
@@ -84,6 +92,8 @@ export const siteData = {
             {
               name: 'Replicad',
               url: 'https://replicad.xyz/',
+              year: 2022,
+              github: 'https://github.com/sgenoud/replicad',
               links: { github: 'https://github.com/sgenoud/replicad' },
               description: 'TypeScript library for browser-based 3D CAD on top of opencascade.js. CadQuery-inspired API. Embeddable in any web app. Online workbench included.',
               tags: ['typescript', 'opencascade', 'open-source', 'brep', 'browser', 'wasm'],
@@ -92,6 +102,7 @@ export const siteData = {
             {
               name: 'cqparts',
               url: 'https://github.com/cqparts/cqparts',
+              year: 2017,
               description: 'Assembly framework for CadQuery. Define parametric parts and assemblies with constraints. BOM generation, exploded views, STEP export. Think "CadQuery for multi-part designs."',
               tags: ['python', 'opencascade', 'open-source', 'brep', 'assembly'],
               tech: ['Python'],
@@ -99,6 +110,7 @@ export const siteData = {
             {
               name: 'Topologic',
               url: 'https://github.com/wassimj/Topologic',
+              year: 2018,
               description: 'Spatial modeling library supporting non-manifold topology for architecture and engineering. Integrates with Blender (via Sverchok), Dynamo, and Python. Academic roots.',
               tags: ['c++', 'python', 'open-source', 'topology', 'architecture', 'academic'],
               tech: ['C++', 'Python'],
@@ -113,6 +125,7 @@ export const siteData = {
             {
               name: 'OpenSCAD',
               url: 'https://openscad.org/',
+              year: 2010,
               links: { github: 'https://github.com/openscad/openscad' },
               description: 'The original code-CAD tool. Custom DSL for CSG modeling. Now integrating the Manifold engine for ~100x speedups. See also <a href="https://github.com/SolidCode/SolidPython" target="_blank" rel="noopener">SolidPython</a> for a Python frontend.',
               tags: ['openscad', 'open-source', 'csg', 'dsl', 'parametric'],
@@ -121,6 +134,7 @@ export const siteData = {
             {
               name: 'SolidPython2',
               url: 'https://github.com/jeff-dh/SolidPython',
+              year: 2021,
               description: 'Python frontend for OpenSCAD. Write Python, generate .scad files. v2 adds operator overloading, chained transforms, and an improved API over the original SolidPython.',
               tags: ['python', 'openscad', 'open-source', 'csg'],
               tech: ['Python'],
@@ -128,6 +142,7 @@ export const siteData = {
             {
               name: 'BOSL2',
               url: 'https://github.com/BelfrySCAD/BOSL2',
+              year: 2019,
               description: 'The Belfry OpenScad v2 Library \u2014 massive standard library for OpenSCAD. Threading, beziers, rounding, joints, hinges, gears, polyhedra, and much more. Essential for serious OpenSCAD work.',
               tags: ['openscad', 'open-source', 'library', 'csg'],
               tech: ['OpenSCAD'],
@@ -135,6 +150,7 @@ export const siteData = {
             {
               name: 'NopSCADlib',
               url: 'https://github.com/nophead/NopSCADlib',
+              year: 2019,
               description: 'OpenSCAD library of common 3D printer/CNC parts: vitamins (screws, bearings, stepper motors, etc.), printed parts, and assemblies. Auto-generates BOMs and assembly instructions.',
               tags: ['openscad', 'open-source', 'library', 'hardware', '3d-printing'],
               tech: ['OpenSCAD'],
@@ -142,6 +158,7 @@ export const siteData = {
             {
               name: 'JSCAD (OpenJSCAD)',
               url: 'https://github.com/jscad/OpenJSCAD.org',
+              year: 2012,
               links: { website: 'https://www.jscad.xyz/' },
               description: 'Modular browser and CLI tools for parametric 2D/3D designs with JavaScript. Exports STL, DXF, SVG. V3 in development.',
               tags: ['javascript', 'open-source', 'csg', 'browser', 'parametric'],
@@ -150,6 +167,7 @@ export const siteData = {
             {
               name: 'Manifold',
               url: 'https://github.com/elalish/manifold',
+              year: 2022,
               links: { website: 'https://manifoldcad.org/' },
               description: 'High-performance geometry library for guaranteed-manifold mesh Booleans. GPU-parallel, ~100x faster than OpenSCAD. JS/Python/C bindings. Now an OpenSCAD backend. See <a href="https://manifoldcad.org/" target="_blank" rel="noopener">ManifoldCAD</a> for a browser editor.',
               tags: ['c++', 'javascript', 'python', 'open-source', 'mesh', 'booleans', 'gpu', 'wasm'],
@@ -158,6 +176,7 @@ export const siteData = {
             {
               name: 'MicroCAD',
               url: 'https://codeberg.org/microcad/microcad',
+              year: 2024,
               description: 'Description language for parameterizable geometric objects, compiled to STL/SVG. Funded by the German Prototype Fund (2025).',
               tags: ['rust', 'open-source', 'csg', 'dsl'],
               tech: ['Rust'],
@@ -165,6 +184,7 @@ export const siteData = {
             {
               name: 'ShapeScript',
               url: 'https://github.com/nicklockwood/ShapeScript',
+              year: 2019,
               description: 'Mac/iOS app for creating 3D models using a simple scripting language. CSG operations, extrusion, lathe, loft, fill, text. Exports STL, DAE, OBJ, SCN, 3MF.',
               tags: ['swift', 'open-source', 'csg', 'macos', 'ios', 'dsl'],
               tech: ['Swift'],
@@ -179,6 +199,7 @@ export const siteData = {
             {
               name: 'Fidget',
               url: 'https://github.com/mkeeter/fidget',
+              year: 2023,
               description: 'Blazing-fast implicit surface evaluation by Matt Keeter. Hand-written JIT compiler (aarch64/x86_64), interval evaluation, Manifold Dual Contouring meshing. Successor to libfive.',
               tags: ['rust', 'open-source', 'sdf', 'implicit', 'jit', 'gpu'],
               tech: ['Rust'],
@@ -186,6 +207,7 @@ export const siteData = {
             {
               name: 'libfive',
               url: 'https://github.com/libfive/libfive',
+              year: 2015,
               description: 'Infrastructure for solid modeling using f-rep (implicit functions). Includes "Studio" GUI for live-coding with Python or Guile. By Matt Keeter.',
               tags: ['c++', 'python', 'open-source', 'sdf', 'implicit', 'frep'],
               tech: ['C++', 'Python', 'Guile'],
@@ -193,6 +215,7 @@ export const siteData = {
             {
               name: 'ImplicitCAD',
               url: 'https://github.com/Haskell-Things/ImplicitCAD',
+              year: 2011,
               description: 'Math-inspired programmatic CAD in Haskell. CSG, bevels, shells, 2D G-code generation. OpenSCAD-like syntax with Haskell extensibility.',
               tags: ['haskell', 'open-source', 'sdf', 'implicit', 'csg', 'gcode'],
               tech: ['Haskell'],
@@ -200,6 +223,7 @@ export const siteData = {
             {
               name: 'Curv',
               url: 'https://github.com/curv3d/curv',
+              year: 2017,
               description: 'Open-source language for making art using mathematics. SDF shapes, full color, animation, 3D printing export. GPU-accelerated.',
               tags: ['c++', 'open-source', 'sdf', 'implicit', 'gpu', 'generative-art'],
               tech: ['C++', 'GLSL'],
@@ -207,6 +231,7 @@ export const siteData = {
             {
               name: 'sdf (fogleman)',
               url: 'https://github.com/fogleman/sdf',
+              year: 2019,
               description: 'Simple SDF mesh generation in Python with Marching Cubes. NumPy-accelerated, multi-threaded. Compact and easy to use.',
               tags: ['python', 'open-source', 'sdf', 'marching-cubes'],
               tech: ['Python'],
@@ -214,6 +239,7 @@ export const siteData = {
             {
               name: 'sdfx',
               url: 'https://github.com/deadsy/sdfx',
+              year: 2019,
               description: 'SDF-based CAD kernel in Go. Supports fillets and chamfers.',
               tags: ['go', 'open-source', 'sdf'],
               tech: ['Go'],
@@ -277,6 +303,7 @@ export const siteData = {
             {
               name: 'Sverchok',
               url: 'https://github.com/nortikin/sverchok',
+              year: 2013,
               description: 'Powerful parametric design addon for Blender. 500+ nodes for generative art, architecture, engineering. Often compared to Grasshopper. Python-scriptable nodes.',
               tags: ['blender', 'python', 'open-source', 'node-graph', 'parametric', 'generative'],
               tech: ['Blender', 'Python'],
@@ -284,6 +311,7 @@ export const siteData = {
             {
               name: 'Antimony',
               url: 'https://github.com/mkeeter/antimony',
+              year: 2013,
               description: 'Node-based CAD tool by Matt Keeter (creator of libfive/Fidget). Graph-based design with implicit functions. No longer maintained but influential.',
               tags: ['c++', 'python', 'open-source', 'node-graph', 'implicit', 'historic'],
               tech: ['C++', 'Python'],
@@ -312,6 +340,7 @@ export const siteData = {
             {
               name: 'CAD Sketcher',
               url: 'https://github.com/hlorus/CAD_Sketcher',
+              year: 2021,
               description: 'Blender addon adding constraint-based 2D sketching (like SolveSpace inside Blender). Geometric and dimensional constraints, then extrude to 3D.',
               tags: ['blender', 'python', 'open-source', 'constraint-solver', 'sketching'],
               tech: ['Blender', 'Python'],
@@ -319,6 +348,7 @@ export const siteData = {
             {
               name: 'BlenderBIM',
               url: 'https://blenderbim.org/',
+              year: 2019,
               links: { github: 'https://github.com/IfcOpenShell/IfcOpenShell' },
               description: 'Full BIM (Building Information Modeling) suite inside Blender. IFC support, parametric architecture, structural analysis. Built on IfcOpenShell.',
               tags: ['blender', 'python', 'open-source', 'bim', 'architecture', 'ifc'],
@@ -327,6 +357,7 @@ export const siteData = {
             {
               name: 'Blender GIS',
               url: 'https://github.com/domlysz/BlenderGIS',
+              year: 2014,
               description: 'Import geographic data (shapefiles, georeferenced rasters, OSM) into Blender. Create 3D terrain and urban models for CNC/3D printing.',
               tags: ['blender', 'python', 'open-source', 'gis', 'terrain'],
               tech: ['Blender', 'Python'],
@@ -341,6 +372,7 @@ export const siteData = {
             {
               name: 'Fornjot',
               url: 'https://github.com/hannobraun/fornjot',
+              year: 2021,
               description: 'Early-stage B-Rep CAD kernel in Rust. CSG, sketches, sweeps. Define models directly in Rust code. Presented at FOSDEM 2026.',
               tags: ['rust', 'open-source', 'brep', 'kernel'],
               tech: ['Rust'],
@@ -348,6 +380,7 @@ export const siteData = {
             {
               name: 'Truck',
               url: 'https://github.com/ricosjp/truck',
+              year: 2021,
               description: 'Shape processing kernel in Rust. STEP I/O, NURBS, Boolean ops. WASM-compilable. Geometry kernel for CADmium.',
               tags: ['rust', 'open-source', 'brep', 'kernel', 'nurbs', 'wasm'],
               tech: ['Rust', 'WASM'],
@@ -373,6 +406,7 @@ export const siteData = {
             {
               name: 'FullControl',
               url: 'https://github.com/FullControlXYZ/fullcontrol',
+              year: 2022,
               links: { website: 'https://fullcontrol.xyz/' },
               description: 'The leading open-source Python library for programmatic G-code. Design everything about a print path: every point, speed, temperature, and extrusion parameter. Think "hotmelt glue gun" \u2014 you decide exactly where it moves. Includes <a href="https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/tutorials/colab/contents_colab.ipynb" target="_blank" rel="noopener">interactive Colab tutorials</a>, a <a href="https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/models/colab/design_template_colab.ipynb" target="_blank" rel="noopener">design template</a>, and a <a href="https://www.youtube.com/playlist?list=PLXIkSZPJTLeVXNktt3HfyeytS7fG2byuG" target="_blank" rel="noopener">YouTube playlist</a>. Pre-made parametric designs at <a href="https://fullcontrol.xyz/" target="_blank" rel="noopener">fullcontrol.xyz</a>.',
               tags: ['python', 'open-source', 'gcode', '3d-printing', 'parametric'],
@@ -384,6 +418,7 @@ export const siteData = {
             {
               name: 'fullcontrol-js',
               url: 'https://github.com/kylegrover/fullcontrol-js',
+              year: 2025,
               links: { npm: 'https://www.npmjs.com/package/fullcontrol-js', docs: 'https://kylegrover.github.io/fullcontrol-js/' },
               description: 'Complete TypeScript rewrite of FullControl. Browser-first, Node-compatible, zero dependencies, tree-shakeable. 23 automated parity tests all passing against Python v0.1.2. 13 geometry modules, 20+ printer profiles, visualization pipeline with color gradients.',
               tags: ['typescript', 'open-source', 'gcode', '3d-printing', 'browser', 'npm'],
@@ -395,6 +430,7 @@ export const siteData = {
             {
               name: 'mecode',
               url: 'https://github.com/jminardi/mecode',
+              year: 2013,
               description: 'Simple Python library for G-code generation. Human-readable layer above G-code with commands for lines, arcs, rectangles, and meanders.',
               tags: ['python', 'open-source', 'gcode'],
               tech: ['Python'],
@@ -402,6 +438,7 @@ export const siteData = {
             {
               name: 'pygcode',
               url: 'https://pypi.org/project/pygcode/',
+              year: 2018,
               description: 'Python G-code parser and generation library. Parse, inspect, and generate standard G-code programmatically.',
               tags: ['python', 'open-source', 'gcode', 'parser'],
               tech: ['Python'],
@@ -416,6 +453,7 @@ export const siteData = {
             {
               name: 'pygdk',
               url: 'https://github.com/cilynx/pygdk',
+              year: 2017,
               description: 'Python G-code Development Kit. Generate G-code for CNC machines directly from object features, bypassing abstract design and slicing.',
               tags: ['python', 'open-source', 'gcode', 'cnc'],
               tech: ['Python'],
@@ -435,25 +473,28 @@ export const siteData = {
           description: 'Integrated environments for writing code that produces G-code.',
           items: [
             {
-              name: 'py2g / js2g',
-              url: 'https://github.com/kylegrover/py2g',
-              links: { website: 'https://py2g.com', website2: 'https://js2g.com' },
-              description: 'Write Python or JavaScript in the browser to generate G-code \u2014 no install needed. Python runs via <a href="https://pyodide.org/" target="_blank" rel="noopener">Pyodide</a> WASM; JS mode uses fullcontrol-js. Monaco editor with AI-assisted coding, WebGPU 3D preview via <a href="https://usegpu.live/" target="_blank" rel="noopener">@use-gpu</a>. Also available as a Tauri desktop app with bundled <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener">uv</a> Python environment. Future plans include <a href="https://github.com/CadQuery/cadquery" target="_blank" rel="noopener">CadQuery</a> / <a href="https://github.com/gumyr/build123d" target="_blank" rel="noopener">Build123d</a> integration.',
-              tags: ['typescript', 'python', 'open-source', 'gcode', 'browser', 'ide', 'webgpu', 'ai'],
+              name: 'py2g',
+              url: 'https://py2g.com',
+              github: 'https://github.com/kylegrover/py2g',
+              year: 2024,
+              description: 'Write Python in the browser to generate G-code \u2014 no install needed. Uses <a href="https://pyodide.org/" target="_blank" rel="noopener">Pyodide</a> WASM to run FullControl natively in-browser. Monaco editor with AI-assisted coding, WebGPU 3D preview via <a href="https://usegpu.live/" target="_blank" rel="noopener">@use-gpu</a>. Also available as a Tauri desktop app with bundled <a href="https://github.com/astral-sh/uv" target="_blank" rel="noopener">uv</a> Python environment. Future plans include <a href="https://github.com/CadQuery/cadquery" target="_blank" rel="noopener">CadQuery</a> / <a href="https://github.com/gumyr/build123d" target="_blank" rel="noopener">Build123d</a> integration.',
+              tags: ['typescript', 'python', 'open-source', 'gcode', 'browser', 'ide', 'webgpu', 'ai', 'pyodide'],
               tech: ['Next.js', 'Pyodide', 'WebGPU', 'Tauri', 'Monaco'],
               featured: true,
               badge: 'Web App',
-              tagline: 'Browser-Based Python & JS to G-Code IDE',
+              tagline: 'Browser-Based Python to G-Code IDE',
             },
             {
-              name: 'FullControl IDE',
-              url: 'https://github.com/kylegrover/fullcontrol-ide',
-              description: 'Windows desktop IDE for FullControl G-code design. Downloadable executables, built-in G-code visualization with yagv5 (dark mode, OpenSCAD-style mouse controls), import/export.',
-              tags: ['python', 'open-source', 'gcode', 'desktop', 'ide'],
-              tech: ['Python', 'PyInstaller'],
+              name: 'js2g',
+              url: 'https://js2g.com',
+              github: 'https://github.com/kylegrover/py2g',
+              year: 2025,
+              description: 'Write JavaScript in the browser to generate G-code using <a href="https://github.com/kylegrover/fullcontrol-js" target="_blank" rel="noopener">fullcontrol-js</a>. Same platform as py2g with shared Monaco editor, AI code assist, and WebGPU 3D preview \u2014 but runs pure JS with zero WASM overhead. Instant execution, no compilation step.',
+              tags: ['typescript', 'javascript', 'open-source', 'gcode', 'browser', 'ide', 'webgpu', 'ai', 'fullcontrol-js'],
+              tech: ['Next.js', 'fullcontrol-js', 'WebGPU', 'Monaco'],
               featured: true,
-              badge: 'Desktop',
-              tagline: 'Desktop IDE for FullControl',
+              badge: 'Web App',
+              tagline: 'Browser-Based JavaScript to G-Code IDE',
             },
           ],
         },
@@ -476,6 +517,7 @@ export const siteData = {
             {
               name: 'PrusaSlicer',
               url: 'https://github.com/prusa3d/PrusaSlicer',
+              year: 2018,
               links: { website: 'https://www.prusa3d.com/page/prusaslicer_424/' },
               description: 'Feature-rich slicer forked from Slic3r. Extensive CLI for batch slicing, profile management, and integration into automated workflows. Supports FDM and SLA. Powers many derivative slicers.',
               tags: ['c++', 'open-source', 'slicer', '3d-printing', 'cli', 'fdm', 'sla'],
@@ -484,6 +526,7 @@ export const siteData = {
             {
               name: 'OrcaSlicer',
               url: 'https://github.com/SoftFever/OrcaSlicer',
+              year: 2023,
               description: 'Community-driven slicer forked from Bambu Studio/PrusaSlicer. Multi-printer support, auto-calibration, Klipper integration. CLI available. Rapidly growing community.',
               tags: ['c++', 'open-source', 'slicer', '3d-printing', 'cli', 'klipper'],
               tech: ['C++', 'CLI'],
@@ -491,6 +534,7 @@ export const siteData = {
             {
               name: 'CuraEngine',
               url: 'https://github.com/Ultimaker/CuraEngine',
+              year: 2013,
               description: 'The slicing engine behind Ultimaker Cura. C++ library that can be integrated into other applications or driven via CLI. Powerful and well-documented.',
               tags: ['c++', 'open-source', 'slicer', '3d-printing', 'cli', 'engine'],
               tech: ['C++'],
@@ -498,6 +542,7 @@ export const siteData = {
             {
               name: 'Slic3r',
               url: 'https://github.com/slic3r/Slic3r',
+              year: 2011,
               links: { website: 'https://slic3r.org/' },
               description: 'The original open-source slicer that spawned PrusaSlicer, SuperSlicer, and BambuStudio. Perl/C++ with CLI. Still maintained for CNC/laser use cases.',
               tags: ['c++', 'perl', 'open-source', 'slicer', '3d-printing', 'cli', 'historic'],
@@ -506,6 +551,7 @@ export const siteData = {
             {
               name: 'SuperSlicer',
               url: 'https://github.com/supermerill/SuperSlicer',
+              year: 2020,
               description: 'PrusaSlicer fork with additional features: calibration tools, more infill patterns, thin wall detection, pressure/flow calibration. Development paused as of late 2024.',
               tags: ['c++', 'open-source', 'slicer', '3d-printing'],
               tech: ['C++'],
@@ -520,6 +566,7 @@ export const siteData = {
             {
               name: 'Kiri:Moto',
               url: 'https://grid.space/kiri/',
+              year: 2014,
               links: { github: 'https://github.com/GridSpace/grid-apps' },
               description: 'Browser-based slicer and CAM tool. FDM slicing, CNC milling (2.5D and 3-axis), laser cutting. All computation runs client-side. Surprisingly capable for a web app.',
               tags: ['javascript', 'open-source', 'cam', 'slicer', 'browser', 'cnc', 'laser'],
@@ -535,6 +582,7 @@ export const siteData = {
             {
               name: 'PyCAM',
               url: 'https://github.com/SebKuworking/pycam',
+              year: 2008,
               links: { website: 'https://pycam.sourceforge.io/' },
               description: 'Open-source 3-axis CAM toolpath generator. Imports STL/DXF, generates G-code for CNC milling. Supports contour, surface, and engrave strategies.',
               tags: ['python', 'open-source', 'cam', 'cnc', 'milling'],
@@ -550,6 +598,7 @@ export const siteData = {
             {
               name: 'OpenCAMLib',
               url: 'https://github.com/aewallin/opencamlib',
+              year: 2010,
               description: 'C++ library for computing CNC toolpaths. Drop-cutter, push-cutter, and waterline algorithms. Python bindings. Used in FreeCAD Path.',
               tags: ['c++', 'python', 'open-source', 'cam', 'cnc', 'library'],
               tech: ['C++', 'Python'],
@@ -557,6 +606,7 @@ export const siteData = {
             {
               name: 'Blender CAM',
               url: 'https://github.com/vilemduha/blendercam',
+              year: 2012,
               description: 'Blender addon for CNC machining. Generates toolpaths from Blender geometry. 3-axis and limited 4/5-axis, various milling strategies.',
               tags: ['blender', 'python', 'open-source', 'cam', 'cnc'],
               tech: ['Blender', 'Python'],
@@ -564,6 +614,7 @@ export const siteData = {
             {
               name: 'F-Engrave',
               url: 'https://github.com/stephenhouser/f-engrave',
+              year: 2014,
               description: 'Converts text, DXF, or bitmap images to G-code for CNC engraving. V-carving, raster engraving, and DXF import. Popular for sign-making.',
               tags: ['python', 'open-source', 'cam', 'cnc', 'engraving'],
               tech: ['Python'],
@@ -578,6 +629,7 @@ export const siteData = {
             {
               name: 'Klipper',
               url: 'https://www.klipper3d.org/',
+              year: 2016,
               links: { github: 'https://github.com/Klipper3d/klipper' },
               description: 'Advanced 3D printer firmware running on a host computer (Raspberry Pi) + microcontroller. Python-based configuration, macros, and scripting. Pressure advance, input shaping, high-speed printing.',
               tags: ['python', 'c', 'open-source', 'firmware', '3d-printing', 'scripting'],
@@ -586,6 +638,7 @@ export const siteData = {
             {
               name: 'Marlin',
               url: 'https://marlinfw.org/',
+              year: 2011,
               links: { github: 'https://github.com/MarlinFirmware/Marlin' },
               description: 'The most widely-used open-source 3D printer firmware. Runs on AVR and ARM boards. Extensive G-code support, linear advance, auto bed leveling.',
               tags: ['c++', 'open-source', 'firmware', '3d-printing'],
@@ -594,6 +647,7 @@ export const siteData = {
             {
               name: 'grbl',
               url: 'https://github.com/gnea/grbl',
+              year: 2009,
               description: 'High-performance G-code interpreter for Arduino/AVR. The standard for hobby CNC mills, laser engravers, and small routers. Compact, fast, well-understood.',
               tags: ['c', 'open-source', 'firmware', 'cnc', 'arduino'],
               tech: ['C'],
@@ -601,6 +655,7 @@ export const siteData = {
             {
               name: 'FluidNC',
               url: 'https://github.com/bdring/FluidNC',
+              year: 2021,
               description: 'Next-gen CNC firmware for ESP32. YAML-based configuration, WiFi, Bluetooth, SD card. grbl-compatible. Modern replacement for Grbl_ESP32.',
               tags: ['c++', 'open-source', 'firmware', 'cnc', 'esp32', 'wifi'],
               tech: ['C++', 'ESP32'],
@@ -608,6 +663,7 @@ export const siteData = {
             {
               name: 'LinuxCNC',
               url: 'https://linuxcnc.org/',
+              year: 1993,
               links: { github: 'https://github.com/LinuxCNC/linuxcnc' },
               description: 'Full CNC control system running on Linux with real-time kernel. Supports up to 9 axes. HAL (Hardware Abstraction Layer) for custom I/O. Python and G-code scripting. Industry-proven.',
               tags: ['c', 'python', 'open-source', 'firmware', 'cnc', 'linux', 'industrial'],
@@ -616,6 +672,7 @@ export const siteData = {
             {
               name: 'RepRapFirmware',
               url: 'https://github.com/Duet3D/RepRapFirmware',
+              year: 2014,
               description: 'Advanced 3D printer firmware for Duet boards. Macro system, object model API, HTTP/MQTT control, conditional G-code. Runs its own web interface (DWC).',
               tags: ['c++', 'open-source', 'firmware', '3d-printing', 'api', 'duet'],
               tech: ['C++'],
@@ -623,6 +680,7 @@ export const siteData = {
             {
               name: 'grblHAL',
               url: 'https://github.com/grblHAL',
+              year: 2018,
               description: '32-bit evolution of grbl. Runs on ARM, ESP32, RP2040. Adds networking, SD card, spindle sync, plasma THC, lathe threading, and more. Drop-in grbl replacement.',
               tags: ['c', 'open-source', 'firmware', 'cnc', '32-bit'],
               tech: ['C'],
@@ -630,6 +688,7 @@ export const siteData = {
             {
               name: 'Smoothieware',
               url: 'https://github.com/Smoothieware/Smoothieware',
+              year: 2011,
               description: 'G-code interpreter for LPC17xx/STM32 boards. Supports 3D printers, CNC mills, and laser cutters. Modular, configurable via SD card text files.',
               tags: ['c++', 'open-source', 'firmware', '3d-printing', 'cnc', 'laser'],
               tech: ['C++'],
@@ -637,6 +696,7 @@ export const siteData = {
             {
               name: 'TinyG',
               url: 'https://github.com/synthetos/TinyG',
+              year: 2012,
               description: '6-axis motion control system by Synthetos. JSON-based API, jerk-controlled motion planning. Foundation for g2core (next-gen ARM port).',
               tags: ['c', 'open-source', 'firmware', 'cnc', '6-axis', 'json-api'],
               tech: ['C'],
@@ -662,6 +722,7 @@ export const siteData = {
             {
               name: 'OpenCASCADE (OCCT)',
               url: 'https://dev.opencascade.org/',
+              year: 1999,
               description: 'The industrial-strength open-source B-Rep geometry kernel. Powers CadQuery, Build123d, FreeCAD, pythonOCC, and dozens of commercial products. STEP/IGES/BREP native. C++ with SWIG bindings.',
               tags: ['c++', 'open-source', 'kernel', 'brep', 'nurbs', 'step'],
               tech: ['C++'],
@@ -669,6 +730,7 @@ export const siteData = {
             {
               name: 'CGAL',
               url: 'https://www.cgal.org/',
+              year: 1996,
               links: { github: 'https://github.com/CGAL/cgal' },
               description: 'Computational Geometry Algorithms Library. Mesh generation, Boolean operations, convex hulls, Voronoi diagrams, surface reconstruction, and much more. Academic gold standard. C++ with Python bindings (scikit-geometry).',
               tags: ['c++', 'python', 'open-source', 'kernel', 'computational-geometry', 'academic'],
@@ -677,6 +739,7 @@ export const siteData = {
             {
               name: 'OpenCascade.js',
               url: 'https://ocjs.org/',
+              year: 2020,
               description: 'The foundational WASM port of OpenCASCADE powering CascadeStudio, Replicad, Chili3D, and others. Near-native speeds with multi-threading.',
               tags: ['javascript', 'open-source', 'wasm', 'opencascade', 'browser'],
               tech: ['WASM', 'JavaScript'],
@@ -691,6 +754,7 @@ export const siteData = {
             {
               name: 'Trimesh',
               url: 'https://github.com/mikedh/trimesh',
+              year: 2014,
               description: 'The go-to Python library for triangle meshes. Load/save 30+ formats, boolean operations, ray casting, voxelization, convex decomposition, section planes, repair. Used everywhere.',
               tags: ['python', 'open-source', 'mesh', 'stl', 'repair'],
               tech: ['Python'],
@@ -698,6 +762,7 @@ export const siteData = {
             {
               name: 'numpy-stl',
               url: 'https://github.com/WoLpH/numpy-stl',
+              year: 2013,
               description: 'Fast STL file reading/writing in Python using NumPy arrays. Simple and efficient for batch processing STL files.',
               tags: ['python', 'open-source', 'mesh', 'stl', 'numpy'],
               tech: ['Python'],
@@ -705,6 +770,7 @@ export const siteData = {
             {
               name: 'Open3D',
               url: 'https://www.open3d.org/',
+              year: 2018,
               links: { github: 'https://github.com/isl-org/Open3D' },
               description: 'Modern library for 3D data processing. Point clouds, meshes, RGBD images, voxels. Reconstruction, registration, visualization. C++ core with Python bindings. By Intel ISL.',
               tags: ['c++', 'python', 'open-source', 'mesh', 'point-cloud', 'visualization'],
@@ -713,6 +779,7 @@ export const siteData = {
             {
               name: 'libigl',
               url: 'https://libigl.github.io/',
+              year: 2013,
               links: { github: 'https://github.com/libigl/libigl' },
               description: 'Header-only C++ geometry processing library. Discrete differential geometry, mesh editing, parametrization, decimation, remeshing. Python bindings. Academic workhorse.',
               tags: ['c++', 'python', 'open-source', 'mesh', 'academic', 'geometry'],
@@ -721,6 +788,7 @@ export const siteData = {
             {
               name: 'PyMesh',
               url: 'https://github.com/PyMesh/PyMesh',
+              year: 2016,
               description: 'Geometry processing library wrapping CGAL, libigl, Triangle, TetGen, Qhull. Boolean operations, mesh repair, wire network inflation, self-intersection detection.',
               tags: ['python', 'c++', 'open-source', 'mesh', 'boolean', 'repair'],
               tech: ['Python', 'C++'],
@@ -728,6 +796,7 @@ export const siteData = {
             {
               name: 'MeshLab (PyMeshLab)',
               url: 'https://www.meshlab.net/',
+              year: 2005,
               links: { github: 'https://github.com/cnr-isti-vclab/meshlab' },
               description: 'Open-source mesh processing tool with 100+ filters. <a href="https://github.com/cnr-isti-vclab/PyMeshLab" target="_blank" rel="noopener">PyMeshLab</a> exposes all filters as a Python API for scripting and automation.',
               tags: ['c++', 'python', 'open-source', 'mesh', 'repair', 'gui', 'scripting'],
@@ -736,6 +805,7 @@ export const siteData = {
             {
               name: 'VTK',
               url: 'https://vtk.org/',
+              year: 1993,
               links: { github: 'https://github.com/Kitware/VTK' },
               description: 'Visualization Toolkit by Kitware. Comprehensive 3D data processing, rendering, and interaction. C++ core with Python bindings. Foundation for ParaView and many scientific visualization tools.',
               tags: ['c++', 'python', 'open-source', 'mesh', 'visualization', 'scientific'],
@@ -751,6 +821,7 @@ export const siteData = {
             {
               name: 'lib3mf',
               url: 'https://github.com/3MFConsortium/lib3mf',
+              year: 2016,
               links: { website: 'https://3mf.io/' },
               description: 'Official C++ SDK for the 3MF file format \u2014 the modern replacement for STL. Supports multi-material, full color, lattice extensions. Python, C#, Go bindings.',
               tags: ['c++', 'python', 'open-source', '3mf', 'file-format'],
@@ -759,6 +830,7 @@ export const siteData = {
             {
               name: 'Assimp',
               url: 'https://github.com/assimp/assimp',
+              year: 2006,
               description: 'Open Asset Import Library. Reads 40+ 3D file formats (STL, OBJ, FBX, GLTF, STEP, etc.) into a unified in-memory format. C/C++ with Python and many other bindings.',
               tags: ['c++', 'open-source', 'file-format', 'import', 'multi-format'],
               tech: ['C++'],
@@ -773,6 +845,7 @@ export const siteData = {
             {
               name: 'MeshFix',
               url: 'https://github.com/MarcoAttworking/MeshFix-V2.1',
+              year: 2010,
               description: 'Automatic repair of triangle meshes. Fixes holes, self-intersections, degenerate faces. Produces watertight meshes suitable for 3D printing.',
               tags: ['c++', 'open-source', 'mesh', 'repair', '3d-printing'],
               tech: ['C++'],
@@ -861,6 +934,7 @@ export const siteData = {
             {
               name: 'gcode-preview',
               url: 'https://github.com/xyz-tools/gcode-preview',
+              year: 2020,
               description: 'The most popular npm G-code library. TypeScript parser & 3D previewer using Three.js. Multi-tool coloring, arc support. v3.0.0-alpha in development.',
               tags: ['typescript', 'open-source', 'gcode', 'npm', 'threejs', 'viewer'],
               tech: ['TypeScript', 'npm'],
@@ -917,6 +991,7 @@ export const siteData = {
             {
               name: 'CAMotics',
               url: 'https://camotics.org/',
+              year: 2014,
               description: 'Open-source 3-axis CNC G-code simulator. Visualizes material removal in 3D, calculates machining time. Formerly "OpenSCAM."',
               tags: ['desktop', 'open-source', 'gcode', 'cnc', 'simulation'],
               tech: ['C++'],
@@ -931,6 +1006,7 @@ export const siteData = {
             {
               name: 'Universal Gcode Sender (UGS)',
               url: 'https://winder.github.io/ugs_website/',
+              year: 2012,
               description: 'Cross-platform Java GRBL/FluidNC sender with 3D toolpath visualization, macros, and jog controls.',
               tags: ['java', 'open-source', 'gcode', 'cnc', 'sender', 'grbl'],
               tech: ['Java'],
@@ -938,6 +1014,7 @@ export const siteData = {
             {
               name: 'CNCjs',
               url: 'https://cnc.js.org/',
+              year: 2015,
               description: 'Web-based G-code sender for GRBL/Marlin/Smoothieware with 3D toolpath visualization. Runs on Raspberry Pi.',
               tags: ['javascript', 'open-source', 'gcode', 'cnc', 'sender', 'web'],
               tech: ['Node.js'],
@@ -952,6 +1029,7 @@ export const siteData = {
             {
               name: 'Candle',
               url: 'https://github.com/Denvi/Candle',
+              year: 2015,
               description: 'Qt-based GRBL controller with G-code visualizer, console, and real-time machine state monitoring.',
               tags: ['c++', 'open-source', 'gcode', 'cnc', 'sender', 'grbl'],
               tech: ['C++', 'Qt'],
@@ -959,6 +1037,7 @@ export const siteData = {
             {
               name: 'bCNC',
               url: 'https://github.com/vlachoudis/bCNC',
+              year: 2015,
               description: 'Python GRBL controller with visualization, auto-leveling, toolpath optimization, and DXF/SVG import.',
               tags: ['python', 'open-source', 'gcode', 'cnc', 'sender', 'grbl'],
               tech: ['Python'],
@@ -1008,6 +1087,7 @@ export const siteData = {
             {
               name: 'pyGCodeDecode',
               url: 'https://github.com/FAST-LB/pyGCodeDecode',
+              year: 2023,
               description: 'Time-accurate G-code simulation replicating grbl motion planning (Classic Jerk, Junction Deviation). <a href="https://joss.theoj.org/papers/10.21105/joss.06465" target="_blank" rel="noopener">Published in JOSS (2024)</a>.',
               tags: ['python', 'open-source', 'gcode', 'simulation', 'motion-planning'],
               tech: ['Python'],
@@ -1141,6 +1221,7 @@ export const siteData = {
             {
               name: 'Vericut',
               url: 'https://vericut.com/',
+              year: 1988,
               description: 'Industry-leading CNC simulation (since 1988). Digital twin approach, collision checking, multi-axis material removal. Commercial.',
               tags: ['commercial', 'cnc', 'simulation', 'enterprise', 'digital-twin'],
               tech: ['Commercial'],
@@ -1169,6 +1250,7 @@ export const siteData = {
             {
               name: 'VOLCO',
               url: 'https://github.com/FullControlXYZ/volco',
+              year: 2017,
               links: { fork: 'https://github.com/kylegrover/volco' },
               description: 'Open-source voxel-based simulation from the FullControl team. Takes G-code, simulates material deposition with volume-conserving physics (bisection solver), and predicts final shape. Outputs STL via marching cubes. FEA module for structural analysis. Research-backed: <a href="https://www.sciencedirect.com/science/article/pii/S2214860417304852" target="_blank" rel="noopener">VOLCO paper</a> & <a href="https://www.sciencedirect.com/science/article/abs/pii/S2214860421000658" target="_blank" rel="noopener">VOLCO-X paper</a>.',
               tags: ['python', 'open-source', 'simulation', '3d-printing', 'voxel', 'fea'],
@@ -1180,6 +1262,7 @@ export const siteData = {
             {
               name: 'VolcoGUI',
               url: 'https://github.com/kylegrover/volcogui',
+              year: 2024,
               description: 'Cross-platform desktop interface for VOLCO. Drag-and-drop G-code, configure voxel/step size, run simulations in background threads with live progress, view interactive 3D results in PyVista. Standalone Windows executable available.',
               tags: ['python', 'open-source', 'simulation', '3d-printing', 'gui', 'desktop'],
               tech: ['Python', 'PyQt6', 'PyVista', 'VTK'],
@@ -1190,6 +1273,7 @@ export const siteData = {
             {
               name: 'AdditiveFOAM',
               url: 'https://github.com/ORNL/AdditiveFOAM',
+              year: 2021,
               description: 'Open-source continuum multiphysics code for AM from Oak Ridge National Lab. Built on OpenFOAM. Simulates heat and mass transfer in L-PBF and DED. Couples with ExaCA for microstructure prediction. <a href="https://joss.theoj.org/papers/10.21105/joss.06465" target="_blank" rel="noopener">Published in JOSS (2025)</a>. DOE-funded.',
               tags: ['c++', 'open-source', 'simulation', 'metal-am', 'multiphysics'],
               tech: ['C++', 'OpenFOAM'],
@@ -1218,6 +1302,7 @@ export const siteData = {
             {
               name: 'PySLM',
               url: 'https://github.com/drlukeparry/pyslm',
+              year: 2019,
               description: 'Python library for SLM/SLS/EBM additive manufacturing. Generates scan paths and hatching patterns; slicing, support generation, overhang analysis, build-time estimation.',
               tags: ['python', 'open-source', 'simulation', 'metal-am', 'slm', 'hatching'],
               tech: ['Python'],
@@ -1260,6 +1345,7 @@ export const siteData = {
             {
               name: 'Obico',
               url: 'https://www.obico.io/',
+              year: 2020,
               description: 'Open-source AI platform for real-time print failure detection. 89M+ hours monitored. Supports OctoPrint, Klipper, Bambu Lab. Cloud and self-hosted.',
               tags: ['python', 'open-source', 'ai', '3d-printing', 'monitoring'],
               tech: ['Python', 'AI'],
@@ -1388,16 +1474,27 @@ export const siteData = {
           description: null,
           items: [
             {
-              name: 'py2g / js2g',
+              name: 'py2g',
               url: 'https://py2g.com',
-              links: { website2: 'https://js2g.com', github: 'https://github.com/kylegrover/py2g' },
-              description: 'Browser IDE for Python/JS \u2192 G-code via FullControl. Pyodide WASM runtime, WebGPU visualization, AI code assist. Also available as Tauri desktop app.',
+              github: 'https://github.com/kylegrover/py2g',
+              year: 2024,
+              description: 'Browser IDE for Python \u2192 G-code via FullControl + Pyodide WASM. WebGPU visualization, AI code assist. Also Tauri desktop app.',
               tags: ['browser', 'open-source', 'gcode', 'ide', 'wasm', 'webgpu'],
               tech: ['Next.js', 'WASM'],
             },
             {
+              name: 'js2g',
+              url: 'https://js2g.com',
+              github: 'https://github.com/kylegrover/py2g',
+              year: 2025,
+              description: 'Browser IDE for JavaScript \u2192 G-code via fullcontrol-js. Zero WASM overhead, instant execution. Shares platform with py2g.',
+              tags: ['browser', 'open-source', 'gcode', 'ide', 'javascript', 'webgpu'],
+              tech: ['Next.js', 'fullcontrol-js'],
+            },
+            {
               name: 'ManifoldCAD',
               url: 'https://manifoldcad.org/',
+              year: 2022,
               description: 'Browser-based solid modeling using Manifold compiled to WASM. Script in JS/TS with near-native performance.',
               tags: ['browser', 'open-source', 'csg', 'wasm', 'manifold'],
               tech: ['WASM'],
@@ -1405,6 +1502,7 @@ export const siteData = {
             {
               name: 'Chili3D',
               url: 'https://chili3d.com/',
+              year: 2023,
               description: 'Open-source browser-based 3D CAD. OpenCASCADE \u2192 WASM + Three.js. Full modeling tools: sketches, booleans, fillets. Alpha stage.',
               tags: ['browser', 'open-source', 'brep', 'wasm', 'opencascade', 'gui'],
               tech: ['WASM', 'Three.js'],
@@ -1412,6 +1510,7 @@ export const siteData = {
             {
               name: 'CADmium',
               url: 'https://github.com/CADmium-Co/CADmium',
+              year: 2023,
               description: 'Local-first browser CAD using the Truck Rust kernel \u2192 WASM. SvelteKit UI. Early prototype targeting 3D printing hobbyists.',
               tags: ['browser', 'open-source', 'brep', 'wasm', 'rust', 'svelte'],
               tech: ['Rust', 'WASM', 'SvelteKit'],
@@ -1419,6 +1518,7 @@ export const siteData = {
             {
               name: 'CascadeStudio',
               url: 'https://zalo.github.io/CascadeStudio/',
+              year: 2020,
               description: 'Live-scripted browser CAD using opencascade.js. Write JavaScript, see 3D results instantly. Monaco editor with autocomplete.',
               tags: ['browser', 'open-source', 'brep', 'wasm', 'opencascade', 'scripting'],
               tech: ['JavaScript', 'WASM'],
@@ -1426,6 +1526,8 @@ export const siteData = {
             {
               name: 'Replicad',
               url: 'https://replicad.xyz/',
+              year: 2022,
+              github: 'https://github.com/sgenoud/replicad',
               description: 'JS/TS library for building 3D models in the browser on opencascade.js. CadQuery-inspired API. Online workbench included.',
               tags: ['browser', 'open-source', 'brep', 'wasm', 'opencascade', 'typescript'],
               tech: ['TypeScript', 'WASM'],
@@ -1440,6 +1542,7 @@ export const siteData = {
             {
               name: 'CadHub',
               url: 'https://cadhub.xyz/',
+              year: 2021,
               description: 'Community platform for sharing code-CAD designs. Integrates OpenSCAD, CadQuery, and JSCAD in the browser.',
               tags: ['browser', 'open-source', 'community', 'openscad', 'cadquery'],
               tech: ['Browser'],
@@ -1447,6 +1550,7 @@ export const siteData = {
             {
               name: 'OpenCascade.js',
               url: 'https://ocjs.org/',
+              year: 2020,
               description: 'The foundational WASM port of OpenCASCADE powering CascadeStudio, Replicad, Chili3D, and others. Near-native speeds with multi-threading.',
               tags: ['wasm', 'open-source', 'opencascade', 'kernel', 'browser'],
               tech: ['WASM'],
@@ -1454,6 +1558,7 @@ export const siteData = {
             {
               name: 'Pyodide',
               url: 'https://pyodide.org/',
+              year: 2019,
               description: 'CPython compiled to WebAssembly. Powers py2g and JupyterLite. Could theoretically run CadQuery/Build123d in the browser.',
               tags: ['wasm', 'open-source', 'python', 'browser'],
               tech: ['WASM', 'Python'],
@@ -1479,6 +1584,7 @@ export const siteData = {
             {
               name: 'vpype',
               url: 'https://github.com/abey79/vpype',
+              year: 2020,
               description: 'CLI pipeline for creating, modifying, and optimizing SVGs for plotting. Path reordering, line merging, simplification, hatching, and more. Extensible via plugins (vpype-gcode, pixel art, halftoning). Hardware-accelerated viewer.',
               tags: ['python', 'open-source', 'plotter', 'svg', 'cli', 'pipeline'],
               tech: ['Python', 'CLI'],
@@ -1489,6 +1595,7 @@ export const siteData = {
             {
               name: 'oneliner',
               url: 'https://github.com/kylegrover/oneliner',
+              year: 2024,
               description: 'Converts images to a single continuous line. Sub-pixel edge detection (<a href="https://doi.org/10.5201/ipol.2017.216" target="_blank" rel="noopener">Canny/Devernay, IPOL 2017</a>), then <a href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm" target="_blank" rel="noopener">Kruskal\'s MST</a> + <a href="https://en.wikipedia.org/wiki/Eulerian_path" target="_blank" rel="noopener">Euler tour</a> optimization for an unbroken plotter path.',
               tags: ['rust', 'open-source', 'plotter', 'image-processing', 'single-line'],
               tech: ['Rust'],
@@ -1499,6 +1606,7 @@ export const siteData = {
             {
               name: 'idraw-extensions',
               url: 'https://github.com/kylegrover/idraw-extensions',
+              year: 2024,
               description: 'Suite of Inkscape extensions for iDraw plotters (AxiDraw variant, 16T GT2 belt, 0.01mm precision). Hatch fill, SVG reordering, direct serial control, laser engraving.',
               tags: ['python', 'c', 'open-source', 'plotter', 'inkscape', 'laser'],
               tech: ['Python', 'C/C++', 'Inkscape'],
@@ -1516,6 +1624,7 @@ export const siteData = {
             {
               name: 'DrawBot',
               url: 'https://www.drawbot.com/',
+              year: 2003,
               description: 'macOS app for Python-scripted 2D graphics. Exports PDF, SVG, PNG, animated GIF. Popular for generative art. Also see <a href="https://pypi.org/project/drawbot-skia/" target="_blank" rel="noopener">drawbot-skia</a> for cross-platform.',
               tags: ['python', 'open-source', 'plotter', 'generative-art', 'macos'],
               tech: ['Python', 'macOS'],
@@ -1523,6 +1632,7 @@ export const siteData = {
             {
               name: 'vsketch',
               url: 'https://github.com/abey79/vsketch',
+              year: 2021,
               description: 'Python generative art toolkit for plotter art. Processing-like API with vpype integration. Parametric sketches, interactive viewer, SVG export.',
               tags: ['python', 'open-source', 'plotter', 'generative-art', 'creative-coding'],
               tech: ['Python'],
@@ -1562,6 +1672,7 @@ export const siteData = {
             {
               name: 'Zoo.dev (formerly KittyCAD)',
               url: 'https://zoo.dev/',
+              year: 2021,
               description: 'API-first CAD engine with an AI-powered modeling assistant. Text-to-CAD, code generation, geometry API. KCL scripting language. Backed by substantial VC funding.',
               tags: ['commercial', 'ai', 'api', 'cad', 'text-to-cad', 'kcl'],
               tech: ['Rust', 'KCL', 'API'],
@@ -1590,6 +1701,7 @@ export const siteData = {
             {
               name: 'Topy',
               url: 'https://github.com/williamhunter/topy',
+              year: 2012,
               description: 'Lightweight Python topology optimization library using the SIMP (Solid Isotropic Material with Penalization) method. 2D and 3D, educational code.',
               tags: ['python', 'open-source', 'topology-optimization', 'simp'],
               tech: ['Python'],
@@ -1604,6 +1716,7 @@ export const siteData = {
             {
               name: 'DL4TO',
               url: 'https://github.com/dl4to/dl4to',
+              year: 2022,
               description: 'Deep Learning for Topology Optimization. PyTorch-based framework for data-driven topology optimization. Train neural networks to predict optimal material distributions.',
               tags: ['python', 'open-source', 'topology-optimization', 'deep-learning', 'pytorch'],
               tech: ['Python', 'PyTorch'],
@@ -1618,6 +1731,7 @@ export const siteData = {
             {
               name: 'Processing',
               url: 'https://processing.org/',
+              year: 2001,
               description: 'The original creative coding environment. Export 2D graphics as SVG for plotting/laser cutting, or generate 3D geometry for printing. Massive community and educational resources.',
               tags: ['java', 'open-source', 'creative-coding', 'generative-art', 'svg'],
               tech: ['Java'],
@@ -1625,6 +1739,7 @@ export const siteData = {
             {
               name: 'p5.js',
               url: 'https://p5js.org/',
+              year: 2014,
               description: 'JavaScript port of Processing for the browser. SVG export for plotter art. WebGL mode for 3D. Enormous community.',
               tags: ['javascript', 'open-source', 'creative-coding', 'browser', 'svg'],
               tech: ['JavaScript'],
@@ -1632,6 +1747,7 @@ export const siteData = {
             {
               name: 'Paper.js',
               url: 'http://paperjs.org/',
+              year: 2011,
               description: 'Vector graphics scripting framework for the browser. Boolean operations on paths, SVG import/export. Good for generative plotter art.',
               tags: ['javascript', 'open-source', 'creative-coding', 'svg', 'vector'],
               tech: ['JavaScript'],
@@ -1646,6 +1762,7 @@ export const siteData = {
             {
               name: 'Beetle Blocks',
               url: 'https://github.com/ericrosenbaum/BeetleBlocks',
+              year: 2014,
               description: 'Scratch-like visual programming for 3D-printable designs. Block-based coding creates turtle-graphics-style 3D geometry. Great for education.',
               tags: ['javascript', 'open-source', 'creative-coding', 'visual-programming', 'education', '3d-printing'],
               tech: ['JavaScript', 'Scratch'],
@@ -1660,6 +1777,7 @@ export const siteData = {
             {
               name: 'Descartes.jl',
               url: 'https://github.com/JuliaGeometry/Descartes.jl',
+              year: 2016,
               description: 'Software-defined solid modeling in Julia. Part of the JuliaGeometry organization. CSG operations, mesh generation.',
               tags: ['julia', 'open-source', 'csg', 'solid-modeling'],
               tech: ['Julia'],
@@ -1667,6 +1785,7 @@ export const siteData = {
             {
               name: 'Comodo.jl',
               url: 'https://github.com/COMODO-research/Comodo.jl',
+              year: 2023,
               description: 'Computational mechanics and design framework in Julia. Mesh processing, FEA integration, lattice generation for additive manufacturing.',
               tags: ['julia', 'open-source', 'computational-mechanics', 'mesh', 'fea'],
               tech: ['Julia'],
@@ -1674,6 +1793,7 @@ export const siteData = {
             {
               name: 'Meshes.jl',
               url: 'https://github.com/JuliaGeometry/Meshes.jl',
+              year: 2020,
               description: 'Computational geometry and meshing algorithms in Julia. Points, polygons, polyhedra, mesh generation, spatial operations. Part of JuliaGeometry.',
               tags: ['julia', 'open-source', 'mesh', 'computational-geometry'],
               tech: ['Julia'],
@@ -1741,6 +1861,7 @@ export const siteData = {
             {
               name: 'uv',
               url: 'https://github.com/astral-sh/uv',
+              year: 2024,
               description: 'Extremely fast Python package manager. Used in py2g\'s Tauri desktop app for per-sketch virtual environments.',
               tags: ['python', 'open-source', 'tooling', 'package-manager'],
               tech: ['Rust'],
@@ -1748,6 +1869,7 @@ export const siteData = {
             {
               name: 'Ruff',
               url: 'https://github.com/astral-sh/ruff',
+              year: 2022,
               description: 'Fast Python linter and formatter. Useful for code-CAD scripts.',
               tags: ['python', 'open-source', 'tooling', 'linter'],
               tech: ['Rust'],
@@ -1755,6 +1877,7 @@ export const siteData = {
             {
               name: 'OCP CAD Viewer',
               url: 'https://github.com/bernhard-42/vscode-ocp-cad-viewer',
+              year: 2022,
               description: 'VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.',
               tags: ['vscode', 'open-source', 'cadquery', 'build123d', 'viewer'],
               tech: ['VS Code'],
