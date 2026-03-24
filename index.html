@@ -11,16 +11,20 @@
 
   <header class="hero" id="top">
     <div class="hero-bg"></div>
-    <div class="container">
+    <canvas id="hero-canvas"></canvas>
+    <div class="container hero-content">
       <h1 id="hero-title"></h1>
       <p class="subtitle" id="hero-subtitle"></p>
-      <div class="search-container">
-        <input type="text" id="search" class="search-input" placeholder="Search tools, libraries, and resources..." autocomplete="off" />
-        <div class="search-meta" id="search-meta"></div>
-      </div>
-      <nav class="hero-nav" id="hero-nav"></nav>
     </div>
   </header>
+
+  <div class="sticky-bar" id="sticky-bar">
+    <div class="container sticky-bar-inner">
+      <input type="text" id="search" class="search-input" placeholder="Search tools, libraries, and resources..." autocomplete="off" />
+      <nav class="sticky-nav" id="hero-nav"></nav>
+      <div class="search-meta" id="search-meta"></div>
+    </div>
+  </div>
 
   <main id="app"></main>
 
@@ -31,5 +35,6 @@
   </footer>
 
   <script type="module" src="script.js"></script>
+  <script src="hero-canvas.js"></script>
 </body>
 </html>

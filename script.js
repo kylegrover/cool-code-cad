@@ -10,6 +10,7 @@ const heroSubtitle = document.getElementById('hero-subtitle');
 const heroNav = document.getElementById('hero-nav');
 const searchInput = document.getElementById('search');
 const searchMeta = document.getElementById('search-meta');
+const stickyBar = document.getElementById('sticky-bar');
 
 // --- Hero -------------------------------------------------------------------
 
@@ -39,34 +40,63 @@ function renderItem(item) {
   return renderLinkCard(item);
 }
 
+// Build the links row for any card (GitHub link, website, extras)
+function buildLinksHTML(item) {
+  const parts = [];
+  const githubUrl = item.github || (isGitHubUrl(item.url) ? item.url : null);
+  const websiteUrl = !isGitHubUrl(item.url) ? item.url : (item.links?.website || null);
+
+  if (githubUrl) {
+    parts.push(`<a href="${esc(githubUrl)}" target="_blank" rel="noopener" title="GitHub">GitHub</a>`);
+  }
+  if (websiteUrl && websiteUrl !== githubUrl) {
+    parts.push(`<a href="${esc(websiteUrl)}" target="_blank" rel="noopener" title="Website">Website</a>`);
+  }
+  // Extra links from .links (docs, npm, pypi, etc.) — skip website/github (already shown)
+  if (item.links) {
+    for (const [label, url] of Object.entries(item.links)) {
+      if (['website', 'github', 'fork'].includes(label)) continue;
+      if (label.match(/^website\d+$/)) continue; // skip website2, etc.
+      const display = label.charAt(0).toUpperCase() + label.slice(1);
+      parts.push(`<a href="${esc(url)}" target="_blank" rel="noopener">${esc(display)}</a>`);
+    }
+  }
+  return parts.join('');
+}
+
+function buildMetaHTML(item) {
+  const parts = [];
+  if (item.year) parts.push(`<span class="meta-year" title="First released">${item.year}</span>`);
+  if (item.stars) parts.push(`<span class="meta-stars" title="GitHub stars">\u2605 ${formatStars(item.stars)}</span>`);
+  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
+}
+
+function formatStars(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return String(n);
+}
+
+function isGitHubUrl(url) {
+  return url && (url.includes('github.com') || url.includes('codeberg.org'));
+}
+
 function renderFeaturedCard(item) {
   const div = document.createElement('div');
   div.className = 'card';
   div.dataset.searchable = searchableText(item);
 
-  // Header: badge + links
   let headerHTML = '<div class="card-header">';
   if (item.badge) {
     headerHTML += `<div class="card-badge badge--star">${esc(item.badge)}</div>`;
   }
-  headerHTML += '<div class="card-links">';
-  // Determine if primary URL is GitHub
-  const isGitHub = item.url.includes('github.com') || item.url.includes('codeberg.org');
-  if (item.links) {
-    for (const [label, url] of Object.entries(item.links)) {
-      if (label === 'fork') continue;
-      const displayLabel = label.replace(/\d+$/, '').charAt(0).toUpperCase() + label.replace(/\d+$/, '').slice(1);
-      headerHTML += `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(displayLabel)}</a>`;
-    }
-  }
-  const primaryLabel = isGitHub ? 'GitHub' : 'Link';
-  headerHTML += `<a href="${esc(item.url)}" target="_blank" rel="noopener">${primaryLabel}</a>`;
-  headerHTML += '</div></div>';
+  headerHTML += `<div class="card-links">${buildLinksHTML(item)}</div>`;
+  headerHTML += '</div>';
 
   let bodyHTML = `<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></h3>`;
   if (item.tagline) {
     bodyHTML += `<p class="card-tagline">${esc(item.tagline)}</p>`;
   }
+  bodyHTML += buildMetaHTML(item);
   bodyHTML += `<p>${item.description}</p>`;
 
   if (item.tech && item.tech.length) {
@@ -86,7 +116,12 @@ function renderLinkCard(item) {
   div.className = 'link-card';
   div.dataset.searchable = searchableText(item);
 
-  let html = `<h4><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></h4>`;
+  const linksHTML = buildLinksHTML(item);
+  let html = '<div class="link-card-header">';
+  html += `<h4><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></h4>`;
+  if (linksHTML) html += `<div class="card-links">${linksHTML}</div>`;
+  html += '</div>';
+  html += buildMetaHTML(item);
   html += `<p>${item.description}</p>`;
 
   if (item.tech && item.tech.length) {
@@ -272,6 +307,17 @@ const navObserver = new IntersectionObserver(
 );
 
 sectionEls.forEach(s => navObserver.observe(s));
+
+// --- Sticky bar shadow on scroll --------------------------------------------
+
+const heroEl = document.querySelector('.hero');
+const stickyObserver = new IntersectionObserver(
+  ([entry]) => {
+    stickyBar.classList.toggle('stuck', !entry.isIntersecting);
+  },
+  { threshold: 0 }
+);
+stickyObserver.observe(heroEl);
 
 // --- Utilities --------------------------------------------------------------
 
