@@ -1,0 +1,1365 @@
+# Programmatic G-Code & Code-First CAD — Complete Reference
+# Generated from https://kylegrover.github.io/gcode-knowledge-site/
+# Feed this to an LLM for context about code-CAD and G-code tools.
+#
+# Total items: 197
+
+================================================================================
+CODE-FIRST CAD
+================================================================================
+Design 3D models by writing code instead of clicking in a GUI. Parametric, reproducible, version-controllable. See also the curated-code-cad list.
+
+--- B-Rep / Solid Modeling ---
+Boundary Representation is the industry-standard approach. These tools build geometry from faces, edges, and vertices  --  most backed by the OpenCASCADE kernel.
+
+  CadQuery (2014)
+  URL: https://github.com/CadQuery/cadquery
+  Tech: Python
+  Tags: python, opencascade, open-source, brep, parametric
+  Python parametric CAD with a chainable fluent API on top of OpenCASCADE. Large community, mature. See also awesome-cadquery.
+
+  Build123d (2022)
+  URL: https://github.com/gumyr/build123d
+  Tech: Python
+  Tags: python, opencascade, open-source, brep, parametric
+  Next-gen Python CAD evolved from CadQuery. Pythonic context managers, both CSG tree and feature-stack workflows. Heading toward stable 1.0. See bd_warehouse for a parametric parts library.
+
+  pythonOCC (2008)
+  URL: https://github.com/tpaviot/pythonocc-core
+  Tech: Python
+  Tags: python, opencascade, open-source, brep, academic
+  Low-level Python bindings to nearly all OpenCASCADE classes. STEP/IGES/STL/GLTF I/O. 400+ academic citations.
+
+  FreeCAD (2002)
+  URL: https://github.com/FreeCAD/FreeCAD
+  Website: https://www.freecad.org/
+  Tech: Python, C++
+  Tags: python, opencascade, open-source, brep, parametric, gui
+  Full parametric CAD application with deeply integrated Python API. Nearly everything is scriptable. Milestone v1.0 released.
+
+  Dune3D (2023)
+  URL: https://dune3d.org/
+  GitHub: https://github.com/dune3d/dune3d
+  Tech: C++, Gtk4
+  Tags: c++, opencascade, open-source, brep, parametric, gui
+  Parametric 3D CAD combining SolveSpace's constraint solver with OpenCASCADE geometry. Modern Gtk4 UI. STEP import/export.
+
+  SolveSpace (2008)
+  URL: https://solvespace.com/
+  Github: https://github.com/solvespace/solvespace
+  Tech: C++
+  Tags: c++, open-source, brep, parametric, constraint-solver, gui
+  Lightweight parametric 2D/3D CAD with a powerful geometric constraint solver. Exports STEP, STL, DXF, PDF. Also usable as a C library.
+
+  BRL-CAD (1979)
+  URL: https://brlcad.org/
+  Github: https://github.com/BRL-CAD/brlcad
+  Tech: C, Tcl
+  Tags: c, open-source, csg, ray-tracing, military, historic
+  One of the oldest open-source CAD systems (since 1979). CSG solid modeling, ray tracing, geometric analysis. Originally developed by the U.S. Army Research Laboratory.
+
+  Replicad (2022)
+  URL: https://replicad.xyz/
+  GitHub: https://github.com/sgenoud/replicad
+  Github: https://github.com/sgenoud/replicad
+  Tech: TypeScript, WASM
+  Tags: typescript, opencascade, open-source, brep, browser, wasm
+  TypeScript library for browser-based 3D CAD on top of opencascade.js. CadQuery-inspired API. Embeddable in any web app. Online workbench included.
+
+  cqparts (2017)
+  URL: https://github.com/cqparts/cqparts
+  Tech: Python
+  Tags: python, opencascade, open-source, brep, assembly
+  Assembly framework for CadQuery. Define parametric parts and assemblies with constraints. BOM generation, exploded views, STEP export. Think "CadQuery for multi-part designs."
+
+  Topologic (2018)
+  URL: https://github.com/wassimj/Topologic
+  Tech: C++, Python
+  Tags: c++, python, open-source, topology, architecture, academic
+  Spatial modeling library supporting non-manifold topology for architecture and engineering. Integrates with Blender (via Sverchok), Dynamo, and Python. Academic roots.
+
+--- CSG & Mesh-Based ---
+Constructive Solid Geometry combines primitives with boolean operations. These tools work directly with meshes or CSG trees.
+
+  OpenSCAD (2010)
+  URL: https://openscad.org/
+  Github: https://github.com/openscad/openscad
+  Tech: OpenSCAD DSL
+  Tags: openscad, open-source, csg, dsl, parametric
+  The original code-CAD tool. Custom DSL for CSG modeling. Now integrating the Manifold engine for ~100x speedups. See also SolidPython for a Python frontend.
+
+  SolidPython2 (2021)
+  URL: https://github.com/jeff-dh/SolidPython
+  Tech: Python
+  Tags: python, openscad, open-source, csg
+  Python frontend for OpenSCAD. Write Python, generate .scad files. v2 adds operator overloading, chained transforms, and an improved API over the original SolidPython.
+
+  BOSL2 (2019)
+  URL: https://github.com/BelfrySCAD/BOSL2
+  Tech: OpenSCAD
+  Tags: openscad, open-source, library, csg
+  The Belfry OpenScad v2 Library  --  massive standard library for OpenSCAD. Threading, beziers, rounding, joints, hinges, gears, polyhedra, and much more. Essential for serious OpenSCAD work.
+
+  NopSCADlib (2019)
+  URL: https://github.com/nophead/NopSCADlib
+  Tech: OpenSCAD
+  Tags: openscad, open-source, library, hardware, 3d-printing
+  OpenSCAD library of common 3D printer/CNC parts: vitamins (screws, bearings, stepper motors, etc.), printed parts, and assemblies. Auto-generates BOMs and assembly instructions.
+
+  JSCAD (OpenJSCAD) (2012)
+  URL: https://github.com/jscad/OpenJSCAD.org
+  Website: https://www.jscad.xyz/
+  Tech: JavaScript
+  Tags: javascript, open-source, csg, browser, parametric
+  Modular browser and CLI tools for parametric 2D/3D designs with JavaScript. Exports STL, DXF, SVG. V3 in development.
+
+  Manifold (2022)
+  URL: https://github.com/elalish/manifold
+  Website: https://manifoldcad.org/
+  Tech: C++, JS, Python, WASM
+  Tags: c++, javascript, python, open-source, mesh, booleans, gpu, wasm
+  High-performance geometry library for guaranteed-manifold mesh Booleans. GPU-parallel, ~100x faster than OpenSCAD. JS/Python/C bindings. Now an OpenSCAD backend. See ManifoldCAD for a browser editor.
+
+  MicroCAD (2024)
+  URL: https://codeberg.org/microcad/microcad
+  Tech: Rust
+  Tags: rust, open-source, csg, dsl
+  Description language for parameterizable geometric objects, compiled to STL/SVG. Funded by the German Prototype Fund (2025).
+
+  ShapeScript (2019)
+  URL: https://github.com/nicklockwood/ShapeScript
+  Tech: Swift
+  Tags: swift, open-source, csg, macos, ios, dsl
+  Mac/iOS app for creating 3D models using a simple scripting language. CSG operations, extrusion, lathe, loft, fill, text. Exports STL, DAE, OBJ, SCN, 3MF.
+
+--- SDF & Implicit Modeling ---
+Represent shapes as mathematical distance functions. Smooth booleans, real-time GPU rendering, and unique modeling workflows. Increasingly relevant for generative manufacturing.
+
+  Fidget (2023)
+  URL: https://github.com/mkeeter/fidget
+  Tech: Rust
+  Tags: rust, open-source, sdf, implicit, jit, gpu
+  Blazing-fast implicit surface evaluation by Matt Keeter. Hand-written JIT compiler (aarch64/x86_64), interval evaluation, Manifold Dual Contouring meshing. Successor to libfive.
+
+  libfive (2015)
+  URL: https://github.com/libfive/libfive
+  Tech: C++, Python, Guile
+  Tags: c++, python, open-source, sdf, implicit, frep
+  Infrastructure for solid modeling using f-rep (implicit functions). Includes "Studio" GUI for live-coding with Python or Guile. By Matt Keeter.
+
+  ImplicitCAD (2011)
+  URL: https://github.com/Haskell-Things/ImplicitCAD
+  Tech: Haskell
+  Tags: haskell, open-source, sdf, implicit, csg, gcode
+  Math-inspired programmatic CAD in Haskell. CSG, bevels, shells, 2D G-code generation. OpenSCAD-like syntax with Haskell extensibility.
+
+  Curv (2017)
+  URL: https://github.com/curv3d/curv
+  Tech: C++, GLSL
+  Tags: c++, open-source, sdf, implicit, gpu, generative-art
+  Open-source language for making art using mathematics. SDF shapes, full color, animation, 3D printing export. GPU-accelerated.
+
+  sdf (fogleman) (2019)
+  URL: https://github.com/fogleman/sdf
+  Tech: Python
+  Tags: python, open-source, sdf, marching-cubes
+  Simple SDF mesh generation in Python with Marching Cubes. NumPy-accelerated, multi-threaded. Compact and easy to use.
+
+  sdfx (2019)
+  URL: https://github.com/deadsy/sdfx
+  Tech: Go
+  Tags: go, open-source, sdf
+  SDF-based CAD kernel in Go. Supports fillets and chamfers.
+
+  SDF Modeler
+  URL: https://sascha-rode.itch.io/sdf-modeler
+  Tech: Desktop
+  Tags: desktop, sdf, free, gui
+  Desktop 3D modeler with non-destructive procedural SDF workflow. Auto-retopology, mesh export, vertex colors. Free for commercial use.
+
+  SDFeditor
+  URL: https://www.sleditor.com/SDFeditor.html
+  Tech: Browser
+  Tags: browser, sdf, node-graph, free
+  Node-graph-based web SDF editor. Visual programming approach to building SDF scenes.
+
+  editSDF
+  URL: https://stephaneginier.com/archive/editSDF/
+  Tech: Browser
+  Tags: browser, sdf, free
+  SDF field editor by Stephane Ginier (creator of SculptGL / Nomad Sculpt).
+
+  Inigo Quilez
+  URL: https://iquilezles.org/
+  Tech: GLSL, Reference
+  Tags: resource, sdf, reference, glsl, raymarching
+  The definitive resource for SDF primitives, operators, and raymarching techniques. Essential reading.
+
+  nTopology
+  URL: https://www.ntop.com/
+  Tech: Commercial
+  Tags: commercial, sdf, implicit, engineering
+  Commercial computational design using implicit modeling with field-driven geometry. Aerospace, medical, automotive. Not open source.
+
+--- Visual & Node-Based ---
+Program geometry through visual dataflow graphs instead of text code. Connect nodes to build parametric pipelines.
+
+  Grasshopper (Rhino)
+  URL: https://www.grasshopper3d.com/
+  Tech: Rhino, C#, Python
+  Tags: visual-programming, commercial, node-graph, parametric, architecture
+  The original visual programming environment for computational design. Ships with Rhino. Massive plugin ecosystem (Kangaroo physics, Ladybug environmental analysis, Karamba structural). Industry standard in architecture and industrial design.
+
+  Blender Geometry Nodes
+  URL: https://docs.blender.org/manual/en/latest/modeling/geometry_nodes/index.html
+  Tech: Blender
+  Tags: blender, open-source, node-graph, procedural, parametric
+  Built-in node-based geometry system in Blender. Procedural modeling, scattering, mesh operations, simulation. Rapidly evolving  --  a serious parametric design tool.
+
+  Sverchok (2013)
+  URL: https://github.com/nortikin/sverchok
+  Tech: Blender, Python
+  Tags: blender, python, open-source, node-graph, parametric, generative
+  Powerful parametric design addon for Blender. 500+ nodes for generative art, architecture, engineering. Often compared to Grasshopper. Python-scriptable nodes.
+
+  Antimony (2013)
+  URL: https://github.com/mkeeter/antimony
+  Tech: C++, Python
+  Tags: c++, python, open-source, node-graph, implicit, historic
+  Node-based CAD tool by Matt Keeter (creator of libfive/Fidget). Graph-based design with implicit functions. No longer maintained but influential.
+
+  bitbybit
+  URL: https://bitbybit.dev/
+  Tech: TypeScript, Browser
+  Tags: typescript, browser, node-graph, opencascade, parametric
+  Visual node editor with TypeScript programming interface for 3D modeling in the browser. Uses multiple geometry kernels (JSCAD, OpenCASCADE, Manifold).
+
+--- Blender as CAD ---
+Blender is not traditionally a CAD tool, but its Python API, add-ons, and Geometry Nodes make it increasingly viable for parametric and programmatic modeling.
+
+  Blender Python API
+  URL: https://docs.blender.org/api/current/
+  Tech: Python, Blender
+  Tags: blender, python, open-source, scripting
+  Full scripting API for Blender (bpy). Create, modify, and export geometry programmatically. Headless mode for batch processing. Massive ecosystem.
+
+  CAD Sketcher (2021)
+  URL: https://github.com/hlorus/CAD_Sketcher
+  Tech: Blender, Python
+  Tags: blender, python, open-source, constraint-solver, sketching
+  Blender addon adding constraint-based 2D sketching (like SolveSpace inside Blender). Geometric and dimensional constraints, then extrude to 3D.
+
+  BlenderBIM (2019)
+  URL: https://blenderbim.org/
+  Github: https://github.com/IfcOpenShell/IfcOpenShell
+  Tech: Blender, Python
+  Tags: blender, python, open-source, bim, architecture, ifc
+  Full BIM (Building Information Modeling) suite inside Blender. IFC support, parametric architecture, structural analysis. Built on IfcOpenShell.
+
+  Blender GIS (2014)
+  URL: https://github.com/domlysz/BlenderGIS
+  Tech: Blender, Python
+  Tags: blender, python, open-source, gis, terrain
+  Import geographic data (shapefiles, georeferenced rasters, OSM) into Blender. Create 3D terrain and urban models for CNC/3D printing.
+
+--- Rust CAD Kernels ---
+A new generation of CAD kernels written in Rust, targeting memory safety, WASM compilation, and modern APIs.
+
+  Fornjot (2021)
+  URL: https://github.com/hannobraun/fornjot
+  Tech: Rust
+  Tags: rust, open-source, brep, kernel
+  Early-stage B-Rep CAD kernel in Rust. CSG, sketches, sweeps. Define models directly in Rust code. Presented at FOSDEM 2026.
+
+  Truck (2021)
+  URL: https://github.com/ricosjp/truck
+  Tech: Rust, WASM
+  Tags: rust, open-source, brep, kernel, nurbs, wasm
+  Shape processing kernel in Rust. STEP I/O, NURBS, Boolean ops. WASM-compilable. Geometry kernel for CADmium.
+
+
+================================================================================
+PROGRAMMATIC G-CODE GENERATION
+================================================================================
+Write code to produce machine instructions directly, instead of going through a slicer. This enables parametric designs, mathematical patterns, and geometries impossible with conventional workflows.
+
+--- G-Code Generation Libraries ---
+
+  FullControl (2022)
+  URL: https://github.com/FullControlXYZ/fullcontrol
+  Website: https://fullcontrol.xyz/
+  Tech: Python
+  Tags: python, open-source, gcode, 3d-printing, parametric
+  The leading open-source Python library for programmatic G-code. Design everything about a print path: every point, speed, temperature, and extrusion parameter. Think "hotmelt glue gun"  --  you decide exactly where it moves. Includes interactive Colab tutorials, a design template, and a YouTube playlist. Pre-made parametric designs at fullcontrol.xyz.
+
+  fullcontrol-js (2025)
+  URL: https://github.com/kylegrover/fullcontrol-js
+  Npm: https://www.npmjs.com/package/fullcontrol-js
+  Docs: https://kylegrover.github.io/fullcontrol-js/
+  Tech: TypeScript, npm, ESM + CJS
+  Tags: typescript, open-source, gcode, 3d-printing, browser, npm
+  Complete TypeScript rewrite of FullControl. Browser-first, Node-compatible, zero dependencies, tree-shakeable. 23 automated parity tests all passing against Python v0.1.2. 13 geometry modules, 20+ printer profiles, visualization pipeline with color gradients.
+
+  mecode (2013)
+  URL: https://github.com/jminardi/mecode
+  Tech: Python
+  Tags: python, open-source, gcode
+  Simple Python library for G-code generation. Human-readable layer above G-code with commands for lines, arcs, rectangles, and meanders.
+
+  pygcode (2018)
+  URL: https://pypi.org/project/pygcode/
+  Tech: Python
+  Tags: python, open-source, gcode, parser
+  Python G-code parser and generation library. Parse, inspect, and generate standard G-code programmatically.
+
+  PythonicGcodeMachine
+  URL: https://fabricesalvaire.github.io/pythonic-gcode-machine/
+  Tech: Python
+  Tags: python, open-source, gcode, parser, rs274
+  Python toolkit for RS-274 / ISO G-code. Focused on parsing and interpreting standard G-code specifications.
+
+  pygdk (2017)
+  URL: https://github.com/cilynx/pygdk
+  Tech: Python
+  Tags: python, open-source, gcode, cnc
+  Python G-code Development Kit. Generate G-code for CNC machines directly from object features, bypassing abstract design and slicing.
+
+  LinuxCNC G-Code Generators
+  URL: https://github.com/LinuxCNC/simple-gcode-generators
+  Tech: Python
+  Tags: python, open-source, gcode, cnc, linuxcnc
+  Collection of simple Python G-code generators from the LinuxCNC project.
+
+--- G-Code IDEs & Editors ---
+Integrated environments for writing code that produces G-code.
+
+  py2g (2024)
+  URL: https://py2g.com
+  GitHub: https://github.com/kylegrover/py2g
+  Tech: Next.js, Pyodide, WebGPU, Tauri, Monaco
+  Tags: typescript, python, open-source, gcode, browser, ide, webgpu, ai, pyodide
+  Write Python in the browser to generate G-code  --  no install needed. Uses Pyodide WASM to run FullControl natively in-browser. Monaco editor with AI-assisted coding, WebGPU 3D preview via @use-gpu. Also available as a Tauri desktop app with bundled uv Python environment. Future plans include CadQuery / Build123d integration.
+
+  js2g (2025)
+  URL: https://js2g.com
+  GitHub: https://github.com/kylegrover/py2g
+  Tech: Next.js, fullcontrol-js, WebGPU, Monaco
+  Tags: typescript, javascript, open-source, gcode, browser, ide, webgpu, ai, fullcontrol-js
+  Write JavaScript in the browser to generate G-code using fullcontrol-js. Same platform as py2g with shared Monaco editor, AI code assist, and WebGPU 3D preview  --  but runs pure JS with zero WASM overhead. Instant execution, no compilation step.
+
+
+================================================================================
+CAM & SLICING
+================================================================================
+Turn 3D geometry into machine-readable toolpaths. Slicers convert STL/3MF to G-code for 3D printers; CAM tools generate toolpaths for CNC mills, lathes, and routers.
+
+--- Open-Source Slicers ---
+All of these have CLI interfaces and can be driven programmatically  --  essential for automated pipelines.
+
+  PrusaSlicer (2018)
+  URL: https://github.com/prusa3d/PrusaSlicer
+  Website: https://www.prusa3d.com/page/prusaslicer_424/
+  Tech: C++, CLI
+  Tags: c++, open-source, slicer, 3d-printing, cli, fdm, sla
+  Feature-rich slicer forked from Slic3r. Extensive CLI for batch slicing, profile management, and integration into automated workflows. Supports FDM and SLA. Powers many derivative slicers.
+
+  OrcaSlicer (2023)
+  URL: https://github.com/SoftFever/OrcaSlicer
+  Tech: C++, CLI
+  Tags: c++, open-source, slicer, 3d-printing, cli, klipper
+  Community-driven slicer forked from Bambu Studio/PrusaSlicer. Multi-printer support, auto-calibration, Klipper integration. CLI available. Rapidly growing community.
+
+  CuraEngine (2013)
+  URL: https://github.com/Ultimaker/CuraEngine
+  Tech: C++
+  Tags: c++, open-source, slicer, 3d-printing, cli, engine
+  The slicing engine behind Ultimaker Cura. C++ library that can be integrated into other applications or driven via CLI. Powerful and well-documented.
+
+  Slic3r (2011)
+  URL: https://github.com/slic3r/Slic3r
+  Website: https://slic3r.org/
+  Tech: C++, Perl
+  Tags: c++, perl, open-source, slicer, 3d-printing, cli, historic
+  The original open-source slicer that spawned PrusaSlicer, SuperSlicer, and BambuStudio. Perl/C++ with CLI. Still maintained for CNC/laser use cases.
+
+  SuperSlicer (2020)
+  URL: https://github.com/supermerill/SuperSlicer
+  Tech: C++
+  Tags: c++, open-source, slicer, 3d-printing
+  PrusaSlicer fork with additional features: calibration tools, more infill patterns, thin wall detection, pressure/flow calibration. Development paused as of late 2024.
+
+--- CAM / Toolpath Generation ---
+Tools for generating CNC toolpaths from 2D/3D geometry.
+
+  Kiri:Moto (2014)
+  URL: https://grid.space/kiri/
+  Github: https://github.com/GridSpace/grid-apps
+  Tech: JavaScript, Browser
+  Tags: javascript, open-source, cam, slicer, browser, cnc, laser
+  Browser-based slicer and CAM tool. FDM slicing, CNC milling (2.5D and 3-axis), laser cutting. All computation runs client-side. Surprisingly capable for a web app.
+
+  FreeCAD Path Workbench
+  URL: https://wiki.freecad.org/Path_Workbench
+  Tech: Python, FreeCAD
+  Tags: python, open-source, cam, cnc, freecad
+  CNC toolpath generation integrated into FreeCAD. 2.5D and 3D operations, tool library, post-processors for various controllers. Fully scriptable via Python.
+
+  PyCAM (2008)
+  URL: https://github.com/SebKuworking/pycam
+  Website: https://pycam.sourceforge.io/
+  Tech: Python
+  Tags: python, open-source, cam, cnc, milling
+  Open-source 3-axis CAM toolpath generator. Imports STL/DXF, generates G-code for CNC milling. Supports contour, surface, and engrave strategies.
+
+  dxf2gcode
+  URL: https://sourceforge.net/projects/dxf2gcode/
+  Tech: Python
+  Tags: python, open-source, cam, cnc, dxf
+  Converts DXF drawings to CNC G-code. Supports milling and drag knife cutting. Tool compensation, automatic optimization of cutting order.
+
+  OpenCAMLib (2010)
+  URL: https://github.com/aewallin/opencamlib
+  Tech: C++, Python
+  Tags: c++, python, open-source, cam, cnc, library
+  C++ library for computing CNC toolpaths. Drop-cutter, push-cutter, and waterline algorithms. Python bindings. Used in FreeCAD Path.
+
+  Blender CAM (2012)
+  URL: https://github.com/vilemduha/blendercam
+  Tech: Blender, Python
+  Tags: blender, python, open-source, cam, cnc
+  Blender addon for CNC machining. Generates toolpaths from Blender geometry. 3-axis and limited 4/5-axis, various milling strategies.
+
+  F-Engrave (2014)
+  URL: https://github.com/stephenhouser/f-engrave
+  Tech: Python
+  Tags: python, open-source, cam, cnc, engraving
+  Converts text, DXF, or bitmap images to G-code for CNC engraving. V-carving, raster engraving, and DXF import. Popular for sign-making.
+
+--- CNC Firmware & Control ---
+The firmware that interprets G-code on the machine. Many expose APIs for programmatic control.
+
+  Klipper (2016)
+  URL: https://www.klipper3d.org/
+  Github: https://github.com/Klipper3d/klipper
+  Tech: Python, C
+  Tags: python, c, open-source, firmware, 3d-printing, scripting
+  Advanced 3D printer firmware running on a host computer (Raspberry Pi) + microcontroller. Python-based configuration, macros, and scripting. Pressure advance, input shaping, high-speed printing.
+
+  Marlin (2011)
+  URL: https://marlinfw.org/
+  Github: https://github.com/MarlinFirmware/Marlin
+  Tech: C++
+  Tags: c++, open-source, firmware, 3d-printing
+  The most widely-used open-source 3D printer firmware. Runs on AVR and ARM boards. Extensive G-code support, linear advance, auto bed leveling.
+
+  grbl (2009)
+  URL: https://github.com/gnea/grbl
+  Tech: C
+  Tags: c, open-source, firmware, cnc, arduino
+  High-performance G-code interpreter for Arduino/AVR. The standard for hobby CNC mills, laser engravers, and small routers. Compact, fast, well-understood.
+
+  FluidNC (2021)
+  URL: https://github.com/bdring/FluidNC
+  Tech: C++, ESP32
+  Tags: c++, open-source, firmware, cnc, esp32, wifi
+  Next-gen CNC firmware for ESP32. YAML-based configuration, WiFi, Bluetooth, SD card. grbl-compatible. Modern replacement for Grbl_ESP32.
+
+  LinuxCNC (1993)
+  URL: https://linuxcnc.org/
+  Github: https://github.com/LinuxCNC/linuxcnc
+  Tech: C, Python, Linux
+  Tags: c, python, open-source, firmware, cnc, linux, industrial
+  Full CNC control system running on Linux with real-time kernel. Supports up to 9 axes. HAL (Hardware Abstraction Layer) for custom I/O. Python and G-code scripting. Industry-proven.
+
+  RepRapFirmware (2014)
+  URL: https://github.com/Duet3D/RepRapFirmware
+  Tech: C++
+  Tags: c++, open-source, firmware, 3d-printing, api, duet
+  Advanced 3D printer firmware for Duet boards. Macro system, object model API, HTTP/MQTT control, conditional G-code. Runs its own web interface (DWC).
+
+  grblHAL (2018)
+  URL: https://github.com/grblHAL
+  Tech: C
+  Tags: c, open-source, firmware, cnc, 32-bit
+  32-bit evolution of grbl. Runs on ARM, ESP32, RP2040. Adds networking, SD card, spindle sync, plasma THC, lathe threading, and more. Drop-in grbl replacement.
+
+  Smoothieware (2011)
+  URL: https://github.com/Smoothieware/Smoothieware
+  Tech: C++
+  Tags: c++, open-source, firmware, 3d-printing, cnc, laser
+  G-code interpreter for LPC17xx/STM32 boards. Supports 3D printers, CNC mills, and laser cutters. Modular, configurable via SD card text files.
+
+  TinyG (2012)
+  URL: https://github.com/synthetos/TinyG
+  Tech: C
+  Tags: c, open-source, firmware, cnc, 6-axis, json-api
+  6-axis motion control system by Synthetos. JSON-based API, jerk-controlled motion planning. Foundation for g2core (next-gen ARM port).
+
+
+================================================================================
+GEOMETRY PROCESSING
+================================================================================
+Libraries and tools for mesh manipulation, computational geometry, and file format conversion  --  the infrastructure layer that code-CAD tools are built on.
+
+--- Geometry Kernels & Engines ---
+The computational engines behind CAD tools.
+
+  OpenCASCADE (OCCT) (1999)
+  URL: https://dev.opencascade.org/
+  Tech: C++
+  Tags: c++, open-source, kernel, brep, nurbs, step
+  The industrial-strength open-source B-Rep geometry kernel. Powers CadQuery, Build123d, FreeCAD, pythonOCC, and dozens of commercial products. STEP/IGES/BREP native. C++ with SWIG bindings.
+
+  CGAL (1996)
+  URL: https://www.cgal.org/
+  Github: https://github.com/CGAL/cgal
+  Tech: C++, Python
+  Tags: c++, python, open-source, kernel, computational-geometry, academic
+  Computational Geometry Algorithms Library. Mesh generation, Boolean operations, convex hulls, Voronoi diagrams, surface reconstruction, and much more. Academic gold standard. C++ with Python bindings (scikit-geometry).
+
+  OpenCascade.js (2020)
+  URL: https://ocjs.org/
+  Tech: WASM, JavaScript
+  Tags: javascript, open-source, wasm, opencascade, browser
+  The foundational WASM port of OpenCASCADE powering CascadeStudio, Replicad, Chili3D, and others. Near-native speeds with multi-threading.
+
+--- Mesh Processing Libraries ---
+Tools for manipulating triangle meshes  --  the common exchange format between CAD, simulation, and manufacturing.
+
+  Trimesh (2014)
+  URL: https://github.com/mikedh/trimesh
+  Tech: Python
+  Tags: python, open-source, mesh, stl, repair
+  The go-to Python library for triangle meshes. Load/save 30+ formats, boolean operations, ray casting, voxelization, convex decomposition, section planes, repair. Used everywhere.
+
+  numpy-stl (2013)
+  URL: https://github.com/WoLpH/numpy-stl
+  Tech: Python
+  Tags: python, open-source, mesh, stl, numpy
+  Fast STL file reading/writing in Python using NumPy arrays. Simple and efficient for batch processing STL files.
+
+  Open3D (2018)
+  URL: https://www.open3d.org/
+  Github: https://github.com/isl-org/Open3D
+  Tech: C++, Python
+  Tags: c++, python, open-source, mesh, point-cloud, visualization
+  Modern library for 3D data processing. Point clouds, meshes, RGBD images, voxels. Reconstruction, registration, visualization. C++ core with Python bindings. By Intel ISL.
+
+  libigl (2013)
+  URL: https://libigl.github.io/
+  Github: https://github.com/libigl/libigl
+  Tech: C++, Python
+  Tags: c++, python, open-source, mesh, academic, geometry
+  Header-only C++ geometry processing library. Discrete differential geometry, mesh editing, parametrization, decimation, remeshing. Python bindings. Academic workhorse.
+
+  PyMesh (2016)
+  URL: https://github.com/PyMesh/PyMesh
+  Tech: Python, C++
+  Tags: python, c++, open-source, mesh, boolean, repair
+  Geometry processing library wrapping CGAL, libigl, Triangle, TetGen, Qhull. Boolean operations, mesh repair, wire network inflation, self-intersection detection.
+
+  MeshLab (PyMeshLab) (2005)
+  URL: https://www.meshlab.net/
+  Github: https://github.com/cnr-isti-vclab/meshlab
+  Tech: C++, Python
+  Tags: c++, python, open-source, mesh, repair, gui, scripting
+  Open-source mesh processing tool with 100+ filters. PyMeshLab exposes all filters as a Python API for scripting and automation.
+
+  VTK (1993)
+  URL: https://vtk.org/
+  Github: https://github.com/Kitware/VTK
+  Tech: C++, Python
+  Tags: c++, python, open-source, mesh, visualization, scientific
+  Visualization Toolkit by Kitware. Comprehensive 3D data processing, rendering, and interaction. C++ core with Python bindings. Foundation for ParaView and many scientific visualization tools.
+
+--- File Format & Interchange ---
+Tools for reading, writing, converting, and repairing 3D file formats.
+
+  lib3mf (2016)
+  URL: https://github.com/3MFConsortium/lib3mf
+  Website: https://3mf.io/
+  Tech: C++, Python
+  Tags: c++, python, open-source, 3mf, file-format
+  Official C++ SDK for the 3MF file format  --  the modern replacement for STL. Supports multi-material, full color, lattice extensions. Python, C#, Go bindings.
+
+  Assimp (2006)
+  URL: https://github.com/assimp/assimp
+  Tech: C++
+  Tags: c++, open-source, file-format, import, multi-format
+  Open Asset Import Library. Reads 40+ 3D file formats (STL, OBJ, FBX, GLTF, STEP, etc.) into a unified in-memory format. C/C++ with Python and many other bindings.
+
+  cadexchanger
+  URL: https://cadexchanger.com/
+  Tech: Commercial
+  Tags: commercial, file-format, step, iges, conversion
+  Commercial SDK and desktop tool for converting between CAD formats (STEP, IGES, JT, Parasolid, ACIS, etc.). High-fidelity B-Rep conversion.
+
+  MeshFix (2010)
+  URL: https://github.com/MarcoAttworking/MeshFix-V2.1
+  Tech: C++
+  Tags: c++, open-source, mesh, repair, 3d-printing
+  Automatic repair of triangle meshes. Fixes holes, self-intersections, degenerate faces. Produces watertight meshes suitable for 3D printing.
+
+
+================================================================================
+VISUALIZATION & SIMULATION
+================================================================================
+Preview, verify, analyze, and simulate G-code and manufacturing processes before sending instructions to a machine.
+
+--- Web-Based G-Code Viewers ---
+
+  NC Viewer
+  URL: https://ncviewer.com/
+  Tech: Browser
+  Tags: browser, free, gcode, cnc, viewer
+  The go-to free online G-code viewer and CNC simulator. Widely used for quick verification.
+
+  3DPEA G-Code Simulator
+  URL: https://www.3dpea.com/en/gcode-simulator
+  Tech: Browser
+  Tags: browser, free, gcode, 3d-printing, viewer, simulation
+  Free online viewer with animated toolpath simulation, 2D/3D switching, speed-based coloring, print time estimation, and G-code to STL/3MF conversion.
+
+  gCodeViewer
+  URL: https://gcode.ws/
+  Tech: Browser
+  Tags: browser, open-source, gcode, 3d-printing, viewer
+  Open-source online G-code visualizer and analyzer. Print time estimation, filament usage, layer-by-layer view.
+
+  webgcode
+  URL: https://nraynaud.github.io/webgcode/
+  Tech: Browser
+  Tags: browser, open-source, gcode, cnc, viewer
+  Open-source online G-code simulator. Also imports STL, SVG, Gerber, and Excellon files.
+
+  CutViewer
+  URL: https://cutviewer.com/
+  Tech: Browser
+  Tags: browser, free, gcode, cnc, viewer
+  Free browser-based CNC G-code viewer with animated cutting process visualization. Supports .nc/.gcode/.tap/.ngc.
+
+  PrintPal G-Code Viewer
+  URL: https://printpal.io/tools/gcode-viewer
+  Tech: Browser
+  Tags: browser, free, gcode, 3d-printing, viewer
+  Free online analyzer for PrusaSlicer, Cura, Bambu Studio, OrcaSlicer. Shows layer paths, print time, filament usage.
+
+  Zupfe
+  URL: https://zupfe.velor.ca/
+  Tech: Browser
+  Tags: browser, open-source, gcode, 3d-printing, viewer, octoprint
+  Click any extrusion to find the exact G-code command. OctoPrint plugin for real-time print progress tracking.
+
+  GCodeAnalyser
+  URL: https://www.gcodeanalyser.com/
+  Tech: Browser
+  Tags: browser, free, gcode, 3d-printing, analysis
+  Accurate print time estimation accounting for acceleration/jerk, average speed, and per-layer statistics.
+
+--- JavaScript / npm Libraries ---
+
+  gcode-preview (2020)
+  URL: https://github.com/xyz-tools/gcode-preview
+  Tech: TypeScript, npm
+  Tags: typescript, open-source, gcode, npm, threejs, viewer
+  The most popular npm G-code library. TypeScript parser & 3D previewer using Three.js. Multi-tool coloring, arc support. v3.0.0-alpha in development.
+
+  gcode-viewer (aligator)
+  URL: https://github.com/aligator/gcode-viewer
+  Tech: JavaScript
+  Tags: javascript, open-source, gcode, threejs, viewer
+  Three.js viewer that renders lines as meshes (not GL lines) so line thickness works cross-platform.
+
+  @polar3d/gcode-viewer
+  URL: https://github.com/Polar3D/gcode-viewer
+  Tech: JavaScript
+  Tags: javascript, open-source, gcode, threejs, viewer
+  Lightweight, framework-agnostic viewer on Three.js. Layer-by-layer viewing, 3D tube rendering, 5 color themes, G2/G3 arc support.
+
+  @sindarius/gcodeviewer
+  URL: https://www.npmjs.com/package/@sindarius/gcodeviewer
+  Tech: JavaScript
+  Tags: javascript, open-source, gcode, npm, viewer, duet
+  Used in Duet Web Control for RepRapFirmware. Simulation playback and real-time print line tracking.
+
+  react-gcode-viewer
+  URL: https://github.com/gabotechs/react-gcode-viewer
+  Tech: React
+  Tags: react, open-source, gcode, npm, viewer
+  Drop-in React component for G-code visualization using Three.js.
+
+  Three.js GCodeLoader
+  URL: https://threejs.org/examples/webgl_loader_gcode.html
+  Tech: Three.js
+  Tags: javascript, open-source, gcode, threejs, loader
+  Built-in Three.js addon for G-code files. Renders layered 3D printing toolpaths. Part of the Three.js examples.
+
+--- Desktop Viewers & Senders ---
+
+  PrusaSlicer G-Code Viewer
+  URL: https://help.prusa3d.com/article/prusaslicer-g-code-viewer_193152
+  Tech: C++
+  Tags: desktop, open-source, gcode, 3d-printing, viewer
+  Lightweight standalone viewer shipped with PrusaSlicer. Works with G-code from any slicer. Color-codes by feature type, speed, temperature.
+
+  CAMotics (2014)
+  URL: https://camotics.org/
+  Tech: C++
+  Tags: desktop, open-source, gcode, cnc, simulation
+  Open-source 3-axis CNC G-code simulator. Visualizes material removal in 3D, calculates machining time. Formerly "OpenSCAM."
+
+  Repetier-Host
+  URL: https://www.repetier.com/
+  Tech: Desktop
+  Tags: desktop, free, gcode, 3d-printing, viewer, sender
+  Desktop 3D printing host with built-in G-code editor and 3D visualization. Layer-by-layer inspection, travel move display.
+
+  Universal Gcode Sender (UGS) (2012)
+  URL: https://winder.github.io/ugs_website/
+  Tech: Java
+  Tags: java, open-source, gcode, cnc, sender, grbl
+  Cross-platform Java GRBL/FluidNC sender with 3D toolpath visualization, macros, and jog controls.
+
+  CNCjs (2015)
+  URL: https://cnc.js.org/
+  Tech: Node.js
+  Tags: javascript, open-source, gcode, cnc, sender, web
+  Web-based G-code sender for GRBL/Marlin/Smoothieware with 3D toolpath visualization. Runs on Raspberry Pi.
+
+  gSender
+  URL: https://sienci.com/gsender/
+  Tech: Electron
+  Tags: desktop, free, gcode, cnc, sender
+  Free CNC control software by Sienci Labs. 3D toolpath visualization, laser intensity preview, cut time estimation.
+
+  Candle (2015)
+  URL: https://github.com/Denvi/Candle
+  Tech: C++, Qt
+  Tags: c++, open-source, gcode, cnc, sender, grbl
+  Qt-based GRBL controller with G-code visualizer, console, and real-time machine state monitoring.
+
+  bCNC (2015)
+  URL: https://github.com/vlachoudis/bCNC
+  Tech: Python
+  Tags: python, open-source, gcode, cnc, sender, grbl
+  Python GRBL controller with visualization, auto-leveling, toolpath optimization, and DXF/SVG import.
+
+--- Klipper / OctoPrint Interfaces ---
+
+  Mainsail G-Code Viewer
+  URL: https://docs.mainsail.xyz/overview/settings/g-code-viewer
+  Tech: Vue.js
+  Tags: browser, open-source, gcode, klipper, viewer
+  Built-in 3D viewer in Mainsail (Klipper web UI). Most powerful of the Klipper frontends with customizable colors.
+
+  Fluidd G-Code Viewer
+  URL: https://docs.fluidd.xyz/features/gcode-viewer
+  Tech: Vue.js
+  Tags: browser, open-source, gcode, klipper, viewer
+  2D layer-by-layer visualization in Fluidd (Klipper). Auto-follows print progress with Exclude Object support.
+
+  PrettyGCode
+  URL: https://github.com/Kragrathea/OctoPrint-PrettyGCode
+  Tech: OctoPrint
+  Tags: javascript, open-source, gcode, octoprint, viewer
+  OctoPrint plugin: full WebGL 3D G-code visualizer with real-time print progress animation.
+
+  PrintTimeGenius
+  URL: https://plugins.octoprint.org/plugins/PrintTimeGenius/
+  Tech: OctoPrint
+  Tags: python, open-source, gcode, octoprint, analysis
+  OctoPrint plugin running Marlin firmware simulation for line-by-line print time accuracy, often within 0.2% of actual.
+
+--- Python G-Code Libraries ---
+
+  pyGCodeDecode (2023)
+  URL: https://github.com/FAST-LB/pyGCodeDecode
+  Tech: Python
+  Tags: python, open-source, gcode, simulation, motion-planning
+  Time-accurate G-code simulation replicating grbl motion planning (Classic Jerk, Junction Deviation). Published in JOSS (2024).
+
+  gcode-simulator
+  URL: https://pypi.org/project/gcode-simulator/
+  Tech: Python
+  Tags: python, open-source, gcode, simulation
+  Analyzes and simulates G-code toolpaths with junction deviation modeling, time estimation, and boundary calculation.
+
+  gcodeparser
+  URL: https://pypi.org/project/gcodeparser/
+  Tech: Python
+  Tags: python, open-source, gcode, parser
+  Parses G-code lines extracting commands, parameters, and comments. Round-trip support.
+
+--- Rust G-Code Crates ---
+
+  gcode-rs
+  URL: https://crates.io/crates/g-code
+  Tech: Rust
+  Tags: rust, open-source, gcode, parser, embedded, no-std
+  Streaming G-code parser for #[no_std] embedded use. Retains source spans for error reporting.
+
+  gcode-nom
+  URL: https://github.com/martinfrances107/gcode-nom
+  Tech: Rust
+  Tags: rust, open-source, gcode, parser
+  Full nom-based parser supporting .gcode and binary .bgcode. Includes bgcodeViewer visualization tool.
+
+  gcode2obj
+  URL: https://lib.rs/crates/gcode2obj
+  Tech: Rust, Bevy
+  Tags: rust, open-source, gcode, conversion, bevy
+  Converts G-code to Wavefront OBJ for Blender import. Includes a Bevy app for real-time visualization.
+
+--- VS Code Extensions ---
+
+  G-code Genius
+  URL: https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius
+  Tech: VS Code
+  Tags: vscode, gcode, viewer, editor
+  VSCode extension for visualizing, formatting, and editing G-code with an interactive 3D viewer.
+
+  G-Code Syntax
+  URL: https://marketplace.visualstudio.com/items?itemName=appliedengdesign.vscode-gcode-syntax
+  Tech: VS Code
+  Tags: vscode, gcode, syntax-highlighting
+  Comprehensive G-code language support for VSCode  --  syntax highlighting, turning VSCode into a G-code editor.
+
+--- CNC Editors & Backplotters ---
+
+  CIMCO Edit
+  URL: https://www.cimco.com/software/cimco-edit/
+  Tech: Commercial
+  Tags: commercial, gcode, cnc, editor, simulation
+  Industry-standard CNC editor with mill/turn backplotter, solid simulation, file compare, and DNC. Commercial.
+
+  NCPlot
+  URL: https://www.ncplot.com/
+  Tech: Windows
+  Tags: desktop, free, gcode, cnc, editor
+  Free editor and backplotter for 4-axis mill and 2-axis lathe. Fanuc-compatible, instant verification.
+
+  Discriminator
+  URL: https://www.cncedit.com/
+  Tech: Windows
+  Tags: desktop, free, gcode, cnc, editor
+  Free CNC editor/simulator with multi-viewport viewer, graphical compare, and VB.NET plugin support.
+
+  NCneticNpp
+  URL: https://github.com/NCalu/NCneticNpp
+  Tech: Notepad++
+  Tags: desktop, open-source, gcode, cnc, editor, notepad++
+  Notepad++ plugin adding G-code syntax highlighting and 3D simulation/backplot preview.
+
+--- Blender G-Code Integration ---
+
+  Stitch3R
+  URL: https://createinc.gumroad.com/l/stitch3r
+  Tech: Blender
+  Tags: blender, commercial, gcode, 3d-printing, rendering
+  Blender add-on converting PrusaSlicer/OrcaSlicer/Bambu Studio G-code into photorealistic renderable 3D models and virtual printing time-lapses. Commercial.
+
+  GCode-Parser-and-Viz
+  URL: https://github.com/apetsiuk/GCode-Parser-and-Viz
+  Tech: Blender, Python
+  Tags: blender, python, open-source, gcode, viewer
+  Blender scripts for parsing and visualizing PrusaSlicer G-code with Shell/Fill/Support separation.
+
+--- Enterprise CNC Simulation ---
+
+  Vericut (1988)
+  URL: https://vericut.com/
+  Tech: Commercial
+  Tags: commercial, cnc, simulation, enterprise, digital-twin
+  Industry-leading CNC simulation (since 1988). Digital twin approach, collision checking, multi-axis material removal. Commercial.
+
+  NCSIMUL
+  URL: https://cn.ncsimul.com/
+  Tech: Commercial
+  Tags: commercial, cnc, simulation, enterprise
+  Comprehensive G-code verification for turning, drilling, 3-5 axis milling. Reportedly 3x faster than Vericut. Hexagon. Commercial.
+
+  RoboDK
+  URL: https://robodk.com/
+  Tech: Commercial
+  Tags: commercial, cnc, simulation, robotics
+  Offline robot programming and simulation. Import/simulate/convert G-code for industrial robots. 100+ post processors. Commercial.
+
+--- 3D Print Simulation ---
+Predict what your print will actually look like, how it will deform, and whether it will survive real loads.
+
+  VOLCO (2017)
+  URL: https://github.com/FullControlXYZ/volco
+  Tech: Python, NumPy, SciPy, Trimesh
+  Tags: python, open-source, simulation, 3d-printing, voxel, fea
+  Open-source voxel-based simulation from the FullControl team. Takes G-code, simulates material deposition with volume-conserving physics (bisection solver), and predicts final shape. Outputs STL via marching cubes. FEA module for structural analysis. Research-backed: VOLCO paper & VOLCO-X paper.
+
+  VolcoGUI (2024)
+  URL: https://github.com/kylegrover/volcogui
+  Tech: Python, PyQt6, PyVista, VTK
+  Tags: python, open-source, simulation, 3d-printing, gui, desktop
+  Cross-platform desktop interface for VOLCO. Drag-and-drop G-code, configure voxel/step size, run simulations in background threads with live progress, view interactive 3D results in PyVista. Standalone Windows executable available.
+
+  AdditiveFOAM (2021)
+  URL: https://github.com/ORNL/AdditiveFOAM
+  Tech: C++, OpenFOAM
+  Tags: c++, open-source, simulation, metal-am, multiphysics
+  Open-source continuum multiphysics code for AM from Oak Ridge National Lab. Built on OpenFOAM. Simulates heat and mass transfer in L-PBF and DED. Couples with ExaCA for microstructure prediction. Published in JOSS (2025). DOE-funded.
+
+  OpenAM-SimCCX
+  URL: https://www.mdpi.com/1996-1944/18/21/4990
+  Tech: CalculiX
+  Tags: open-source, simulation, metal-am, fea, thermal
+  Open-source thermo-mechanical AM simulation using CalculiX. Layer-by-layer element activation, scanning strategy simulation, validated to 94.7% accuracy. Published October 2025.
+
+  MALAMUTE (MOOSE)
+  URL: https://mooseframework.inl.gov/malamute/
+  Tech: C++, MOOSE
+  Tags: c++, open-source, simulation, metal-am, multiphysics
+  AM simulation app on the MOOSE framework (Idaho National Lab). Models laser melting, welding, sintering. Combines mechanical contact, heat transport, phase field, and EM.
+
+  Truchas / Truchas-PBF
+  URL: https://www.truchas.org/
+  Tech: Fortran
+  Tags: fortran, open-source, simulation, metal-am, multiphysics
+  Open-source multiphysics code from Los Alamos. Metal casting and PBF AM: incompressible flow, heat transfer, phase change, elastic/plastic mechanics. Modern Fortran. DOE-funded.
+
+  PySLM (2019)
+  URL: https://github.com/drlukeparry/pyslm
+  Tech: Python
+  Tags: python, open-source, simulation, metal-am, slm, hatching
+  Python library for SLM/SLS/EBM additive manufacturing. Generates scan paths and hatching patterns; slicing, support generation, overhang analysis, build-time estimation.
+
+  Helio Additive "Dragon"
+  URL: https://docs.helioadditive.com/
+  Tech: Cloud
+  Tags: cloud, commercial, simulation, 3d-printing, thermal
+  Cloud-based voxel simulation integrated into OrcaSlicer via "Slice with Helio." Thermal Quality Index color map, layer speed optimization. Free simulation tier, paid optimization. ~250 material profiles planned.
+
+  SmartSlice for Cura
+  URL: https://www.tetoncomposites.com/smart-slice-for-cura
+  Tech: Cura Plugin
+  Tags: commercial, simulation, 3d-printing, fea, cura
+  Cura plugin performing cloud-based FEA within the slicer. Structural validation and optimization of FFF print parameters. Reduces print time by 45%, material by 40%. Commercial (Teton/Markforged).
+
+  Markforged Simulation
+  URL: https://markforged.com/simulation
+  Tech: Commercial
+  Tags: commercial, simulation, 3d-printing, composites
+  Built into Eiger for continuous fiber 3D printing. Validates part strength/stiffness, auto-determines fiber reinforcement. Commercial.
+
+  5minlab 3D Printer Simulator
+  URL: https://5minlab.itch.io/3d-printer-simulator
+  Tech: Unity
+  Tags: free, simulation, 3d-printing, educational
+  Visual FDM simulator mirroring real Ender 3 mechanics: nozzle movement, retraction, Bowden pressure lag, stringing, seam buildup. Educational. Free.
+
+--- AI Print Monitoring & Failure Detection ---
+
+  Obico (2020)
+  URL: https://www.obico.io/
+  Tech: Python, AI
+  Tags: python, open-source, ai, 3d-printing, monitoring
+  Open-source AI platform for real-time print failure detection. 89M+ hours monitored. Supports OctoPrint, Klipper, Bambu Lab. Cloud and self-hosted.
+
+  PrintWatch
+  URL: https://github.com/printpal-io/OctoPrint-PrintWatch
+  Tech: Python, ML
+  Tags: python, open-source, ai, 3d-printing, monitoring, octoprint
+  OctoPrint plugin using ML to detect print defects in real-time from camera feed. Auto-pauses on failure. Open source.
+
+--- Commercial Metal AM Simulation ---
+The commercial landscape for metal additive simulation is mature. These are the major players  --  all proprietary.
+
+  Simufact Additive
+  URL: https://hexagon.com/products/simufact-additive
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am, fea
+  Hexagon/MSC. Metal L-PBF and binder jetting: distortion, residual stress, temperature. Includes defect analysis module co-developed with Pratt & Whitney.
+
+  Ansys Additive Suite
+  URL: https://www.ansys.com/products/additive
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am, fea
+  Full metal AM workflow: DfAM, distortion prediction, melt pool/porosity/microstructure. Inherent strain and element birth-and-death methods.
+
+  Autodesk Netfabb
+  URL: https://www.autodesk.com/products/netfabb/overview
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am
+  Multiscale thermo-mechanical simulation of metal PBF and DED. Residual stress, distortion, support failure, recoater interference. Auto-compensation.
+
+  FLOW-3D AM
+  URL: https://www.flow3d.com/products/flow3d-am/
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am, cfd
+  High-fidelity CFD melt pool simulation: powder spreading, keyhole formation, porosity, spatter, binder jetting resin penetration. Microscale to mesoscale.
+
+  Siemens Simcenter 3D AM
+  URL: https://plm.sw.siemens.com/en-US/simcenter/simulation-test/additive-manufacturing-process-simulation/
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am
+  Distortion prediction and compensation integrated into NX. Supports PBF, FDM, multi-axis, multi-material.
+
+  Altair Inspire Print3D
+  URL: https://altair.com/inspire-print3d/
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am
+  Metal PBF and binder jetting: build, cooling, cutting, springback simulation. Delamination/overheating detection. Support optimization.
+
+  Amphyon / 3DXpert
+  URL: https://oqton.com/amphyon/
+  Tech: Commercial
+  Tags: commercial, simulation, metal-am
+  Oqton/3D Systems. Orientation optimization, mechanical/thermal process simulation, distortion compensation, support optimization.
+
+  Digimat-AM
+  URL: https://simulatemore.mscsoftware.com/predictive-simulation-tools-for-additive-manufacturing/
+  Tech: Commercial
+  Tags: commercial, simulation, plastics, composites
+  Hexagon. FDM and SLS for reinforced plastics/composites. Warpage, residual stress, porosity, anisotropic properties from fiber orientation.
+
+--- General FEA / CFD Foundations ---
+Open-source solvers that power many of the above AM simulation tools.
+
+  CalculiX
+  URL: http://www.calculix.de/
+  Tech: Fortran, C
+  Tags: fortran, c, open-source, fea, solver
+  Open-source FEA solver (Abaqus-compatible input). Engine behind OpenAM-SimCCX. Nonlinear coupled thermal-structural analysis.
+
+  OpenFOAM
+  URL: https://www.openfoam.com/
+  Tech: C++
+  Tags: c++, open-source, cfd, solver
+  Open-source CFD platform. Foundation for AdditiveFOAM. Used in melt pool research: powder spreading, Marangoni effects, multi-phase flow.
+
+  FEniCS
+  URL: https://fenicsproject.org/
+  Tech: Python, C++
+  Tags: python, c++, open-source, fea, solver
+  Open-source FEM platform (Python/C++) for PDEs. Used in AM research for phase-field modeling of melt pool dynamics.
+
+  MOOSE Framework
+  URL: https://mooseframework.inl.gov/
+  Tech: C++, Python
+  Tags: c++, python, open-source, fea, multiphysics
+  Idaho National Lab's open-source multi-physics FEM framework. Foundation for MALAMUTE and other AM tools. C++ and Python interfaces.
+
+
+================================================================================
+BROWSER-BASED CAD & MANUFACTURING
+================================================================================
+Design and manufacture without installing anything. These tools compile CAD kernels to WebAssembly and run entirely client-side.
+
+
+  py2g (2024)
+  URL: https://py2g.com
+  GitHub: https://github.com/kylegrover/py2g
+  Tech: Next.js, WASM
+  Tags: browser, open-source, gcode, ide, wasm, webgpu
+  Browser IDE for Python -> G-code via FullControl + Pyodide WASM. WebGPU visualization, AI code assist. Also Tauri desktop app.
+
+  js2g (2025)
+  URL: https://js2g.com
+  GitHub: https://github.com/kylegrover/py2g
+  Tech: Next.js, fullcontrol-js
+  Tags: browser, open-source, gcode, ide, javascript, webgpu
+  Browser IDE for JavaScript -> G-code via fullcontrol-js. Zero WASM overhead, instant execution. Shares platform with py2g.
+
+  ManifoldCAD (2022)
+  URL: https://manifoldcad.org/
+  Tech: WASM
+  Tags: browser, open-source, csg, wasm, manifold
+  Browser-based solid modeling using Manifold compiled to WASM. Script in JS/TS with near-native performance.
+
+  Chili3D (2023)
+  URL: https://chili3d.com/
+  Tech: WASM, Three.js
+  Tags: browser, open-source, brep, wasm, opencascade, gui
+  Open-source browser-based 3D CAD. OpenCASCADE -> WASM + Three.js. Full modeling tools: sketches, booleans, fillets. Alpha stage.
+
+  CADmium (2023)
+  URL: https://github.com/CADmium-Co/CADmium
+  Tech: Rust, WASM, SvelteKit
+  Tags: browser, open-source, brep, wasm, rust, svelte
+  Local-first browser CAD using the Truck Rust kernel -> WASM. SvelteKit UI. Early prototype targeting 3D printing hobbyists.
+
+  CascadeStudio (2020)
+  URL: https://zalo.github.io/CascadeStudio/
+  Tech: JavaScript, WASM
+  Tags: browser, open-source, brep, wasm, opencascade, scripting
+  Live-scripted browser CAD using opencascade.js. Write JavaScript, see 3D results instantly. Monaco editor with autocomplete.
+
+  Replicad (2022)
+  URL: https://replicad.xyz/
+  GitHub: https://github.com/sgenoud/replicad
+  Tech: TypeScript, WASM
+  Tags: browser, open-source, brep, wasm, opencascade, typescript
+  JS/TS library for building 3D models in the browser on opencascade.js. CadQuery-inspired API. Online workbench included.
+
+  JSCAD
+  URL: https://www.jscad.xyz/
+  Tech: JavaScript
+  Tags: browser, open-source, csg, javascript
+  Runs entirely in the browser. Also CLI for server-side and experimental desktop app.
+
+  CadHub (2021)
+  URL: https://cadhub.xyz/
+  Tech: Browser
+  Tags: browser, open-source, community, openscad, cadquery
+  Community platform for sharing code-CAD designs. Integrates OpenSCAD, CadQuery, and JSCAD in the browser.
+
+  OpenCascade.js (2020)
+  URL: https://ocjs.org/
+  Tech: WASM
+  Tags: wasm, open-source, opencascade, kernel, browser
+  The foundational WASM port of OpenCASCADE powering CascadeStudio, Replicad, Chili3D, and others. Near-native speeds with multi-threading.
+
+  Pyodide (2019)
+  URL: https://pyodide.org/
+  Tech: WASM, Python
+  Tags: wasm, open-source, python, browser
+  CPython compiled to WebAssembly. Powers py2g and JupyterLite. Could theoretically run CadQuery/Build123d in the browser.
+
+
+================================================================================
+PEN PLOTTER & 2D FABRICATION
+================================================================================
+Tools for driving drawing machines and converting images to plotter-friendly vector art. See awesome-plotters for a comprehensive resource list.
+
+
+  vpype (2020)
+  URL: https://github.com/abey79/vpype
+  Tech: Python, CLI
+  Tags: python, open-source, plotter, svg, cli, pipeline
+  CLI pipeline for creating, modifying, and optimizing SVGs for plotting. Path reordering, line merging, simplification, hatching, and more. Extensible via plugins (vpype-gcode, pixel art, halftoning). Hardware-accelerated viewer.
+
+  oneliner (2024)
+  URL: https://github.com/kylegrover/oneliner
+  Tech: Rust
+  Tags: rust, open-source, plotter, image-processing, single-line
+  Converts images to a single continuous line. Sub-pixel edge detection (Canny/Devernay, IPOL 2017), then Kruskal's MST + Euler tour optimization for an unbroken plotter path.
+
+  idraw-extensions (2024)
+  URL: https://github.com/kylegrover/idraw-extensions
+  Tech: Python, C/C++, Inkscape
+  Tags: python, c, open-source, plotter, inkscape, laser
+  Suite of Inkscape extensions for iDraw plotters (AxiDraw variant, 16T GT2 belt, 0.01mm precision). Hatch fill, SVG reordering, direct serial control, laser engraving.
+
+  AxiDraw / NextDraw Software
+  URL: https://github.com/evil-mad/axidraw
+  Tech: Python, Inkscape
+  Tags: python, open-source, plotter, axidraw, inkscape
+  Official software for AxiDraw and Bantam Tools NextDraw plotters. Inkscape extensions + Python API for programmatic control.
+
+  DrawBot (2003)
+  URL: https://www.drawbot.com/
+  Tech: Python, macOS
+  Tags: python, open-source, plotter, generative-art, macos
+  macOS app for Python-scripted 2D graphics. Exports PDF, SVG, PNG, animated GIF. Popular for generative art. Also see drawbot-skia for cross-platform.
+
+  vsketch (2021)
+  URL: https://github.com/abey79/vsketch
+  Tech: Python
+  Tags: python, open-source, plotter, generative-art, creative-coding
+  Python generative art toolkit for plotter art. Processing-like API with vpype integration. Parametric sketches, interactive viewer, SVG export.
+
+  PlotterFiles
+  URL: https://plotterfiles.com/
+  Tech: Community
+  Tags: community, plotter, svg, free
+  Community platform for sharing free SVGs designed for pen plotters and 2D CNC machines.
+
+  devernay_1.0
+  URL: https://github.com/kylegrover/devernay_1.0
+  Tech: C89
+  Tags: c, open-source, image-processing, edge-detection, academic
+  ANSI C89 implementation of the Canny/Devernay sub-pixel edge detection algorithm (IPOL 2017). Outputs contours as TXT/PDF/SVG. Core dependency of oneliner.
+
+
+================================================================================
+EMERGING APPROACHES
+================================================================================
+New paradigms for programmatic design  --  AI-assisted CAD, topology optimization, and generative design.
+
+--- AI-Assisted CAD ---
+Using machine learning and large language models to generate or assist with CAD design.
+
+  Zoo.dev (formerly KittyCAD) (2021)
+  URL: https://zoo.dev/
+  Tech: Rust, KCL, API
+  Tags: commercial, ai, api, cad, text-to-cad, kcl
+  API-first CAD engine with an AI-powered modeling assistant. Text-to-CAD, code generation, geometry API. KCL scripting language. Backed by substantial VC funding.
+
+  FullControl LLM Reference
+  URL: https://raw.githubusercontent.com/FullControlXYZ/fullcontrol/refs/heads/master/llm_ref.md
+  Tech: Reference
+  Tags: ai, reference, gcode, llm, fullcontrol
+  Machine-readable reference designed for LLMs to generate FullControl code. Useful for AI-assisted G-code design.
+
+--- Topology Optimization & Generative Design ---
+Algorithms that determine optimal material distribution given loads and constraints.
+
+  TopOpt (DTU)
+  URL: https://www.topopt.mek.dtu.dk/
+  Tech: Python, MATLAB
+  Tags: python, matlab, open-source, topology-optimization, academic
+  Reference implementations of topology optimization from the Technical University of Denmark. 99-line MATLAB code, 250-line Python, educational resources. The academic starting point.
+
+  Topy (2012)
+  URL: https://github.com/williamhunter/topy
+  Tech: Python
+  Tags: python, open-source, topology-optimization, simp
+  Lightweight Python topology optimization library using the SIMP (Solid Isotropic Material with Penalization) method. 2D and 3D, educational code.
+
+  FreeCAD FEM + Topology
+  URL: https://wiki.freecad.org/FEM_Workbench
+  Tech: Python, FreeCAD
+  Tags: python, open-source, topology-optimization, fea, freecad
+  FreeCAD's FEM workbench includes topology optimization via Calculix. Scriptable from Python.
+
+  DL4TO (2022)
+  URL: https://github.com/dl4to/dl4to
+  Tech: Python, PyTorch
+  Tags: python, open-source, topology-optimization, deep-learning, pytorch
+  Deep Learning for Topology Optimization. PyTorch-based framework for data-driven topology optimization. Train neural networks to predict optimal material distributions.
+
+--- Creative Coding for Fabrication ---
+General-purpose creative coding tools that can produce output for CNC, 3D printing, or laser cutting.
+
+  Processing (2001)
+  URL: https://processing.org/
+  Tech: Java
+  Tags: java, open-source, creative-coding, generative-art, svg
+  The original creative coding environment. Export 2D graphics as SVG for plotting/laser cutting, or generate 3D geometry for printing. Massive community and educational resources.
+
+  p5.js (2014)
+  URL: https://p5js.org/
+  Tech: JavaScript
+  Tags: javascript, open-source, creative-coding, browser, svg
+  JavaScript port of Processing for the browser. SVG export for plotter art. WebGL mode for 3D. Enormous community.
+
+  Paper.js (2011)
+  URL: http://paperjs.org/
+  Tech: JavaScript
+  Tags: javascript, open-source, creative-coding, svg, vector
+  Vector graphics scripting framework for the browser. Boolean operations on paths, SVG import/export. Good for generative plotter art.
+
+  Observable / D3.js
+  URL: https://observablehq.com/
+  Tech: JavaScript
+  Tags: javascript, creative-coding, svg, data-viz, browser
+  Notebook-style coding environment with D3.js for data-driven SVG generation. Increasingly used for parametric plotter art and data-physicalization.
+
+  Beetle Blocks (2014)
+  URL: https://github.com/ericrosenbaum/BeetleBlocks
+  Tech: JavaScript, Scratch
+  Tags: javascript, open-source, creative-coding, visual-programming, education, 3d-printing
+  Scratch-like visual programming for 3D-printable designs. Block-based coding creates turtle-graphics-style 3D geometry. Great for education.
+
+--- Julia Ecosystem ---
+CAD and computational geometry tools in Julia  --  a growing niche for scientific computing workflows.
+
+  Descartes.jl (2016)
+  URL: https://github.com/JuliaGeometry/Descartes.jl
+  Tech: Julia
+  Tags: julia, open-source, csg, solid-modeling
+  Software-defined solid modeling in Julia. Part of the JuliaGeometry organization. CSG operations, mesh generation.
+
+  Comodo.jl (2023)
+  URL: https://github.com/COMODO-research/Comodo.jl
+  Tech: Julia
+  Tags: julia, open-source, computational-mechanics, mesh, fea
+  Computational mechanics and design framework in Julia. Mesh processing, FEA integration, lattice generation for additive manufacturing.
+
+  Meshes.jl (2020)
+  URL: https://github.com/JuliaGeometry/Meshes.jl
+  Tech: Julia
+  Tags: julia, open-source, mesh, computational-geometry
+  Computational geometry and meshing algorithms in Julia. Points, polygons, polyhedra, mesh generation, spatial operations. Part of JuliaGeometry.
+
+
+================================================================================
+RESOURCES & REFERENCES
+================================================================================
+Documentation, firmware references, essential tooling, and community links.
+
+--- G-Code & Firmware ---
+
+  Klipper G-Code Reference
+  URL: https://www.klipper3d.org/G-Codes.html
+  Tech: Reference
+  Tags: reference, gcode, klipper, firmware
+  Complete command reference for Klipper firmware. Essential for understanding what your printer supports.
+
+  FullControl LLM Reference
+  URL: https://raw.githubusercontent.com/FullControlXYZ/fullcontrol/refs/heads/master/llm_ref.md
+  Tech: Reference
+  Tags: reference, gcode, fullcontrol, ai
+  Machine-readable reference designed for LLMs to generate FullControl code. Useful for AI-assisted G-code design.
+
+  FullControl GCode Designer (Legacy)
+  URL: https://fullcontrolgcode.com/
+  Tech: Excel
+  Tags: reference, gcode, fullcontrol, excel, historic
+  The original 2020 FullControl  --  G-code generation via geometric "features" in Microsoft Excel.
+
+  RepRap G-Code Reference
+  URL: https://reprap.org/wiki/G-code
+  Tech: Reference
+  Tags: reference, gcode, 3d-printing, wiki
+  Community-maintained wiki of all G-code commands used in 3D printing. Covers Marlin, RepRapFirmware, Klipper, Smoothieware variants.
+
+  LinuxCNC G-Code Reference
+  URL: https://linuxcnc.org/docs/html/gcode/g-code.html
+  Tech: Reference
+  Tags: reference, gcode, cnc, linuxcnc
+  Comprehensive G-code and M-code documentation for LinuxCNC. RS-274/NGC dialect with extensions.
+
+--- Development Tools ---
+
+  uv (2024)
+  URL: https://github.com/astral-sh/uv
+  Tech: Rust
+  Tags: python, open-source, tooling, package-manager
+  Extremely fast Python package manager. Used in py2g's Tauri desktop app for per-sketch virtual environments.
+
+  Ruff (2022)
+  URL: https://github.com/astral-sh/ruff
+  Tech: Rust
+  Tags: python, open-source, tooling, linter
+  Fast Python linter and formatter. Useful for code-CAD scripts.
+
+  OCP CAD Viewer (2022)
+  URL: https://github.com/bernhard-42/vscode-ocp-cad-viewer
+  Tech: VS Code
+  Tags: vscode, open-source, cadquery, build123d, viewer
+  VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.
+
+--- Meta-Lists & Communities ---
+
+  curated-code-cad
+  URL: https://github.com/Irev-Dev/curated-code-cad
+  Tech: Resource
+  Tags: resource, list, code-cad, community
+  The definitive list of code-CAD projects. Maintained by the CadHub team.
+
+  awesome-cadquery
+  URL: https://github.com/CadQuery/awesome-cadquery
+  Tech: Resource
+  Tags: resource, list, cadquery, build123d
+  Curated list of CadQuery/Build123d resources, plugins, and examples.
+
+  awesome-plotters
+  URL: https://github.com/beardicus/awesome-plotters
+  Tech: Resource
+  Tags: resource, list, plotter, community
+  Curated list of code, resources, hardware, and community links for pen plotters and visual art robots.
+
+  PlotterFiles
+  URL: https://plotterfiles.com/
+  Tech: Community
+  Tags: community, plotter, svg
+  Community for sharing plotter-ready SVGs.
+
+
