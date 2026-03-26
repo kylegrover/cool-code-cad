@@ -625,10 +625,18 @@ export const siteData = {
               tags: ['c++', 'open-source', 'slicer', '3d-printing'],
               tech: ['C++'],
             },
+            {
+              name: 'IceSL',
+              url: 'https://icesl.github.io/',
+              description: 'Lua-scripted code-first slicer/modeler combining CSG, SDF, and voxel techniques. Generates both geometry and G-code with variable layer heights and custom infill patterns. Freeware (source not fully open), community scripts are shared openly.',
+              tags: ['lua', 'code-cad', 'slicer', '3d-printing'],
+              tech: ['Lua'],
+            },
           ],
         },
         {
           id: 'cam-toolpath',
+
           title: 'CAM / Toolpath Generation',
           description: 'Tools for generating CNC toolpaths from 2D/3D geometry.',
           items: [
@@ -691,6 +699,48 @@ export const siteData = {
               description: 'Converts text, DXF, or bitmap images to G-code for CNC engraving. V-carving, raster engraving, and DXF import. Popular for sign-making.',
               tags: ['python', 'open-source', 'cam', 'cnc', 'engraving'],
               tech: ['Python'],
+            },
+          ],
+        },
+        {
+          id: 'laser-cam',
+          title: 'Laser CAM & Control',
+          description: 'Laser-specific toolpath generation and control software for diode/fiber/CO2 cutters and engravers.',
+          items: [
+            {
+              name: 'LightBurn',
+              url: 'https://lightburnsoftware.com/',
+              description: 'Commercial all-in-one laser layout, editing, and control software. Supports many controller boards and adds advanced optimizations, nesting, and camera alignment.',
+              tags: ['commercial', 'laser', 'cam', 'control'],
+              tech: ['Windows', 'macOS', 'Linux'],
+            },
+            {
+              name: 'LaserGRBL',
+              url: 'https://lasergrbl.com/',
+              description: 'Open-source Windows G-code sender for GRBL-based laser cutters and engravers with PWM support, imaging, and advanced path setup.',
+              tags: ['open-source', 'laser', 'control', 'grbl'],
+              tech: ['Windows'],
+            },
+          ],
+        },
+        {
+          id: 'pcb-milling',
+          title: 'PCB Milling (Gerber to G-Code)',
+          description: 'Tools for converting PCB Gerber and drill files into isolation routing and board milling toolpaths.',
+          items: [
+            {
+              name: 'FlatCAM',
+              url: 'https://github.com/pcbmodE/FlatCAM',
+              description: 'Python-based PCB CAM utility with GUI and CLI. Imports Gerbers/Excellon, performs isolation routing, and exports G-code for CNC mills.',
+              tags: ['python', 'open-source', 'pcb', 'gerber', 'cam', 'cnc'],
+              tech: ['Python'],
+            },
+            {
+              name: 'pcb2gcode',
+              url: 'https://github.com/tinyvps/pcb2gcode',
+              description: 'C++ command-line converter from Gerber/Excellon to CNC router G-code for PCB isolation routing and drilling.',
+              tags: ['c++', 'open-source', 'pcb', 'gerber', 'cam', 'cnc'],
+              tech: ['C++'],
             },
           ],
         },
@@ -1602,7 +1652,7 @@ export const siteData = {
     // ========================================================================
     {
       id: 'plotter',
-      title: 'Pen Plotter & 2D Fabrication',
+      title: '2D Fabrication, Lasers & Plotters',
       description: 'Tools for driving drawing machines and converting images to plotter-friendly vector art. See <a href="https://github.com/beardicus/awesome-plotters" target="_blank" rel="noopener">awesome-plotters</a> for a comprehensive resource list.',
       subsections: [
         {
@@ -1620,6 +1670,13 @@ export const siteData = {
               featured: true,
               badge: 'CLI Tool',
               tagline: 'The Swiss-Army Knife for Plotter Graphics',
+            },
+            {
+              name: 'DrawingBotV3',
+              url: 'https://github.com/gkbrk/DrawingBotV3',
+              description: 'Image/vector-to-plotter pipeline with pathfinding, stippling, and hatching optimization to generate efficient G-code/SVG for drawing machines.',
+              tags: ['python', 'open-source', 'plotter', 'G-code', 'vector'],
+              tech: ['Python'],
             },
             {
               name: 'AxiDraw / NextDraw Software',
@@ -1643,6 +1700,13 @@ export const siteData = {
               description: 'Python generative art toolkit for plotter art. Processing-like API with vpype integration. Parametric sketches, interactive viewer, SVG export.',
               tags: ['python', 'open-source', 'plotter', 'generative-art', 'creative-coding'],
               tech: ['Python'],
+            },
+            {
+              name: 'Cuttle.xyz',
+              url: 'https://cuttle.xyz/',
+              description: 'Browser-based parametric 2D CAD for laser cutting with variable material thickness and JS-based custom modifiers. Designed for small business laser production workflows.',
+              tags: ['browser', 'commercial', 'laser', 'code-cad', '2d'],
+              tech: ['JavaScript'],
             },
             {
               name: 'PlotterFiles',
@@ -1760,6 +1824,13 @@ export const siteData = {
               description: 'Scratch-like visual programming for 3D-printable designs. Block-based coding creates turtle-graphics-style 3D geometry. Great for education.',
               tags: ['javascript', 'open-source', 'creative-coding', 'visual-programming', 'education', '3d-printing'],
               tech: ['JavaScript', 'Scratch'],
+            },
+            {
+              name: 'Tinkercad Codeblocks',
+              url: 'https://www.tinkercad.com/codeblocks',
+              description: 'Block-based visual programming for building parametric 3D models via a friendly educational interface. Export to STL for printing or laser cutting.',
+              tags: ['visual-programming', 'education', 'blockly', '3d-printing'],
+              tech: ['Browser'],
             },
           ],
         },
