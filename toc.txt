@@ -1,0 +1,243 @@
+Code-First CAD
+  B-Rep / Solid Modeling
+    CadQuery
+    PLaSM
+    Build123d
+    pythonOCC
+    FreeCAD
+    Dune3D
+    SolveSpace
+    BRL-CAD
+    Replicad
+    cqparts
+    Topologic
+  CSG & Mesh-Based
+    OpenSCAD
+    PythonSCAD
+    SolidPython2
+    BOSL2
+    NopSCADlib
+    JSCAD (OpenJSCAD)
+    Manifold
+    MicroCAD
+    ShapeScript
+  SDF & Implicit Modeling
+    Fidget
+    libfive
+    ImplicitCAD
+    Curv
+    sdf (fogleman)
+    sdfx
+    SDF Modeler
+    SDFeditor
+    editSDF
+    Inigo Quilez
+    nTopology
+  Visual & Node-Based
+    Grasshopper (Rhino)
+    Blender Geometry Nodes
+    Sverchok
+    Antimony
+    bitbybit
+    BlockMill
+  Blender as CAD
+    Blender Python API
+    CAD Sketcher
+    BlenderBIM
+    Blender GIS
+  Rust CAD Kernels
+    Fornjot
+    Truck
+Programmatic G-Code Generation
+  G-Code Generation Libraries
+    FullControl
+    fullcontrol-js
+    mecode
+    pygcode
+    PythonicGcodeMachine
+    gcodepreview
+    NIST RS274NGC Interpreter
+    pygdk
+    LinuxCNC G-Code Generators
+  G-Code IDEs & Editors
+    py2g
+    js2g
+CAM & Slicing
+  Open-Source Slicers
+    PrusaSlicer
+    OrcaSlicer
+    CuraEngine
+    Slic3r
+    SuperSlicer
+    IceSL
+  CAM / Toolpath Generation
+    Kiri:Moto
+    FreeCAD Path Workbench
+    PyCAM
+    dxf2gcode
+    OpenCAMLib
+    Blender CAM
+    F-Engrave
+  Laser CAM & Control
+    LightBurn
+    LaserGRBL
+  PCB Milling (Gerber to G-Code)
+    FlatCAM
+    pcb2gcode
+  CNC Firmware & Control
+    Klipper
+    Marlin
+    grbl
+    FluidNC
+    LinuxCNC
+    RepRapFirmware
+    grblHAL
+    Smoothieware
+    TinyG
+Geometry Processing
+  Geometry Kernels & Engines
+    OpenCASCADE (OCCT)
+    CGAL
+    OpenCascade.js
+  Mesh Processing Libraries
+    Trimesh
+    numpy-stl
+    Open3D
+    libigl
+    PyMesh
+    MeshLab (PyMeshLab)
+    VTK
+  File Format & Interchange
+    lib3mf
+    Assimp
+    ezdxf
+    cadexchanger
+    MeshFix
+Visualization & Simulation
+  Web-Based G-Code Viewers
+    NC Viewer
+    3DPEA G-Code Simulator
+    gCodeViewer
+    webgcode
+    CutViewer
+    PrintPal G-Code Viewer
+    Zupfe
+    GCodeAnalyser
+  JavaScript / npm Libraries
+    gcode-preview
+    gcode-viewer (aligator)
+    @polar3d/gcode-viewer
+    @sindarius/gcodeviewer
+    react-gcode-viewer
+    Three.js GCodeLoader
+  Desktop Viewers & Senders
+    PrusaSlicer G-Code Viewer
+    CAMotics
+    Repetier-Host
+    Universal Gcode Sender (UGS)
+    CNCjs
+    gSender
+    Candle
+    bCNC
+  Klipper / OctoPrint Interfaces
+    Mainsail G-Code Viewer
+    Fluidd G-Code Viewer
+    PrettyGCode
+    PrintTimeGenius
+  Python G-Code Libraries
+    pyGCodeDecode
+    gcode-simulator
+    gcodeparser
+  Rust G-Code Crates
+    gcode-rs
+    gcode-nom
+    gcode2obj
+  VS Code Extensions
+    OCP CAD Viewer
+    G-code Genius
+    G-Code Syntax
+  CNC Editors & Backplotters
+    CIMCO Edit
+    NCPlot
+    Discriminator
+    NCneticNpp
+  Blender G-Code Integration
+    Stitch3R
+    GCode-Parser-and-Viz
+  Enterprise CNC Simulation
+    Vericut
+    NCSIMUL
+    RoboDK
+  3D Print Simulation
+    VOLCO
+    VolcoGUI
+    AdditiveFOAM
+    OpenAM-SimCCX
+    MALAMUTE (MOOSE)
+    Truchas / Truchas-PBF
+    PySLM
+    Helio Additive "Dragon"
+    SmartSlice for Cura
+    Markforged Simulation
+    5minlab 3D Printer Simulator
+  AI Print Monitoring & Failure Detection
+    Obico
+    PrintWatch
+  General FEA / CFD Foundations
+    CalculiX
+    OpenFOAM
+    FEniCS
+    MOOSE Framework
+Browser-Based CAD & Manufacturing
+  browser-tools
+    py2g
+    js2g
+    ManifoldCAD
+    Chili3D
+    CADmium
+    CascadeStudio
+    Replicad
+    JSCAD
+    CadHub
+    OpenCascade.js
+    Pyodide
+2D Fabrication, Lasers & Plotters
+  plotter-tools
+    vpype
+    DrawingBotV3
+    AxiDraw / NextDraw Software
+    DrawBot
+    vsketch
+    Cuttle.xyz
+    PlotterFiles
+Emerging Approaches
+  AI-Assisted CAD
+    Zoo.dev (formerly KittyCAD)
+  Topology Optimization & Generative Design
+    TopOpt (DTU)
+    Topy
+    FreeCAD FEM + Topology
+    DL4TO
+  Creative Coding for Fabrication
+    Processing
+    p5.js
+    Paper.js
+    Observable / D3.js
+    Beetle Blocks
+    Tinkercad Codeblocks
+  Julia Ecosystem
+    Descartes.jl
+    Comodo.jl
+    Meshes.jl
+Resources & References
+  G-Code & Firmware
+    Klipper G-Code Reference
+    FullControl LLM Reference
+    FullControl GCode Designer (Legacy)
+    RepRap G-Code Reference
+    LinuxCNC G-Code Reference
+  Meta-Lists & Communities
+    curated-code-cad
+    awesome-cadquery
+    awesome-plotters
+    PlotterFiles

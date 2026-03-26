@@ -2942,6 +2942,27 @@ export const siteData = {
           "description": null,
           "items": [
             {
+              "name": "OCP CAD Viewer",
+              "url": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
+              "year": 2022,
+              "description": "VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.",
+              "tags": [
+                "vscode",
+                "open-source",
+                "cadquery",
+                "build123d",
+                "viewer"
+              ],
+              "tech": [
+                "VS Code"
+              ],
+              "links": {
+                "website": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
+                "github": "https://github.com/bernhard-42/vscode-ocp-cad-viewer"
+              },
+              "license": "Open Source"
+            },
+            {
               "name": "G-code Genius",
               "url": "https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius",
               "description": "VSCode extension for visualizing, formatting, and editing G-code with an interactive 3D viewer.",
@@ -4374,74 +4395,6 @@ export const siteData = {
               "links": {
                 "website": "https://linuxcnc.org/docs/html/gcode/g-code.html"
               }
-            }
-          ]
-        },
-        {
-          "id": "dev-tools",
-          "title": "Development Tools",
-          "description": null,
-          "items": [
-            {
-              "name": "uv",
-              "url": "https://github.com/astral-sh/uv",
-              "year": 2024,
-              "description": "Extremely fast Python package manager. Used in py2g's Tauri desktop app for per-sketch virtual environments.",
-              "tags": [
-                "python",
-                "open-source",
-                "tooling",
-                "package-manager"
-              ],
-              "tech": [
-                "Rust"
-              ],
-              "links": {
-                "website": "https://github.com/astral-sh/uv",
-                "github": "https://github.com/astral-sh/uv"
-              },
-              "license": "Open Source"
-            },
-            {
-              "name": "Ruff",
-              "url": "https://github.com/astral-sh/ruff",
-              "year": 2022,
-              "description": "Fast Python linter and formatter. Useful for code-CAD scripts.",
-              "tags": [
-                "python",
-                "open-source",
-                "tooling",
-                "linter"
-              ],
-              "tech": [
-                "Rust"
-              ],
-              "links": {
-                "website": "https://github.com/astral-sh/ruff",
-                "github": "https://github.com/astral-sh/ruff"
-              },
-              "license": "Open Source"
-            },
-            {
-              "name": "OCP CAD Viewer",
-              "url": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
-              "year": 2022,
-              "description": "VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.",
-              "tags": [
-                "vscode",
-                "open-source",
-                "cadquery",
-                "build123d",
-                "viewer"
-              ],
-              "tech": [
-                "VS Code"
-              ],
-              "links": {
-                "website": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
-                "github": "https://github.com/bernhard-42/vscode-ocp-cad-viewer"
-              },
-              "license": "Open Source"
             }
           ]
         },

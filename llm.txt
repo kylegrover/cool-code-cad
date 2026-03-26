@@ -2,7 +2,7 @@
 # Generated from https://kylegrover.github.io/gcode-knowledge-site/
 # Feed this to an LLM for context about code-CAD and G-code tools.
 #
-# Total items: 198
+# Total items: 197
 
 ================================================================================
 CODE-FIRST CAD
@@ -19,6 +19,14 @@ Boundary Representation is the industry-standard approach. These tools build geo
   Tech: Python
   Tags: python, opencascade, open-source, brep, parametric
   Python parametric CAD with a chainable fluent API on top of OpenCASCADE. Large community, mature. See also awesome-cadquery.
+
+  PLaSM (1980)
+  URL: http://www.plasm.net/
+  Website: http://www.plasm.net/
+  Wikipedia: https://en.wikipedia.org/wiki/PLaSM
+  Tech: C++, Python
+  Tags: c++, python, open-source, brep, scripting, historic, academic
+  Open source scripting language for solid modeling, developed by the CAD group at the Universities Roma Tre and La Sapienza. Emphasizes scripting over GUI, supporting complex 2D/3D objects, advanced curves, Boolean operations, and geometric transformations. Used for academic and architectural modeling, notably for ancient Roman architecture.
 
   Build123d (2022)
   URL: https://github.com/gumyr/build123d
@@ -1057,6 +1065,14 @@ Preview, verify, analyze, and simulate G-code and manufacturing processes before
 
 --- VS Code Extensions ---
 
+  OCP CAD Viewer (2022)
+  URL: https://github.com/bernhard-42/vscode-ocp-cad-viewer
+  Website: https://github.com/bernhard-42/vscode-ocp-cad-viewer
+  Github: https://github.com/bernhard-42/vscode-ocp-cad-viewer
+  Tech: VS Code
+  Tags: vscode, open-source, cadquery, build123d, viewer
+  VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.
+
   G-code Genius
   URL: https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius
   Website: https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius
@@ -1589,32 +1605,6 @@ Documentation, firmware references, essential tooling, and community links.
   Tech: Reference
   Tags: reference, gcode, cnc, linuxcnc
   Comprehensive G-code and M-code documentation for LinuxCNC. RS-274/NGC dialect with extensions.
-
---- Development Tools ---
-
-  uv (2024)
-  URL: https://github.com/astral-sh/uv
-  Website: https://github.com/astral-sh/uv
-  Github: https://github.com/astral-sh/uv
-  Tech: Rust
-  Tags: python, open-source, tooling, package-manager
-  Extremely fast Python package manager. Used in py2g's Tauri desktop app for per-sketch virtual environments.
-
-  Ruff (2022)
-  URL: https://github.com/astral-sh/ruff
-  Website: https://github.com/astral-sh/ruff
-  Github: https://github.com/astral-sh/ruff
-  Tech: Rust
-  Tags: python, open-source, tooling, linter
-  Fast Python linter and formatter. Useful for code-CAD scripts.
-
-  OCP CAD Viewer (2022)
-  URL: https://github.com/bernhard-42/vscode-ocp-cad-viewer
-  Website: https://github.com/bernhard-42/vscode-ocp-cad-viewer
-  Github: https://github.com/bernhard-42/vscode-ocp-cad-viewer
-  Tech: VS Code
-  Tags: vscode, open-source, cadquery, build123d, viewer
-  VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.
 
 --- Meta-Lists & Communities ---
 
