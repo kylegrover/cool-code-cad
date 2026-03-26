@@ -336,3 +336,62 @@ function searchableText(item) {
   ];
   return parts.join(' ').toLowerCase();
 }
+
+// --- TOC Sidebar -----------------------------------------------------------
+
+const tocSidebar = document.getElementById('toc-sidebar');
+const tocLink = document.getElementById('toc-link');
+
+function buildTOCSidebar(data) {
+  tocSidebar.innerHTML = '';
+  const tocList = document.createElement('ul');
+  tocList.className = 'toc-list';
+  for (const section of data.sections) {
+    const sectionLi = document.createElement('li');
+    sectionLi.className = 'toc-section';
+    const sectionA = document.createElement('a');
+    sectionA.href = `#${section.id}`;
+    sectionA.textContent = section.title;
+    sectionLi.appendChild(sectionA);
+    if (section.subsections) {
+      const subUl = document.createElement('ul');
+      subUl.className = 'toc-sublist';
+      for (const sub of section.subsections) {
+        const subLi = document.createElement('li');
+        subLi.className = 'toc-subsection';
+        if (sub.title) {
+          const subA = document.createElement('a');
+          subA.href = `#${section.id}`; // Could use anchors for subsections if present
+          subA.textContent = sub.title;
+          subLi.appendChild(subA);
+        }
+        if (sub.items && sub.items.length) {
+          const itemsUl = document.createElement('ul');
+          itemsUl.className = 'toc-items';
+          for (const item of sub.items) {
+            const itemLi = document.createElement('li');
+            itemLi.className = 'toc-item';
+            const itemA = document.createElement('a');
+            itemA.href = `#${section.id}`; // Could use anchors for items if present
+            itemA.textContent = item.name;
+            itemLi.appendChild(itemA);
+            itemsUl.appendChild(itemLi);
+          }
+          subLi.appendChild(itemsUl);
+        }
+        subUl.appendChild(subLi);
+      }
+      sectionLi.appendChild(subUl);
+    }
+    tocList.appendChild(sectionLi);
+  }
+  tocSidebar.appendChild(tocList);
+}
+
+buildTOCSidebar(siteData);
+
+tocSidebar.style.display = 'none';
+tocLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  tocSidebar.style.display = tocSidebar.style.display === 'none' ? 'block' : 'none';
+});
