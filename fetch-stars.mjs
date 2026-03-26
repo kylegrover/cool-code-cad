@@ -3,9 +3,26 @@
 // Usage: node fetch-stars.mjs
 // With auth: GITHUB_TOKEN=ghp_xxx node fetch-stars.mjs
 
+
 import { siteData } from './data.js';
 import fs from 'fs';
 import { execSync } from 'child_process';
+
+const CACHE_FILE = 'fetch-stars-cache.json';
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+function loadCache() {
+  try {
+    const data = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+    return data;
+  } catch {
+    return { lastFetched: 0, stars: {} };
+  }
+}
+
+function saveCache(cache) {
+  fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2), 'utf8');
+}
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || '';
 const DELAY_MS = 1000; // 1 second between requests
@@ -86,9 +103,18 @@ async function fetchStars(ownerRepo) {
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
+
   console.log('=== GitHub Star Fetcher ===');
   console.log(`Auth: ${GITHUB_TOKEN ? 'Using GITHUB_TOKEN (5000 req/hr)' : 'Anonymous (60 req/hr)'}`);
   console.log('');
+
+  // Load cache and check TTL
+  const cache = loadCache();
+  const now = Date.now();
+  if (cache.lastFetched && now - cache.lastFetched < CACHE_TTL_MS) {
+    console.log(`Using cached star data (last fetched ${(new Date(cache.lastFetched)).toLocaleString()})`);
+    return;
+  }
 
   // Collect all items with GitHub repos
   const repoItems = []; // { name, ownerRepo, ghUrl }
@@ -118,10 +144,12 @@ async function main() {
   console.log(`Found ${repoItems.length} items with GitHub repos (${seen.size} unique repos)`);
   console.log('');
 
+
   // Fetch stars
   const starMap = new Map(); // ownerRepo -> star count
   const failures = [];
   let fetchCount = 0;
+  let rateLimited = false;
 
   for (const entry of repoItems) {
     if (entry.duplicate) continue; // already fetched or will fetch
@@ -132,22 +160,37 @@ async function main() {
     try {
       const result = await fetchStars(entry.ownerRepo);
       if (result.error) {
-        console.log(`FAIL: ${result.error}`);
-        failures.push({ name: entry.name, ownerRepo: entry.ownerRepo, error: result.error });
+        if (result.error.includes('Rate limited')) {
+          console.log(`RATE LIMIT: ${result.error}`);
+          rateLimited = true;
+          break;
+        } else if (result.error.includes('404')) {
+          console.log(`404 Not Found`);
+          failures.push({ name: entry.name, ownerRepo: entry.ownerRepo, error: result.error });
+        } else {
+          console.log(`FAIL: ${result.error}`);
+          failures.push({ name: entry.name, ownerRepo: entry.ownerRepo, error: result.error });
+        }
       } else {
         console.log(`${result.stars.toLocaleString()} stars`);
         starMap.set(entry.ownerRepo, result.stars);
+        cache.stars[entry.ownerRepo] = result.stars;
       }
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
       failures.push({ name: entry.name, ownerRepo: entry.ownerRepo, error: err.message });
     }
 
+    if (rateLimited) break;
     // Rate limit delay (skip after last request)
     if (fetchCount < seen.size) {
       await sleep(DELAY_MS);
     }
   }
+
+  // Save cache
+  cache.lastFetched = Date.now();
+  saveCache(cache);
 
   console.log('');
   console.log(`Fetched stars for ${starMap.size} repos`);
