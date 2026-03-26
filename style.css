@@ -316,6 +316,10 @@ a:hover { color: #93b0ff; }
   color: var(--amber, #fbbf24) !important;
 }
 
+.meta-license {
+  color: var(--teal, #22d3ee) !important;
+}
+
 .card > p {
   color: var(--text-dim);
   font-size: 0.92rem;

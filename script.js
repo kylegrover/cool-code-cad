@@ -43,8 +43,8 @@ function renderItem(item) {
 // Build the links row for any card (GitHub link, website, extras)
 function buildLinksHTML(item) {
   const parts = [];
-  const githubUrl = item.github || (isGitHubUrl(item.url) ? item.url : null);
-  const websiteUrl = !isGitHubUrl(item.url) ? item.url : (item.links?.website || null);
+  const githubUrl = item.links?.github || item.github || (isGitHubUrl(item.url) ? item.url : null);
+  const websiteUrl = item.links?.website || (item.url && !isGitHubUrl(item.url) ? item.url : null);
 
   if (githubUrl) {
     parts.push(`<a href="${esc(githubUrl)}" target="_blank" rel="noopener" title="GitHub">GitHub</a>`);
@@ -67,8 +67,7 @@ function buildLinksHTML(item) {
 function buildMetaHTML(item) {
   const parts = [];
   if (item.year) parts.push(`<span class="meta-year" title="First released">${item.year}</span>`);
-  if (item.stars) parts.push(`<span class="meta-stars" title="GitHub stars">\u2605 ${formatStars(item.stars)}</span>`);
-  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
+  if (item.stars) parts.push(`<span class="meta-stars" title="GitHub stars">\u2605 ${formatStars(item.stars)}</span>`);  if (item.license) parts.push(`<span class="meta-license" title="License">${esc(item.license)}</span>`);  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
 }
 
 function formatStars(n) {

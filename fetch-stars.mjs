@@ -265,6 +265,16 @@ async function main() {
   console.log(`data.js updated (${updatedCount} items).`);
 
   // ---------------------------------------------------------------------------
+  // Normalize link schema and license metadata
+  // ---------------------------------------------------------------------------
+  console.log('\nNormalizing data schema with normalize-data.mjs ...');
+  try {
+    execSync('node normalize-data.mjs', { stdio: 'inherit' });
+  } catch (err) {
+    console.error('Failed to normalize data.js:', err.message);
+  }
+
+  // ---------------------------------------------------------------------------
   // Regenerate llm.txt
   // ---------------------------------------------------------------------------
   console.log('\nRegenerating llm.txt ...');

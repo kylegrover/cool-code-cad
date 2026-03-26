@@ -25,7 +25,13 @@ A static knowledge site for code-first CAD, G-code generators, and programmatic 
    - `setx GITHUB_TOKEN "ghp_xxx"` (Windows PowerShell)
 2. Run:
    - `node fetch-stars.mjs`
-3. This script updates `data.js` with `stars: <number>` entries and regenerates `llm.txt` via `generate-llm-txt.mjs`.
+3. This script updates `data.js` with `stars: <number>` entries, normalizes schema links and licenses via `normalize-data.mjs`, and regenerates `llm.txt` via `generate-llm-txt.mjs`.
+
+## Normalize schema manually
+
+If you only want normalization without fetching stars:
+
+- `node normalize-data.mjs`
 
 ## Contributing
 
