@@ -2,7 +2,7 @@
 # Generated from https://kylegrover.github.io/gcode-knowledge-site/
 # Feed this to an LLM for context about code-CAD and G-code tools.
 #
-# Total items: 197
+# Total items: 199
 
 ================================================================================
 CODE-FIRST CAD
@@ -34,29 +34,29 @@ Boundary Representation is the industry-standard approach. These tools build geo
   URL: https://github.com/FreeCAD/FreeCAD
   Website: https://www.freecad.org/
   Tech: Python, C++
-  Tags: python, opencascade, open-source, brep, parametric, gui
-  Full parametric CAD application with deeply integrated Python API. Nearly everything is scriptable. Milestone v1.0 released.
+  Tags: python, opencascade, open-source, brep, parametric, gui, scripting, macro
+  Full parametric CAD application with deeply integrated Python API and macro system. Nearly every GUI action is scriptable, and full headless Python automation is standard in manufacturing pipelines.
 
   Dune3D (2023)
   URL: https://dune3d.org/
   GitHub: https://github.com/dune3d/dune3d
   Tech: C++, Gtk4
-  Tags: c++, opencascade, open-source, brep, parametric, gui
-  Parametric 3D CAD combining SolveSpace's constraint solver with OpenCASCADE geometry. Modern Gtk4 UI. STEP import/export.
+  Tags: c++, opencascade, open-source, brep, parametric, gui, honorable-mention
+  GUI-first parametric CAD for 3D-printed enclosures. Uses SolveSpace solver and OpenCASCADE geometry but currently lacks a dedicated code/model API; kept as a GUI-centric honorable mention.
 
   SolveSpace (2008)
   URL: https://solvespace.com/
   Github: https://github.com/solvespace/solvespace
-  Tech: C++
-  Tags: c++, open-source, brep, parametric, constraint-solver, gui
-  Lightweight parametric 2D/3D CAD with a powerful geometric constraint solver. Exports STEP, STL, DXF, PDF. Also usable as a C library.
+  Tech: C++, Python
+  Tags: c++, python, open-source, brep, parametric, constraint-solver, gui, api
+  Lightweight parametric 2D/3D CAD with a powerful geometric constraint solver. Also exposes notebooks and Python bindings (slvs_py / python-solvespace) for programmatic constraint solving.
 
   BRL-CAD (1979)
   URL: https://brlcad.org/
   Github: https://github.com/BRL-CAD/brlcad
   Tech: C, Tcl
-  Tags: c, open-source, csg, ray-tracing, military, historic
-  One of the oldest open-source CAD systems (since 1979). CSG solid modeling, ray tracing, geometric analysis. Originally developed by the U.S. Army Research Laboratory.
+  Tags: c, tcl, shell, open-source, csg, historic, legacy
+  Classic command-line-driven CSG kernel with strong shell/Tcl scriptability. Includes MGED GUI, ray tracing, and mature geometric analysis tools. Legacy but powerful for scripted CSG workflows.
 
   Replicad (2022)
   URL: https://replicad.xyz/
@@ -87,6 +87,12 @@ Constructive Solid Geometry combines primitives with boolean operations. These t
   Tech: OpenSCAD DSL
   Tags: openscad, open-source, csg, dsl, parametric
   The original code-CAD tool. Custom DSL for CSG modeling. Now integrating the Manifold engine for ~100x speedups. See also SolidPython for a Python frontend.
+
+  PythonSCAD (2020)
+  URL: https://pythonscad.org/
+  Tech: Python, OpenSCAD
+  Tags: python, openscad, csg, parametric, open-source
+  Python integration for OpenSCAD that adds variable mutation, loops, file I/O, and access to the full Python ecosystem while generating OpenSCAD geometry.
 
   SolidPython2 (2021)
   URL: https://github.com/jeff-dh/SolidPython
@@ -318,6 +324,18 @@ Write code to produce machine instructions directly, instead of going through a 
   Tags: python, open-source, gcode, parser, rs274
   Python toolkit for RS-274 / ISO G-code. Focused on parsing and interpreting standard G-code specifications.
 
+  gcodepreview
+  URL: https://github.com/WillAdams/gcodepreview
+  Tech: Python
+  Tags: python, open-source, gcode, preview, cnc
+  PythonSCAD-based G-code preview and toolpath generator that can render 3D cut simulation and export DXF from lines/arcs.
+
+  NIST RS274NGC Interpreter
+  URL: https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=823374
+  Tech: PDF, Documentation
+  Tags: reference, gcode, nist, rs274, standard
+  Authoritative RS-274/NGC G-code language reference. Key standard for LinuxCNC and many Techties interpreters.
+
   pygdk (2017)
   URL: https://github.com/cilynx/pygdk
   Tech: Python
@@ -346,6 +364,12 @@ Integrated environments for writing code that produces G-code.
   Tech: Next.js, fullcontrol-js, WebGPU, Monaco
   Tags: typescript, javascript, open-source, gcode, browser, ide, webgpu, ai, fullcontrol-js
   Write JavaScript in the browser to generate G-code using fullcontrol-js. Same platform as py2g with shared Monaco editor, AI code assist, and WebGPU 3D preview  --  but runs pure JS with zero WASM overhead. Instant execution, no compilation step.
+
+  BlockMill
+  URL: https://blockmill.github.io/BlockMill/
+  Tech: JavaScript, Browser
+  Tags: javascript, browser, gcode, visual, block-programming
+  Visual, block-programming G-code generator for CNC. Drag and drop operations into sequences and preview toolpaths in browser.
 
 
 ================================================================================
@@ -587,6 +611,12 @@ Tools for reading, writing, converting, and repairing 3D file formats.
   Tech: C++
   Tags: c++, open-source, file-format, import, multi-format
   Open Asset Import Library. Reads 40+ 3D file formats (STL, OBJ, FBX, GLTF, STEP, etc.) into a unified in-memory format. C/C++ with Python and many other bindings.
+
+  ezdxf (2013)
+  URL: https://ezdxf.readthedocs.io/
+  Tech: Python
+  Tags: python, open-source, dxf, cad, file-format
+  Mature Python library to create, read, and edit DXF files. Core tool for programmatic 2D CAD/CAM workflows, CNC cutting, and CAD data exchange.
 
   cadexchanger
   URL: https://cadexchanger.com/
@@ -1134,18 +1164,6 @@ Tools for driving drawing machines and converting images to plotter-friendly vec
   Tags: python, open-source, plotter, svg, cli, pipeline
   CLI pipeline for creating, modifying, and optimizing SVGs for plotting. Path reordering, line merging, simplification, hatching, and more. Extensible via plugins (vpype-gcode, pixel art, halftoning). Hardware-accelerated viewer.
 
-  oneliner (2024)
-  URL: https://github.com/kylegrover/oneliner
-  Tech: Rust
-  Tags: rust, open-source, plotter, image-processing, single-line
-  Converts images to a single continuous line. Sub-pixel edge detection (Canny/Devernay, IPOL 2017), then Kruskal's MST + Euler tour optimization for an unbroken plotter path.
-
-  idraw-extensions (2024)
-  URL: https://github.com/kylegrover/idraw-extensions
-  Tech: Python, C/C++, Inkscape
-  Tags: python, c, open-source, plotter, inkscape, laser
-  Suite of Inkscape extensions for iDraw plotters (AxiDraw variant, 16T GT2 belt, 0.01mm precision). Hatch fill, SVG reordering, direct serial control, laser engraving.
-
   AxiDraw / NextDraw Software
   URL: https://github.com/evil-mad/axidraw
   Tech: Python, Inkscape
@@ -1169,12 +1187,6 @@ Tools for driving drawing machines and converting images to plotter-friendly vec
   Tech: Community
   Tags: community, plotter, svg, free
   Community platform for sharing free SVGs designed for pen plotters and 2D CNC machines.
-
-  devernay_1.0
-  URL: https://github.com/kylegrover/devernay_1.0
-  Tech: C89
-  Tags: c, open-source, image-processing, edge-detection, academic
-  ANSI C89 implementation of the Canny/Devernay sub-pixel edge detection algorithm (IPOL 2017). Outputs contours as TXT/PDF/SVG. Core dependency of oneliner.
 
 
 ================================================================================
