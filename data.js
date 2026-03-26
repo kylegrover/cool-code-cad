@@ -37,6 +37,30 @@ export const siteData = {
               "license": "Open Source"
             },
             {
+              "name": "PLaSM",
+              "url": "http://www.plasm.net/",
+              "year": 1980,
+              "description": "Open source scripting language for solid modeling, developed by the CAD group at the Universities Roma Tre and La Sapienza. Emphasizes scripting over GUI, supporting complex 2D/3D objects, advanced curves, Boolean operations, and geometric transformations. Used for academic and architectural modeling, notably for ancient Roman architecture.",
+              "tags": [
+                "c++",
+                "python",
+                "open-source",
+                "brep",
+                "scripting",
+                "historic",
+                "academic"
+              ],
+              "tech": [
+                "C++",
+                "Python"
+              ],
+              "links": {
+                "website": "http://www.plasm.net/",
+                "wikipedia": "https://en.wikipedia.org/wiki/PLaSM"
+              },
+              "license": "GPL"
+            },
+            {
               "name": "Build123d",
               "url": "https://github.com/gumyr/build123d",
               "year": 2022,
