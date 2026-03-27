@@ -15,11 +15,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, left 0.35s cubic-bezier(.77,0,.18,1);
 }
 .toc-float-btn:hover {
   background: var(--surface-hover);
   color: #fff;
+}
+body.toc-open .toc-float-btn {
+  left: 344px;
 }
 
 /* ===== TOC Sidebar Slide & Push ===== */
