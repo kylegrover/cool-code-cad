@@ -14,9 +14,11 @@ const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 function loadCache() {
   try {
     const data = JSON.parse(fs.readFileSync(CACHE_FILE, 'utf8'));
+    // Ensure new fields exist for backward compatibility
+    if (!data.projectFetched) data.projectFetched = {};
     return data;
   } catch {
-    return { lastFetched: 0, stars: {} };
+    return { lastFetched: 0, stars: {}, projectFetched: {} };
   }
 }
 
@@ -108,13 +110,9 @@ async function main() {
   console.log(`Auth: ${GITHUB_TOKEN ? 'Using GITHUB_TOKEN (5000 req/hr)' : 'Anonymous (60 req/hr)'}`);
   console.log('');
 
-  // Load cache and check TTL
+  // Load cache and check TTL per project
   const cache = loadCache();
   const now = Date.now();
-  if (cache.lastFetched && now - cache.lastFetched < CACHE_TTL_MS) {
-    console.log(`Using cached star data (last fetched ${(new Date(cache.lastFetched)).toLocaleString()})`);
-    return;
-  }
 
   // Collect all items with GitHub repos
   const repoItems = []; // { name, ownerRepo, ghUrl }
@@ -150,9 +148,18 @@ async function main() {
   const failures = [];
   let fetchCount = 0;
   let rateLimited = false;
+  let didFetchAny = false;
 
   for (const entry of repoItems) {
     if (entry.duplicate) continue; // already fetched or will fetch
+
+    // Check per-project cache TTL
+    const lastFetched = cache.projectFetched[entry.ownerRepo] || 0;
+    if (now - lastFetched < CACHE_TTL_MS && cache.stars[entry.ownerRepo] !== undefined) {
+      process.stdout.write(`[cache] ${entry.ownerRepo} ... ${cache.stars[entry.ownerRepo].toLocaleString()} stars\n`);
+      starMap.set(entry.ownerRepo, cache.stars[entry.ownerRepo]);
+      continue;
+    }
 
     fetchCount++;
     process.stdout.write(`[${fetchCount}/${seen.size}] ${entry.ownerRepo} ... `);
@@ -175,6 +182,8 @@ async function main() {
         console.log(`${result.stars.toLocaleString()} stars`);
         starMap.set(entry.ownerRepo, result.stars);
         cache.stars[entry.ownerRepo] = result.stars;
+        cache.projectFetched[entry.ownerRepo] = now;
+        didFetchAny = true;
       }
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
@@ -188,9 +197,11 @@ async function main() {
     }
   }
 
-  // Save cache
-  cache.lastFetched = Date.now();
-  saveCache(cache);
+  // Save cache only if any project was fetched this run
+  if (didFetchAny) {
+    cache.lastFetched = now;
+    saveCache(cache);
+  }
 
   console.log('');
   console.log(`Fetched stars for ${starMap.size} repos`);
