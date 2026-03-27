@@ -340,7 +340,7 @@ function searchableText(item) {
 // --- TOC Sidebar -----------------------------------------------------------
 
 const tocSidebar = document.getElementById('toc-sidebar');
-const tocLink = document.getElementById('toc-link');
+const tocFloatBtn = document.getElementById('toc-float-btn');
 
 function buildTOCSidebar(data) {
   tocSidebar.innerHTML = '';
@@ -389,9 +389,44 @@ function buildTOCSidebar(data) {
 }
 
 buildTOCSidebar(siteData);
-
 tocSidebar.style.display = 'none';
 tocLink.addEventListener('click', (e) => {
   e.preventDefault();
   tocSidebar.style.display = tocSidebar.style.display === 'none' ? 'block' : 'none';
+});
+
+// Sidebar open/close logic
+function openTOC() {
+  tocSidebar.classList.add('open');
+  document.body.classList.add('toc-open');
+}
+function closeTOC() {
+  tocSidebar.classList.remove('open');
+  document.body.classList.remove('toc-open');
+}
+
+let tocOpen = false;
+tocFloatBtn.addEventListener('click', () => {
+  tocOpen = !tocOpen;
+  if (tocOpen) {
+    openTOC();
+  } else {
+    closeTOC();
+  }
+});
+
+// Optional: close TOC when clicking outside or pressing Escape
+document.addEventListener('keydown', (e) => {
+  if (tocOpen && (e.key === 'Escape' || e.key === 'Esc')) {
+    tocOpen = false;
+    closeTOC();
+  }
+});
+
+// Clicking a TOC link closes the sidebar (for better UX)
+tocSidebar.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') {
+    tocOpen = false;
+    closeTOC();
+  }
 });
