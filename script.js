@@ -390,10 +390,11 @@ function buildTOCSidebar(data) {
 
 buildTOCSidebar(siteData);
 tocSidebar.style.display = 'none';
-tocLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  tocSidebar.style.display = tocSidebar.style.display === 'none' ? 'block' : 'none';
-});
+
+// tocLink.addEventListener('click', (e) => {
+//   e.preventDefault();
+//   tocSidebar.style.display = tocSidebar.style.display === 'none' ? 'block' : 'none';
+// });
 
 // Sidebar open/close logic
 function openTOC() {
