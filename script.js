@@ -389,7 +389,6 @@ function buildTOCSidebar(data) {
 }
 
 buildTOCSidebar(siteData);
-tocSidebar.style.display = 'none';
 
 // tocLink.addEventListener('click', (e) => {
 //   e.preventDefault();
