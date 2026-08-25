@@ -2,7 +2,46 @@
 # Generated from https://kylegrover.github.io/gcode-knowledge-site/
 # Feed this to an LLM for context about code-CAD and G-code tools.
 #
-# Total items: 197
+# Total items: 204
+
+================================================================================
+HOW THE CAD STACK FITS TOGETHER
+================================================================================
+A CAD product is a stack, not one magic program. Authoring tools preserve design intent; kernels calculate geometry; viewers draw a temporary mesh; CAM and slicers turn shape into motion; controllers make the machine move.
+
+--- HOW THIS PIPELINE WORKS ---
+
+  01 / Author: Describe the thing
+  Dimensions, constraints, features, code, or an AI prompt capture what the part is supposed to be.
+  Examples: Sketch + dimensions, Code / DSL, Feature tree, AI agent
+
+  02 / Evaluate: Build geometry
+  A geometry kernel evaluates booleans, fillets, intersections, topology, tolerances, and measurements.
+  Examples: OCCT / B-Rep, Manifold / mesh, Fidget / implicit
+
+  03 / Inspect: Tessellate & view
+  The exact model is converted to display triangles. The viewport is the window into the model, not usually the model itself.
+  Examples: Three.js, VTK, WebGPU, Measurements
+
+  04 / Exchange: Choose what survives
+  STEP/BREP preserve exact surfaces and topology. STL/3MF carry a tessellated skin. DXF/SVG carry 2D curves.
+  Examples: STEP = exact CAD, STL / 3MF = mesh, DXF / SVG = 2D
+
+  Manufacturing routes:
+  - 3D printing: Solid or mesh -> Slicer -> G-code -> Printer firmware -> Printed part
+  - CNC machining: B-Rep / STEP -> CAM -> G-code -> Machine controller -> Machined part
+  - Programmatic toolpaths: Geometry code -> Path generator -> G-code -> Controller -> Physical output
+
+  Glossary:
+  - Modeler / workbench: The editor, UI, feature history, and file workflow a person or agent operates.
+  - Geometry kernel: The math engine that creates and modifies shapes; OCCT is the common open B-Rep example.
+  - B-Rep: Exact surfaces plus the edges and vertices that bound them. Ideal for STEP, fillets, and machining.
+  - Mesh: Triangles approximating a surface. Excellent for display and printing; lossy as editable CAD.
+  - Slicer / CAM: Manufacturing planners: a slicer makes additive layers; CAM makes subtractive cutting paths.
+  - G-code: The downstream instruction stream: moves, speeds, temperatures, spindle state, and machine commands.
+
+  The important boundary: a viewer can make an STL and a STEP file look equally smooth, but only the STEP model still knows that a round wall is a cylinder. Rendering quality and geometry quality are separate concerns.
+
 
 ================================================================================
 CODE-FIRST CAD
@@ -18,7 +57,15 @@ Boundary Representation is the industry-standard approach. These tools build geo
   Github: https://github.com/CadQuery/cadquery
   Tech: Python
   Tags: python, opencascade, open-source, brep, parametric
-  Python parametric CAD with a chainable fluent API on top of OpenCASCADE. Large community, mature. See also awesome-cadquery.
+  Mature Python parametric CAD on OpenCASCADE. CadQuery 2.8 moved to OCP 7.9, made its free-function API non-experimental, added experimental modeling-history support, a separate B-spline geometry layer, and unit-aware STEP import/export. See also awesome-cadquery.
+
+  CQ-editor (2017)
+  URL: https://github.com/CadQuery/CQ-editor
+  Github: https://github.com/CadQuery/CQ-editor
+  Docs: https://github.com/CadQuery/CQ-editor/wiki
+  Tech: Python, PyQt
+  Tags: python, cadquery, opencascade, open-source, editor, viewer, debugger
+  CadQuery's cross-platform PyQt workbench with automatic source reload, an OCCT viewport, object-stack inspection, STEP/STL export, and a graphical debugger that can step through a script while the model evolves. It can feel old-school and packaging remains a pain point, but the project and wiki were actively maintained in 2026 -- not abandoned.
 
   PLaSM (1980)
   URL: http://www.plasm.net/
@@ -34,7 +81,7 @@ Boundary Representation is the industry-standard approach. These tools build geo
   Github: https://github.com/gumyr/build123d
   Tech: Python
   Tags: python, opencascade, open-source, brep, parametric
-  Next-gen Python CAD evolved from CadQuery. Pythonic context managers, both CSG tree and feature-stack workflows. Heading toward stable 1.0. See bd_warehouse for a parametric parts library.
+  Pythonic B-Rep modeling evolved from CadQuery, with algebra and context-manager builder APIs that work well with ordinary Python control flow. v0.10 added draft operations, curved-surface wrapping, Gordon surfaces, C2 blend curves, and more topology-selection tools; the project is actively defining its stable 1.0 baseline. See bd_warehouse for a parametric parts library.
 
   pythonOCC (2008)
   URL: https://github.com/tpaviot/pythonocc-core
@@ -59,7 +106,7 @@ Boundary Representation is the industry-standard approach. These tools build geo
   Github: https://github.com/dune3d/dune3d
   Tech: C++, Gtk4
   Tags: c++, opencascade, open-source, brep, parametric, gui, honorable-mention
-  GUI-first parametric CAD for 3D-printed enclosures. Uses SolveSpace solver and OpenCASCADE geometry but currently lacks a dedicated code/model API; kept as a GUI-centric honorable mention.
+  Actively developed GUI-first parametric CAD, originally built for 3D-printed enclosures. It pairs a SolveSpace-derived constraint solver with OpenCASCADE, has fillets/chamfers and a notably fluid non-modal sketcher, but still lacks a dedicated code/model API; included as a strong GUI-centric comparison point.
 
   SolveSpace (2008)
   URL: https://solvespace.com/
@@ -84,7 +131,14 @@ Boundary Representation is the industry-standard approach. These tools build geo
   Website: https://replicad.xyz/
   Tech: TypeScript, WASM
   Tags: typescript, opencascade, open-source, brep, browser, wasm
-  TypeScript library for browser-based 3D CAD on top of opencascade.js. CadQuery-inspired API. Embeddable in any web app. Online workbench included.
+  TypeScript B-Rep modeling on opencascade.js, with a live browser Studio, parameters, dimension labels, STEP import/export, and an official Node CLI that evaluates source files and exports STEP, STL, JSON, or SVG projections. A particularly small source-backed loop for browser agents: model.js stays canonical while Studio supplies the viewport.
+
+  oscad (openscad-occt) (2026)
+  URL: https://github.com/dnewcome/openscad-occt
+  Github: https://github.com/dnewcome/openscad-occt
+  Tech: C++, OCCT
+  Tags: c++, opencascade, brep, declarative, scad, experimental
+  Very young clean-room experiment pairing an OpenSCAD-style declarative language with OCCT B-Rep output. It already demonstrates exact STEP export, B-Rep booleans, query-selected fillets, and datum-like attach(), but covers only a subset of OpenSCAD and has no preview GUI yet. Public source; no license file was listed when reviewed.
 
   cqparts (2017)
   URL: https://github.com/cqparts/cqparts
@@ -158,7 +212,7 @@ Constructive Solid Geometry combines primitives with boolean operations. These t
   Github: https://github.com/elalish/manifold
   Tech: C++, JS, Python, WASM
   Tags: c++, javascript, python, open-source, mesh, booleans, gpu, wasm
-  High-performance geometry library for guaranteed-manifold mesh Booleans. GPU-parallel, ~100x faster than OpenSCAD. JS/Python/C bindings. Now an OpenSCAD backend. See ManifoldCAD for a browser editor.
+  High-performance geometry library for guaranteed-manifold mesh booleans, used as OpenSCAD's fast Manifold backend. Its commonly shipped path is multi-core CPU/TBB; CUDA work exists but is not the default GPU-native engine older summaries implied. Official C++, Python, JavaScript, and WASM surfaces. See ManifoldCAD for a browser editor.
 
   MicroCAD (2024)
   URL: https://codeberg.org/microcad/microcad
@@ -351,7 +405,7 @@ A new generation of CAD kernels written in Rust, targeting memory safety, WASM c
   Github: https://github.com/hannobraun/fornjot
   Tech: Rust
   Tags: rust, open-source, brep, kernel
-  Early-stage B-Rep CAD kernel in Rust. CSG, sketches, sweeps. Define models directly in Rust code. Presented at FOSDEM 2026.
+  Historical Rust B-Rep CAD experiment with a useful postmortem. Creator Hanno Braun shut the project down after roughly six years, citing the depth of the geometry problem plus scope, project-management, and funding pressures. Keep it as a reference, not a new dependency.
 
   Truck (2021)
   URL: https://github.com/ricosjp/truck
@@ -359,7 +413,31 @@ A new generation of CAD kernels written in Rust, targeting memory safety, WASM c
   Github: https://github.com/ricosjp/truck
   Tech: Rust, WASM
   Tags: rust, open-source, brep, kernel, nurbs, wasm
-  Shape processing kernel in Rust. STEP I/O, NURBS, Boolean ops. WASM-compilable. Geometry kernel for CADmium.
+  Modular Rust shape-processing kernel with NURBS B-Rep, tessellation, STEP I/O, boolean operations, wgpu rendering utilities, and WASM bindings. Active and technically important, but a lower-level kernel project rather than an end-user modeler; it powered the CADmium experiment.
+
+  Monstertruck (2023)
+  URL: https://github.com/virtualritz/monstertruck
+  Github: https://github.com/virtualritz/monstertruck
+  Tech: Rust, WASM, wgpu
+  Tags: rust, open-source, brep, kernel, fillet, step, experimental
+  Experimental hard fork of Truck focused on missing production-CAD pieces: constant and variable-radius fillets, offsets, STEP healing and assembly output, explicit errors, and improved meshing. A promising research quarry, not a production-safe kernel: its boolean rewrite was reverted after orientation regressions and the project has a bus factor of one.
+
+  vcad (2026)
+  URL: https://github.com/ecto/vcad
+  Website: https://vcad.io/
+  Github: https://github.com/ecto/vcad
+  Tech: Rust, WASM, Tauri
+  Tags: rust, open-source, brep, kernel, wasm, ai, mcp, experimental
+  Ambitious new Apache-2.0 Rust/WASM B-Rep stack pitched as parametric CAD for the AI era, spanning a web/desktop app, CLI, sketch constraints, assemblies, simulation, STEP, and an MCP server. The surface area is unusually broad for such a young project, so treat the feature claims as a watch-and-test list rather than an established robustness record.
+
+  brepkit / brepjs (2026)
+  URL: https://github.com/andymai/brepkit
+  Website: https://brepjs.dev/
+  Github: https://github.com/andymai/brepkit
+  Typescript: https://github.com/andymai/brepjs
+  Tech: Rust, WASM, TypeScript
+  Tags: rust, brep, kernel, wasm, typescript, agpl, experimental
+  New from-scratch exact B-Rep engine in Rust/WASM with a higher-level TypeScript API in brepjs. It publishes a broad, status-labeled feature matrix, public cross-kernel benchmarks, STEP I/O, fillets, shelling, healing, and a sketch solver -- but also documents mesh fallbacks and immature subsystems. v3+ is AGPL-3.0 with a commercial-license option; earlier 2.x releases remain permissive.
 
 
 ================================================================================
@@ -1071,7 +1149,7 @@ Preview, verify, analyze, and simulate G-code and manufacturing processes before
   Github: https://github.com/bernhard-42/vscode-ocp-cad-viewer
   Tech: VS Code
   Tags: vscode, open-source, cadquery, build123d, viewer
-  VS Code extension for viewing CadQuery/Build123d models interactively. Essential for the Python code-CAD workflow.
+  Actively maintained VS Code and standalone viewer for CadQuery/Build123d/OCP models. The 4.x line adds richer B-Rep-backed measurements and inspection, PBR materials, screenshots, visual debugging, selection tools, and automatic reload -- much more than a passive triangle viewer.
 
   G-code Genius
   URL: https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius
@@ -1325,9 +1403,10 @@ Design and manufacture without installing anything. These tools compile CAD kern
   Chili3D (2023)
   URL: https://chili3d.com/
   Website: https://chili3d.com/
+  Github: https://github.com/xiangechen/chili3d
   Tech: WASM, Three.js
   Tags: browser, open-source, brep, wasm, opencascade, gui
-  Open-source browser-based 3D CAD. OpenCASCADE -> WASM + Three.js. Full modeling tools: sketches, booleans, fillets. Alpha stage.
+  Active AGPL browser CAD on OpenCASCADE/WASM + Three.js, with sketches, booleans, fillets, measurements, document history, assemblies, and STEP/IGES/BREP import/export. v0.6.1 shipped in January 2026; newer main-branch work moves to OCCT 8 and adds an early MCP server with both live-browser and headless CAD tools. Still alpha: APIs can break and documentation is developing.
 
   CADmium (2023)
   URL: https://github.com/CADmium-Co/CADmium
@@ -1335,7 +1414,7 @@ Design and manufacture without installing anything. These tools compile CAD kern
   Github: https://github.com/CADmium-Co/CADmium
   Tech: Rust, WASM, SvelteKit
   Tags: browser, open-source, brep, wasm, rust, svelte
-  Local-first browser CAD using the Truck Rust kernel -> WASM. SvelteKit UI. Early prototype targeting 3D printing hobbyists.
+  Historical local-first browser-CAD prototype using the Truck Rust kernel through WASM with a SvelteKit UI. It reached sketch/extrude experiments for 3D-printing hobbyists but stalled; useful prior art, not an active tool to adopt.
 
   CascadeStudio (2020)
   URL: https://zalo.github.io/CascadeStudio/
@@ -1351,7 +1430,7 @@ Design and manufacture without installing anything. These tools compile CAD kern
   Github: https://github.com/sgenoud/replicad
   Tech: TypeScript, WASM
   Tags: browser, open-source, brep, wasm, opencascade, typescript
-  JS/TS library for building 3D models in the browser on opencascade.js. CadQuery-inspired API. Online workbench included.
+  JS/TS B-Rep modeling on opencascade.js. The live Studio combines editor, parameters, dimension labels, and viewport; an official Node CLI now evaluates local source and exports STEP, STL, JSON, or SVG projection. This makes model.js + Studio + CLI a compact source-backed human/AI loop without requiring MCP.
 
   JSCAD
   URL: https://www.jscad.xyz/
@@ -1447,15 +1526,35 @@ EMERGING APPROACHES
 ================================================================================
 New paradigms for programmatic design  --  AI-assisted CAD, topology optimization, and generative design.
 
+--- Agent-Ready CAD Loops ---
+The useful pattern is not merely text-to-mesh: keep editable source, give the agent a real geometry engine, and close the loop with renders, measurements, validation, and exact export. MCP can expose that loop, but a browser or CLI an agent can operate may be enough.
+
+  ChiselCAD (LTKMN) (2026)
+  URL: https://chiselcad.brennan.computer/
+  Website: https://chiselcad.brennan.computer/
+  Github: https://github.com/LTKMN/ChiselCAD
+  Tech: JavaScript, WASM, Three.js, Monaco
+  Tags: browser, brep, opencascade, javascript, ai, agent-api, source-available
+  A strikingly complete browser workbench forked from CascadeStudio: OCCT 8 B-Rep, Monaco, in-viewport constrained sketching that emits readable JavaScript, live parameters, feature commands, code↔geometry linking, and a Playwright-friendly window.CascadeAPI. It also offers optional local-browser LLM chat with user-supplied keys and no central model server. License caveat: upstream remains MIT, while ChiselCAD's additions are source-available and prohibit selling, repackaging, or embedding the editor commercially without permission.
+
+  build123d-mcp (2026)
+  URL: https://github.com/pzfreo/build123d-mcp
+  Github: https://github.com/pzfreo/build123d-mcp
+  Pypi: https://pypi.org/project/build123d-mcp/
+  Tech: Python, MCP, build123d
+  Tags: python, build123d, opencascade, open-source, ai, mcp, local, validation
+  Local MCP toolbox that gives coding agents a persistent build123d session plus rendering, B-Rep measurements, feature inspection, validation, repair guidance, snapshots, and STEP/STL/DXF/SVG export. It closes more of the verification loop than simply asking an LLM to write Python. One caveat for durable projects: a canonical full source-file workflow is still being designed, so keep your own part.py as the source of truth.
+
 --- AI-Assisted CAD ---
 Using machine learning and large language models to generate or assist with CAD design.
 
   Zoo.dev (formerly KittyCAD) (2021)
   URL: https://zoo.dev/
   Website: https://zoo.dev/
+  Github: https://github.com/KittyCAD/modeling-app
   Tech: Rust, KCL, API
   Tags: commercial, ai, api, cad, text-to-cad, kcl
-  API-first CAD engine with an AI-powered modeling assistant. Text-to-CAD, code generation, geometry API. KCL scripting language. Backed by substantial VC funding.
+  Fast-moving KCL-based modeling app with sketching, code/geometry source mapping, and the Zookeeper AI assistant; v1.3.10 shipped in August 2026. The desktop/web app and KCL tooling are MIT-licensed, but model execution streams commands to Zoo's proprietary hosted geometry engine over WebSocket and requires Zoo authentication -- open client, centralized CAD service.
 
 --- Topology Optimization & Generative Design ---
 Algorithms that determine optimal material distribution given loads and constraints.

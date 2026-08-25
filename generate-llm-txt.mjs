@@ -36,6 +36,29 @@ for (const section of siteData.sections) {
   if (section.description) out += stripHTML(section.description) + '\n';
   out += '\n';
 
+  if (section.pipeline) {
+    out += '--- HOW THIS PIPELINE WORKS ---\n\n';
+    for (const stage of section.pipeline.stages ?? []) {
+      out += `  ${stage.kicker}: ${stage.title}\n`;
+      out += `  ${stage.description}\n`;
+      if (stage.examples?.length) out += `  Examples: ${stage.examples.join(', ')}\n`;
+      out += '\n';
+    }
+
+    out += '  Manufacturing routes:\n';
+    for (const route of section.pipeline.routes ?? []) {
+      out += `  - ${route.title}: ${route.steps.join(' -> ')}\n`;
+    }
+    out += '\n';
+
+    out += '  Glossary:\n';
+    for (const item of section.pipeline.glossary ?? []) {
+      out += `  - ${item.term}: ${item.definition}\n`;
+    }
+    if (section.pipeline.note) out += `\n  ${stripHTML(section.pipeline.note)}\n`;
+    out += '\n';
+  }
+
   for (const sub of section.subsections) {
     if (sub.title) out += `--- ${sub.title} ---\n`;
     if (sub.description) out += stripHTML(sub.description) + '\n';

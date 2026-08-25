@@ -17,6 +17,13 @@ const stickyBar = document.getElementById('sticky-bar');
 heroTitle.innerHTML = siteData.meta.title.replace('\n', '<br>');
 heroSubtitle.innerHTML = siteData.meta.subtitle;
 
+if (siteData.meta.updated) {
+  const kicker = document.createElement('p');
+  kicker.className = 'hero-kicker';
+  kicker.textContent = `Curated field guide · reviewed ${siteData.meta.updated}`;
+  heroTitle.before(kicker);
+}
+
 // --- Nav --------------------------------------------------------------------
 
 function buildNav(sections) {
@@ -135,6 +142,84 @@ function renderLinkCard(item) {
   return div;
 }
 
+// --- CAD pipeline infographic ----------------------------------------------
+
+function renderPipeline(pipeline, container) {
+  const graphic = document.createElement('div');
+  graphic.className = 'pipeline-graphic';
+  graphic.setAttribute('aria-label', 'CAD product development pipeline');
+
+  const flow = document.createElement('div');
+  flow.className = 'pipeline-flow';
+  for (const stage of pipeline.stages || []) {
+    const article = document.createElement('article');
+    article.className = 'pipeline-stage';
+    article.innerHTML = `
+      <p class="pipeline-kicker">${esc(stage.kicker)}</p>
+      <h3>${esc(stage.title)}</h3>
+      <p>${esc(stage.description)}</p>
+      <div class="pipeline-chips">
+        ${(stage.examples || []).map(example => `<span>${esc(example)}</span>`).join('')}
+      </div>
+    `;
+    flow.appendChild(article);
+  }
+  graphic.appendChild(flow);
+
+  const splitLabel = document.createElement('div');
+  splitLabel.className = 'pipeline-split-label';
+  splitLabel.innerHTML = '<span>Geometry becomes a manufacturing plan</span>';
+  graphic.appendChild(splitLabel);
+
+  const routes = document.createElement('div');
+  routes.className = 'pipeline-routes';
+  for (const route of pipeline.routes || []) {
+    const article = document.createElement('article');
+    article.className = `pipeline-route pipeline-route--${esc(route.kind)}`;
+
+    const steps = (route.steps || []).map((step, index) => {
+      const arrow = index < route.steps.length - 1
+        ? '<span class="pipeline-route-arrow" aria-hidden="true">→</span>'
+        : '';
+      return `<span class="pipeline-route-step">${esc(step)}</span>${arrow}`;
+    }).join('');
+
+    article.innerHTML = `
+      <div class="pipeline-route-heading">
+        <span>${esc(route.label)}</span>
+        <h3>${esc(route.title)}</h3>
+      </div>
+      <div class="pipeline-route-steps">${steps}</div>
+    `;
+    routes.appendChild(article);
+  }
+  graphic.appendChild(routes);
+
+  if (pipeline.note) {
+    const note = document.createElement('p');
+    note.className = 'pipeline-note';
+    note.innerHTML = pipeline.note;
+    graphic.appendChild(note);
+  }
+
+  const glossaryTitle = document.createElement('h3');
+  glossaryTitle.className = 'pipeline-glossary-title';
+  glossaryTitle.textContent = 'The jobs people commonly mix up';
+  graphic.appendChild(glossaryTitle);
+
+  const glossary = document.createElement('dl');
+  glossary.className = 'pipeline-glossary';
+  for (const item of pipeline.glossary || []) {
+    const group = document.createElement('div');
+    group.className = 'pipeline-term';
+    group.innerHTML = `<dt>${esc(item.term)}</dt><dd>${esc(item.definition)}</dd>`;
+    glossary.appendChild(group);
+  }
+  graphic.appendChild(glossary);
+
+  container.appendChild(graphic);
+}
+
 // --- Section rendering ------------------------------------------------------
 
 function renderSections(sections) {
@@ -143,7 +228,7 @@ function renderSections(sections) {
   for (const section of sections) {
     const sectionEl = document.createElement('section');
     sectionEl.id = section.id;
-    sectionEl.className = 'section';
+    sectionEl.className = section.pipeline ? 'section section--pipeline' : 'section';
 
     let html = '<div class="container">';
     html += `<h2 class="section-title">${esc(section.title)}</h2>`;
@@ -154,6 +239,10 @@ function renderSections(sections) {
     sectionEl.innerHTML = html;
 
     const container = sectionEl.querySelector('.container');
+
+    if (section.pipeline) {
+      renderPipeline(section.pipeline, container);
+    }
 
     for (const sub of section.subsections) {
       // Subsection heading
@@ -200,6 +289,13 @@ function renderSections(sections) {
 }
 
 renderSections(siteData.sections);
+
+// The sections are created after initial HTML parsing, so the browser cannot
+// resolve a deep link such as #emerging until rendering has finished.
+if (window.location.hash) {
+  const target = document.getElementById(window.location.hash.slice(1));
+  if (target) target.scrollIntoView();
+}
 
 // --- Search -----------------------------------------------------------------
 

@@ -1,3 +1,5 @@
+add https://github.com/LTKMN/ChiselCAD
+
 # G-Code & Programmatic CAD — Project Knowledge Base
 
 ## Overview

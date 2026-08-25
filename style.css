@@ -226,6 +226,7 @@ a:hover { color: #93b0ff; }
 /* ===== Sections ===== */
 .section {
   padding: 100px 0;
+  scroll-margin-top: 110px;
 }
 
 .section--alt { background: var(--bg-alt); }
@@ -726,4 +727,276 @@ a:hover { color: #93b0ff; }
     padding: 18px 8px 8px 8px;
     font-size: 0.95rem;
   }
+}
+
+/* ===== CAD pipeline infographic ===== */
+.hero-kicker {
+  margin-bottom: 14px;
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.section--pipeline {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(122, 168, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 168, 255, 0.035) 1px, transparent 1px),
+    radial-gradient(circle at 20% 10%, rgba(34, 211, 238, 0.08), transparent 30%),
+    var(--bg-alt);
+  background-size: 42px 42px, 42px 42px, auto, auto;
+}
+
+.section--pipeline .section-desc {
+  max-width: 760px;
+  margin-bottom: 38px;
+}
+
+.pipeline-graphic {
+  position: relative;
+}
+
+.pipeline-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pipeline-stage {
+  --stage-color: var(--accent);
+  position: relative;
+  min-height: 280px;
+  padding: 26px 24px 22px;
+  border: 1px solid color-mix(in srgb, var(--stage-color) 38%, transparent);
+  border-top: 3px solid var(--stage-color);
+  border-radius: var(--radius);
+  background: linear-gradient(155deg, color-mix(in srgb, var(--stage-color) 11%, var(--surface)), var(--surface));
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+}
+
+.pipeline-stage:nth-child(2) { --stage-color: var(--pink); }
+.pipeline-stage:nth-child(3) { --stage-color: var(--cyan); }
+.pipeline-stage:nth-child(4) { --stage-color: var(--amber); }
+
+.pipeline-stage:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: -27px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 30px;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.pipeline-kicker {
+  margin-bottom: 16px;
+  color: var(--stage-color) !important;
+  font-size: 0.7rem !important;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pipeline-stage h3 {
+  margin-bottom: 10px;
+  font-size: 1.14rem;
+}
+
+.pipeline-stage > p:not(.pipeline-kicker) {
+  margin-bottom: 18px;
+  color: var(--text-dim);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.pipeline-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pipeline-chips span {
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, var(--stage-color) 26%, transparent);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.17);
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.pipeline-split-label {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 38px 0 22px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pipeline-split-label::before,
+.pipeline-split-label::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+.pipeline-routes {
+  display: grid;
+  gap: 12px;
+}
+
+.pipeline-route {
+  --route-color: var(--cyan);
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 18px 20px;
+  border: 1px solid color-mix(in srgb, var(--route-color) 28%, transparent);
+  border-left: 4px solid var(--route-color);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--route-color) 9%, var(--surface)), rgba(16, 21, 41, 0.86));
+}
+
+.pipeline-route--cnc { --route-color: var(--orange); }
+.pipeline-route--direct { --route-color: var(--pink); }
+
+.pipeline-route-heading > span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--route-color);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pipeline-route-heading h3 {
+  font-size: 0.96rem;
+}
+
+.pipeline-route-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.pipeline-route-step {
+  min-width: 0;
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pipeline-route-arrow {
+  flex: 0 0 auto;
+  margin: 0 8px;
+  color: color-mix(in srgb, var(--route-color) 72%, var(--text));
+}
+
+.pipeline-note {
+  margin: 22px 0 42px;
+  padding: 18px 20px;
+  border: 1px solid rgba(122, 168, 255, 0.22);
+  border-radius: var(--radius-sm);
+  background: rgba(122, 168, 255, 0.07);
+  color: var(--text-dim);
+  font-size: 0.86rem;
+}
+
+.pipeline-note strong { color: var(--text); }
+
+.pipeline-glossary-title {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+}
+
+.pipeline-glossary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pipeline-term {
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(7, 10, 18, 0.55);
+}
+
+.pipeline-term dt {
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.pipeline-term dd {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
+}
+
+.pipeline-stage,
+.pipeline-route,
+.pipeline-term {
+  opacity: 1;
+  transform: translateY(0);
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+@media (max-width: 940px) {
+  .pipeline-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pipeline-stage:not(:last-child)::after { display: none; }
+
+  .pipeline-route {
+    grid-template-columns: 130px 1fr;
+    gap: 14px;
+  }
+
+  .pipeline-route-arrow { margin: 0 4px; }
+  .pipeline-glossary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 680px) {
+  .pipeline-flow { grid-template-columns: 1fr; }
+  .pipeline-stage { min-height: 0; }
+
+  .pipeline-route {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .pipeline-route-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 5px;
+  }
+
+  .pipeline-route-step { text-align: left; }
+  .pipeline-route-arrow { margin: -1px 0 -1px 18px; transform: rotate(90deg); }
+  .pipeline-glossary { grid-template-columns: 1fr; }
+  .pipeline-split-label { text-align: center; }
 }

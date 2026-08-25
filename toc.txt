@@ -1,6 +1,8 @@
+How the CAD Stack Fits Together
 Code-First CAD
   B-Rep / Solid Modeling
     CadQuery
+    CQ-editor
     PLaSM
     Build123d
     pythonOCC
@@ -9,6 +11,7 @@ Code-First CAD
     SolveSpace
     BRL-CAD
     Replicad
+    oscad (openscad-occt)
     cqparts
     Topologic
   CSG & Mesh-Based
@@ -48,6 +51,9 @@ Code-First CAD
   Rust CAD Kernels
     Fornjot
     Truck
+    Monstertruck
+    vcad
+    brepkit / brepjs
 Programmatic G-Code Generation
   G-Code Generation Libraries
     FullControl
@@ -211,6 +217,9 @@ Browser-Based CAD & Manufacturing
     Cuttle.xyz
     PlotterFiles
 Emerging Approaches
+  Agent-Ready CAD Loops
+    ChiselCAD (LTKMN)
+    build123d-mcp
   AI-Assisted CAD
     Zoo.dev (formerly KittyCAD)
   Topology Optimization & Generative Design

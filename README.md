@@ -2,10 +2,12 @@
 
 A static knowledge site for code-first CAD, G-code generators, and programmatic manufacturing tools.
 
+Last curated research pass: **2026-08-25**. This pass added an explainer for the CAD-to-machine pipeline, refreshed the active B-Rep/AI-tooling landscape, and added ChiselCAD, build123d-mcp, oscad, Monstertruck, vcad, and brepkit/brepjs.
+
 ## What it is
 
 - A curated collection of open-source libraries, frameworks, and tools geared towards code-based CAD, G-code generation, and programmatic manufacturing or creative workflows.
-- Data is defined in `data.js` as JSON-like items grouped into sections/subsections.
+- Data is defined in `data.js` as JSON-like items grouped into sections/subsections. The `cad-pipeline` section also carries structured infographic data rendered by `script.js`.
 - The site is rendered dynamically in the browser via `script.js`.
 - Optional stars for GitHub repos are fetched with `fetch-stars.mjs` and written to `data.js`.
 
