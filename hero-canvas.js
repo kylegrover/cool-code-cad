@@ -5,6 +5,8 @@
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   let W, H, dpr;
   let paths = [];
@@ -308,10 +310,16 @@
 
   function init() {
     if (animId) cancelAnimationFrame(animId);
+    animId = null;
     resize();
     generatePaths();
-    t = 0;
-    animId = requestAnimationFrame(draw);
+    if (motionPreference.matches) {
+      t = Math.ceil(Math.max(...paths.map(path => path.delay + path.points.length / path.speed), 0));
+      draw();
+    } else {
+      t = 0;
+      animId = requestAnimationFrame(draw);
+    }
   }
 
   let resizeTimer;
@@ -319,6 +327,8 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(init, 200);
   });
+
+  motionPreference.addEventListener('change', init);
 
   init();
 })();

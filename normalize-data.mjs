@@ -4,21 +4,13 @@
 // - Add license metadata from tags
 // - Keep existing url/github for backwards compatibility (optional)
 
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { siteData } from './data.js';
 
-const KNOWN_LICENSE_MAP = {
-  mit: 'MIT',
-  gplv3: 'GPLv3',
-  gpl: 'GPL',
-  lgpl: 'LGPL',
-  apache: 'Apache',
-  bsd: 'BSD',
-  proprietary: 'Proprietary',
-  commercial: 'Proprietary',
-  'open-source': 'Open Source',
-  free: 'Free',
-};
+const PROJECT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const DATA_FILE = path.join(PROJECT_DIR, 'data.js');
 
 function extractLicense(tags = []) {
   if (!Array.isArray(tags) || tags.length === 0) {
@@ -62,7 +54,8 @@ function normalizeItem(item) {
     }
   }
 
-  // Ensure license field is present when tags include source info
+  // Preserve the existing schema: exact licenses and broader access models
+  // currently share this display field.
   if (!item.license) {
     const candidate = extractLicense(item.tags);
     if (candidate) {
@@ -89,8 +82,8 @@ function normalizeAll() {
   }
 
   const dataText = `export const siteData = ${JSON.stringify(siteData, null, 2)};\n`;
-  fs.writeFileSync('data.js', dataText, 'utf8');
-  console.log('✅ data.js normalized (links + license metadata added).');
+  fs.writeFileSync(DATA_FILE, dataText, 'utf8');
+  console.log('data.js normalized (links + license/access metadata added).');
 }
 
 normalizeAll();

@@ -1,4 +1,5 @@
 import { siteData } from './data.js';
+import { itemAnchorId, subsectionAnchorId } from './catalog-utils.js';
 
 // ============================================================================
 // Renderer — turns siteData into DOM
@@ -40,11 +41,11 @@ buildNav(siteData.sections);
 
 // --- Card rendering ---------------------------------------------------------
 
-function renderItem(item) {
+function renderItem(item, anchorId, headingLevel) {
   if (item.featured) {
-    return renderFeaturedCard(item);
+    return renderFeaturedCard(item, anchorId, headingLevel);
   }
-  return renderLinkCard(item);
+  return renderLinkCard(item, anchorId, headingLevel);
 }
 
 // Build the links row for any card (GitHub link, website, extras)
@@ -74,7 +75,21 @@ function buildLinksHTML(item) {
 function buildMetaHTML(item) {
   const parts = [];
   if (item.year) parts.push(`<span class="meta-year" title="First released">${item.year}</span>`);
-  if (item.stars) parts.push(`<span class="meta-stars" title="GitHub stars">\u2605 ${formatStars(item.stars)}</span>`);  if (item.license) parts.push(`<span class="meta-license" title="License">${esc(item.license)}</span>`);  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
+  if (Number.isInteger(item.stars)) {
+    const snapshot = item.starsUpdated ? ` as of ${item.starsUpdated}` : '';
+    const snapshotLabel = item.starsUpdated
+      ? `<small class="meta-as-of">${esc(formatSnapshotDate(item.starsUpdated))}</small>`
+      : '';
+    parts.push(
+      `<span class="meta-stars" title="GitHub stars${esc(snapshot)}" `
+      + `aria-label="${item.stars.toLocaleString()} GitHub stars${esc(snapshot)}">`
+      + `\u2605 ${formatStars(item.stars)}${snapshotLabel}</span>`
+    );
+  }
+  if (item.license) {
+    parts.push(`<span class="meta-license" title="License or access model">${esc(item.license)}</span>`);
+  }
+  return parts.length ? `<div class="card-meta">${parts.join('')}</div>` : '';
 }
 
 function formatStars(n) {
@@ -82,13 +97,24 @@ function formatStars(n) {
   return String(n);
 }
 
+function formatSnapshotDate(value) {
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat(undefined, {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(date);
+}
+
 function isGitHubUrl(url) {
   return url && (url.includes('github.com') || url.includes('codeberg.org'));
 }
 
-function renderFeaturedCard(item) {
+function renderFeaturedCard(item, anchorId, headingLevel) {
   const div = document.createElement('div');
   div.className = 'card';
+  div.id = anchorId;
   div.dataset.searchable = searchableText(item);
 
   let headerHTML = '<div class="card-header">';
@@ -98,7 +124,8 @@ function renderFeaturedCard(item) {
   headerHTML += `<div class="card-links">${buildLinksHTML(item)}</div>`;
   headerHTML += '</div>';
 
-  let bodyHTML = `<h3><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></h3>`;
+  const headingTag = headingLevel === 3 ? 'h3' : 'h4';
+  let bodyHTML = `<${headingTag}><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></${headingTag}>`;
   if (item.tagline) {
     bodyHTML += `<p class="card-tagline">${esc(item.tagline)}</p>`;
   }
@@ -117,14 +144,16 @@ function renderFeaturedCard(item) {
   return div;
 }
 
-function renderLinkCard(item) {
+function renderLinkCard(item, anchorId, headingLevel) {
   const div = document.createElement('div');
   div.className = 'link-card';
+  div.id = anchorId;
   div.dataset.searchable = searchableText(item);
 
   const linksHTML = buildLinksHTML(item);
+  const headingTag = headingLevel === 3 ? 'h3' : 'h4';
   let html = '<div class="link-card-header">';
-  html += `<h4><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></h4>`;
+  html += `<${headingTag}><a href="${esc(item.url)}" target="_blank" rel="noopener">${esc(item.name)}</a></${headingTag}>`;
   if (linksHTML) html += `<div class="card-links">${linksHTML}</div>`;
   html += '</div>';
   html += buildMetaHTML(item);
@@ -244,44 +273,50 @@ function renderSections(sections) {
       renderPipeline(section.pipeline, container);
     }
 
-    for (const sub of section.subsections) {
-      // Subsection heading
+    for (const [subsectionIndex, sub] of section.subsections.entries()) {
+      const subsectionEl = document.createElement('section');
+      subsectionEl.className = 'subsection';
+      subsectionEl.id = subsectionAnchorId(section, sub, subsectionIndex);
+
       if (sub.title) {
         const h3 = document.createElement('h3');
         h3.className = 'subsection-title';
         h3.textContent = sub.title;
-        container.appendChild(h3);
+        subsectionEl.appendChild(h3);
       }
       if (sub.description) {
         const p = document.createElement('p');
         p.className = 'subsection-desc';
         p.innerHTML = sub.description;
-        container.appendChild(p);
+        subsectionEl.appendChild(p);
       }
 
-      // Separate featured items from link items
-      const featured = sub.items.filter(i => i.featured);
-      const links = sub.items.filter(i => !i.featured);
+      const indexedItems = sub.items.map((item, itemIndex) => ({ item, itemIndex }));
+      const featured = indexedItems.filter(({ item }) => item.featured);
+      const links = indexedItems.filter(({ item }) => !item.featured);
+      const itemHeadingLevel = sub.title ? 4 : 3;
 
-      // Featured cards in card-grid
       if (featured.length) {
         const grid = document.createElement('div');
         grid.className = 'card-grid';
-        for (const item of featured) {
-          grid.appendChild(renderItem(item));
+        for (const { item, itemIndex } of featured) {
+          const anchorId = itemAnchorId(section, sub, item, itemIndex, subsectionIndex);
+          grid.appendChild(renderItem(item, anchorId, itemHeadingLevel));
         }
-        container.appendChild(grid);
+        subsectionEl.appendChild(grid);
       }
 
-      // Link cards in link-grid
       if (links.length) {
         const grid = document.createElement('div');
         grid.className = 'link-grid';
-        for (const item of links) {
-          grid.appendChild(renderItem(item));
+        for (const { item, itemIndex } of links) {
+          const anchorId = itemAnchorId(section, sub, item, itemIndex, subsectionIndex);
+          grid.appendChild(renderItem(item, anchorId, itemHeadingLevel));
         }
-        container.appendChild(grid);
+        subsectionEl.appendChild(grid);
       }
+
+      container.appendChild(subsectionEl);
     }
 
     app.appendChild(sectionEl);
@@ -293,7 +328,14 @@ renderSections(siteData.sections);
 // The sections are created after initial HTML parsing, so the browser cannot
 // resolve a deep link such as #emerging until rendering has finished.
 if (window.location.hash) {
-  const target = document.getElementById(window.location.hash.slice(1));
+  const rawTargetId = window.location.hash.slice(1);
+  let targetId = rawTargetId;
+  try {
+    targetId = decodeURIComponent(rawTargetId);
+  } catch {
+    // Leave malformed percent escapes untouched instead of aborting the app.
+  }
+  const target = document.getElementById(targetId);
   if (target) target.scrollIntoView();
 }
 
@@ -309,14 +351,14 @@ function filterItems() {
   const query = searchInput.value.trim().toLowerCase();
   const allCards = app.querySelectorAll('.card, .link-card');
   const allSections = app.querySelectorAll('.section');
-  const allSubTitles = app.querySelectorAll('.subsection-title, .subsection-desc');
+  const allSubsections = app.querySelectorAll('.subsection');
   const allGrids = app.querySelectorAll('.card-grid, .link-grid');
 
   if (!query) {
     // Show everything
     allCards.forEach(c => c.style.display = '');
     allSections.forEach(s => s.style.display = '');
-    allSubTitles.forEach(s => s.style.display = '');
+    allSubsections.forEach(s => s.style.display = '');
     allGrids.forEach(g => g.style.display = '');
     searchMeta.textContent = '';
     return;
@@ -338,24 +380,18 @@ function filterItems() {
     grid.style.display = hasVisible ? '' : 'none';
   });
 
-  // Hide sections with no visible grids
-  allSections.forEach(section => {
-    const hasVisibleGrid = [...section.querySelectorAll('.card-grid, .link-grid')].some(g => g.style.display !== 'none');
-    section.style.display = hasVisibleGrid ? '' : 'none';
+  // Keep subsection headings and descriptions attached to their matching cards.
+  allSubsections.forEach(subsection => {
+    const hasVisibleCard = [...subsection.querySelectorAll('.card, .link-card')]
+      .some(card => card.style.display !== 'none');
+    subsection.style.display = hasVisibleCard ? '' : 'none';
   });
 
-  // Hide orphaned subsection titles
-  allSubTitles.forEach(el => {
-    const nextSibling = el.nextElementSibling;
-    if (nextSibling && (nextSibling.classList.contains('card-grid') || nextSibling.classList.contains('link-grid'))) {
-      el.style.display = nextSibling.style.display;
-    } else if (el.classList.contains('subsection-desc')) {
-      // subsection-desc is between title and grid
-      const prevSibling = el.previousElementSibling;
-      if (prevSibling) {
-        el.style.display = prevSibling.style.display;
-      }
-    }
+  // Hide sections with no visible subsections.
+  allSections.forEach(section => {
+    const hasVisibleSubsection = [...section.querySelectorAll('.subsection')]
+      .some(subsection => subsection.style.display !== 'none');
+    section.style.display = hasVisibleSubsection ? '' : 'none';
   });
 
   searchMeta.textContent = `${matchCount} result${matchCount !== 1 ? 's' : ''} found`;
@@ -418,7 +454,7 @@ stickyObserver.observe(heroEl);
 
 function esc(str) {
   if (!str) return '';
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function searchableText(item) {
@@ -452,23 +488,24 @@ function buildTOCSidebar(data) {
     if (section.subsections) {
       const subUl = document.createElement('ul');
       subUl.className = 'toc-sublist';
-      for (const sub of section.subsections) {
+      for (const [subsectionIndex, sub] of section.subsections.entries()) {
         const subLi = document.createElement('li');
         subLi.className = 'toc-subsection';
+        const subsectionId = subsectionAnchorId(section, sub, subsectionIndex);
         if (sub.title) {
           const subA = document.createElement('a');
-          subA.href = `#${section.id}`; // Could use anchors for subsections if present
+          subA.href = `#${subsectionId}`;
           subA.textContent = sub.title;
           subLi.appendChild(subA);
         }
         if (sub.items && sub.items.length) {
           const itemsUl = document.createElement('ul');
           itemsUl.className = 'toc-items';
-          for (const item of sub.items) {
+          for (const [itemIndex, item] of sub.items.entries()) {
             const itemLi = document.createElement('li');
             itemLi.className = 'toc-item';
             const itemA = document.createElement('a');
-            itemA.href = `#${section.id}`; // Could use anchors for items if present
+            itemA.href = `#${itemAnchorId(section, sub, item, itemIndex, subsectionIndex)}`;
             itemA.textContent = item.name;
             itemLi.appendChild(itemA);
             itemsUl.appendChild(itemLi);
@@ -486,43 +523,53 @@ function buildTOCSidebar(data) {
 
 buildTOCSidebar(siteData);
 
-// tocLink.addEventListener('click', (e) => {
-//   e.preventDefault();
-//   tocSidebar.style.display = tocSidebar.style.display === 'none' ? 'block' : 'none';
-// });
-
 // Sidebar open/close logic
+let tocOpen = false;
+
 function openTOC() {
+  tocOpen = true;
   tocSidebar.classList.add('open');
+  tocSidebar.inert = false;
+  tocSidebar.setAttribute('aria-hidden', 'false');
   document.body.classList.add('toc-open');
-}
-function closeTOC() {
-  tocSidebar.classList.remove('open');
-  document.body.classList.remove('toc-open');
+  tocFloatBtn.setAttribute('aria-expanded', 'true');
+  tocFloatBtn.setAttribute('aria-label', 'Close table of contents');
+  tocSidebar.querySelector('a')?.focus();
 }
 
-let tocOpen = false;
+function closeTOC({ returnFocus = false } = {}) {
+  tocOpen = false;
+  tocSidebar.classList.remove('open');
+  tocSidebar.inert = true;
+  tocSidebar.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('toc-open');
+  tocFloatBtn.setAttribute('aria-expanded', 'false');
+  tocFloatBtn.setAttribute('aria-label', 'Open table of contents');
+  if (returnFocus) tocFloatBtn.focus();
+}
+
+closeTOC();
+
 tocFloatBtn.addEventListener('click', () => {
-  tocOpen = !tocOpen;
-  if (tocOpen) {
-    openTOC();
-  } else {
-    closeTOC();
+  if (tocOpen) closeTOC();
+  else openTOC();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (tocOpen && (e.key === 'Escape' || e.key === 'Esc')) {
+    closeTOC({ returnFocus: true });
   }
 });
 
-// Optional: close TOC when clicking outside or pressing Escape
-document.addEventListener('keydown', (e) => {
-  if (tocOpen && (e.key === 'Escape' || e.key === 'Esc')) {
-    tocOpen = false;
+document.addEventListener('pointerdown', (e) => {
+  if (tocOpen && !tocSidebar.contains(e.target) && !tocFloatBtn.contains(e.target)) {
     closeTOC();
   }
 });
 
 // Clicking a TOC link closes the sidebar (for better UX)
 tocSidebar.addEventListener('click', (e) => {
-  if (e.target.tagName === 'A') {
-    tocOpen = false;
+  if (e.target.closest('a')) {
     closeTOC();
   }
 });

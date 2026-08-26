@@ -1,47 +1,114 @@
-# gcode-knowledge-site
+# Cool Code CAD
 
-A static knowledge site for code-first CAD, G-code generators, and programmatic manufacturing tools.
+A static, curated field guide to code-first CAD, geometry kernels, G-code tooling,
+CAM, slicing, visualization, simulation, and programmatic manufacturing.
 
-Last curated research pass: **2026-08-25**. This pass added an explainer for the CAD-to-machine pipeline, refreshed the active B-Rep/AI-tooling landscape, and added ChiselCAD, build123d-mcp, oscad, Monstertruck, vcad, and brepkit/brepjs.
+Browse the published guide at
+[kylegrover.github.io/cool-code-cad](https://kylegrover.github.io/cool-code-cad/).
 
-## What it is
+Last curated research pass: **2026-08-25**. This pass added the CAD-to-machine
+pipeline explainer, refreshed active B-Rep and agent-tooling projects, and added
+ChiselCAD, build123d-mcp, oscad, Monstertruck, vcad, and brepkit/brepjs.
 
-- A curated collection of open-source libraries, frameworks, and tools geared towards code-based CAD, G-code generation, and programmatic manufacturing or creative workflows.
-- Data is defined in `data.js` as JSON-like items grouped into sections/subsections. The `cad-pipeline` section also carries structured infographic data rendered by `script.js`.
-- The site is rendered dynamically in the browser via `script.js`.
-- Optional stars for GitHub repos are fetched with `fetch-stars.mjs` and written to `data.js`.
+## Scope and caveats
 
-> this project was originally built from my notes of cool projects I found while researching my gcode and code cad related projects, but content copy and additional research are largely generated with LLM assistance. There may be mistakes or outdated info; contributions and corrections are very welcome.
+- The catalog is a starting point, not a compatibility guarantee or endorsement.
+- G-code is controller- and firmware-specific. Verify commands, units, coordinate
+  systems, limits, and safety behavior against the target machine before running
+  generated output.
+- GitHub star counts are optional snapshots, not quality rankings. Each displayed
+  count includes an as-of date.
+- The collection began as personal research notes. Copy and some research were
+  prepared with LLM assistance, so corrections and primary-source updates are
+  welcome.
 
 ## Run locally
 
-1. Open `index.html` in a browser (no build step required).
-2. For live editing and local server, run (from project root):
-   - `python -m http.server 8000` (or your favorite static server)
-   - Browse `http://localhost:8000`
+The page uses JavaScript modules, so it must be served over HTTP; opening
+`index.html` directly as a `file://` URL will not work reliably in browsers.
 
-## Update GitHub stars
+From the project directory, run the dependency-free preview server:
 
-1. Add a GitHub token (llm recs this to avoid rate limits, tbh it hasn't been a problem yet tho):
-   - `export GITHUB_TOKEN=ghp_xxx` (macOS/Linux)
-   - `setx GITHUB_TOKEN "ghp_xxx"` (Windows PowerShell)
-2. Run:
-   - `node fetch-stars.mjs`
-3. This script updates `data.js` with `stars: <number>` entries, normalizes schema links and licenses via `normalize-data.mjs`, and regenerates `llm.txt` via `generate-llm-txt.mjs`.
+```text
+npm start
+```
 
-## Normalize schema manually
+Then browse to <http://127.0.0.1:8000>. To choose another port, pass it after
+`--`, for example `npm start -- 4173`.
 
-If you only want normalization without fetching stars:
+## Validate and regenerate
 
-- `node normalize-data.mjs`
+Maintenance scripts require Node.js 18.17 or newer and have no package
+dependencies. `npm install` is not required.
+
+```text
+npm run validate       # schema, anchors, metadata, and generated-file drift
+npm test               # alias for the local validation suite
+npm run generate       # normalize data.js and regenerate llm.txt + toc.txt
+npm run validate:links # also check external URLs; network failures are warnings
+```
+
+Run validation after editing `data.js`. The generator deliberately rewrites
+`data.js` in a consistent JSON-style format.
+
+## Refresh GitHub star snapshots
+
+An authenticated refresh avoids GitHub's low anonymous API limit. Set the token
+for the current shell only:
+
+```text
+# macOS/Linux
+export GITHUB_TOKEN=ghp_xxx
+
+# Windows PowerShell
+$env:GITHUB_TOKEN = 'ghp_xxx'
+```
+
+Then run:
+
+```text
+npm run refresh
+```
+
+This normalizes the catalog, refreshes available star counts, records an as-of
+date for every snapshot, and regenerates the two text outputs. Without a token,
+the updater may reach GitHub's hourly limit; older cached values are retained
+with their original dates instead of being presented as current.
+
+To apply the existing cache without making network requests:
+
+```text
+node fetch-stars.mjs --cache-only
+npm run generate
+```
+
+## Repository map
+
+- `data.js` — canonical catalog content and pipeline explainer data.
+- `script.js`, `style.css`, `hero-canvas.js`, `favicon.svg` — browser presentation.
+- `serve.mjs` — dependency-free local preview server used by `npm start`.
+- `normalize-data.mjs` — normalizes links and license/access metadata.
+- `fetch-stars.mjs` — refreshes dated GitHub star snapshots.
+- `generate-llm-txt.mjs`, `generate-toc.mjs` — build generated text references.
+- `validate-data.mjs` — checks schema, stable anchors, generated output, and
+  optionally live links.
+- `PROJECTS.md` — notes about the maintainer's related projects; it is not the
+  source for the public catalog.
 
 ## Contributing
 
-- Fix typos, descriptions, URLs, tags, and star data in `data.js`.
-- Add new tools to the appropriate section and include source references.
-- Pull requests are welcome.
-- You can also just throw whatever half cooked thought as an issue and I'll do what I can to sort it too, this is pretty much just a place for me to dump and organize my notes on cool projects, so don't worry about strict standards for contributions
+Edit `data.js`, place an entry in the most useful primary category, and prefer
+official project pages, repositories, documentation, releases, or papers as
+links. Historical and experimental projects are welcome when their status is
+clearly labeled. Run `npm run generate` and `npm run validate` before submitting
+a change.
+
+Small corrections, rough issue reports, and half-formed suggestions are all
+welcome.
 
 ## License
 
-Use this repository as you like; a link back is appreciated if you reuse the content in a public project, but not required.
+This repository does not yet include a standard license file. The maintainer's
+stated intent is to permit reuse of the code and content, with a link back
+appreciated but not required. If your use requires standard license terms, open
+an issue with the maintainer before relying on this informal grant.

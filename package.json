@@ -1,0 +1,16 @@
+{
+  "name": "cool-code-cad",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "npm run validate",
+    "generate": "node normalize-data.mjs && node generate-llm-txt.mjs && node generate-toc.mjs",
+    "refresh": "node run-all.mjs",
+    "validate": "node validate-data.mjs",
+    "validate:links": "node validate-data.mjs --links"
+  },
+  "engines": {
+    "node": ">=18.17"
+  }
+}

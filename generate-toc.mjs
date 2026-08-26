@@ -1,23 +1,39 @@
-// generate-toc.mjs
-// Prints a table of contents for data.js (sections, subsections, and their ids/titles)
+#!/usr/bin/env node
+// Generates a plain-text table of contents with the same anchors as the site.
+
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { siteData } from './data.js';
-import { writeFileSync } from 'fs';
+import { itemAnchorId, subsectionAnchorId } from './catalog-utils.js';
 
-let toc = '';
+const PROJECT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const OUTPUT_FILE = path.join(PROJECT_DIR, 'toc.txt');
 
-siteData.sections.forEach(section => {
-  toc += `${section.title || section.id}\n`;
-  if (section.subsections) {
-    section.subsections.forEach(sub => {
-      toc += `  ${sub.title || sub.id}\n`;
-      if (sub.items) {
-        sub.items.forEach(item => {
-          toc += `    ${item.name}\n`;
-        });
+export function generateToc(data = siteData) {
+  let toc = '';
+
+  for (const section of data.sections || []) {
+    toc += `${section.title || section.id} (#${section.id})\n`;
+    for (const [subsectionIndex, subsection] of (section.subsections || []).entries()) {
+      const subsectionId = subsectionAnchorId(section, subsection, subsectionIndex);
+      toc += `  ${subsection.title || subsection.id || 'Untitled'} (#${subsectionId})\n`;
+      for (const [itemIndex, item] of (subsection.items || []).entries()) {
+        const itemId = itemAnchorId(section, subsection, item, itemIndex, subsectionIndex);
+        toc += `    ${item.name} (#${itemId})\n`;
       }
-    });
+    }
   }
-});
 
-writeFileSync('toc.txt', toc);
-console.log('TOC written to toc.txt');
+  return toc;
+}
+
+function isMainModule() {
+  return process.argv[1]
+    && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url;
+}
+
+if (isMainModule()) {
+  fs.writeFileSync(OUTPUT_FILE, generateToc(), 'utf8');
+  console.log('TOC written to toc.txt');
+}

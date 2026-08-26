@@ -1,10 +1,8 @@
-add https://github.com/LTKMN/ChiselCAD
-
-# G-Code & Programmatic CAD — Project Knowledge Base
+# Maintainer Project Notes
 
 ## Overview
 
-This document catalogs Kyle Grover's projects, tools, and knowledge in the space of programmatic G-code generation, 3D printing simulation, pen plotter art, and SDF-based CAD. The projects span multiple languages (TypeScript, Python, Rust, C/C++) and range from libraries to desktop apps to web platforms.
+This document records Kyle Grover's related projects and working knowledge in programmatic G-code generation, 3D-printing simulation, pen-plotter art, and SDF-based CAD. It is not the source for the public catalog; edit `data.js` for catalog changes. Status notes below were last reviewed on **2026-08-25**.
 
 ---
 
@@ -13,7 +11,7 @@ This document catalogs Kyle Grover's projects, tools, and knowledge in the space
 ### py2g — Browser-Based Python-to-GCode IDE
 - **URL**: https://py2g.com (JS sibling: js2g.com)
 - **Repo**: https://github.com/kylegrover/py2g
-- **Status**: Active development (updated today)
+- **Status**: Active development (reviewed 2026-08-25)
 - **Stack**: Next.js 15, React 19, Tauri 2, Monaco Editor, WebGPU, PostgreSQL/Prisma
 - **Description**: Full-featured web app (and desktop variant) that lets users write Python code in the browser to generate G-code for 3D printing/CNC. Uses FullControl for high-level abstractions. Features include OAuth auth, AI-assisted coding via MonacoPilot, WebGPU-powered 3D visualization, and a Tauri desktop app with bundled Python (`uv` sidecar).
 - **Key Features**:
@@ -25,10 +23,10 @@ This document catalogs Kyle Grover's projects, tools, and knowledge in the space
 
 ### fullcontrol-js — TypeScript Port of FullControl
 - **Repo**: https://github.com/kylegrover/fullcontrol-js
-- **Status**: Active development (updated yesterday), 100% parity with Python v0.1.2
+- **Status**: Active development (reviewed 2026-08-25); targets parity with Python v0.1.2
 - **Stack**: TypeScript 5.4, ES2020, dual ESM/CJS
 - **npm**: `fullcontrol-js`
-- **Description**: Complete TypeScript rewrite of the Python FullControl library. Browser-first, Node-compatible. Converts high-level design steps (Points, Printer settings, Extruder configs) into G-code and 3D visualization data.
+- **Description**: Browser-first TypeScript implementation of the Python FullControl library's core design, G-code, and visualization pipelines. Converts high-level design steps (points, printer settings, and extruder configuration) into G-code and visualization data; a paired parity harness tracks compatibility with a pinned Python reference.
 - **Key Features**:
   - 23 automated parity tests (20 G-code, 3 visualization) — all passing
   - Rich geometry helpers: shapes, arcs, transforms, waves, segmentation
@@ -39,7 +37,7 @@ This document catalogs Kyle Grover's projects, tools, and knowledge in the space
 
 ### SDFVR — VR SDF Modeling Tool
 - **Repo**: https://github.com/kylegrover/sdfvr
-- **Status**: Active development (updated today)
+- **Status**: Active development (reviewed 2026-08-25)
 - **Stack**: C++17, OpenXR, OpenGL, GLSL
 - **Description**: VR-native Signed Distance Function modeling tool. GPU raymarching renders SDF geometry as fullscreen quads per eye. Create, move, and sculpt 3D shapes using VR controllers with real-time visual feedback.
 - **Key Features**:

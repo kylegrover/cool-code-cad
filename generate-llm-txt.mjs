@@ -1,88 +1,164 @@
 #!/usr/bin/env node
-// Generates llm.txt from data.js — run after editing content.
-// Usage: node generate-llm-txt.mjs
+// Generates llm.txt from data.js. Run after editing or normalizing the catalog.
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { siteData } from './data.js';
-import fs from 'fs';
+import { collectCatalogItems } from './catalog-utils.js';
 
-function stripHTML(html) {
-  return html
-    .replace(/<[^>]*>/g, '')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/\u2014/g, ' -- ')
-    .replace(/\u2192/g, '->');
+const PROJECT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const OUTPUT_FILE = path.join(PROJECT_DIR, 'llm.txt');
+const SITE_URL = 'https://kylegrover.github.io/cool-code-cad/';
+
+const NAMED_ENTITIES = {
+  amp: '&',
+  apos: "'",
+  gt: '>',
+  lt: '<',
+  nbsp: ' ',
+  quot: '"',
+};
+
+function decodeEntities(value) {
+  return value.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (entity, code) => {
+    if (code[0] === '#') {
+      const radix = code[1]?.toLowerCase() === 'x' ? 16 : 10;
+      const digits = radix === 16 ? code.slice(2) : code.slice(1);
+      const point = Number.parseInt(digits, radix);
+      return Number.isFinite(point) ? String.fromCodePoint(point) : entity;
+    }
+    return NAMED_ENTITIES[code.toLowerCase()] ?? entity;
+  });
 }
 
-let totalItems = 0;
-for (const s of siteData.sections)
-  for (const sub of s.subsections)
-    totalItems += sub.items.length;
+export function htmlToText(value = '') {
+  return decodeEntities(String(value)
+    .replace(/<code\b[^>]*>([\s\S]*?)<\/code>/gi, '`$1`')
+    .replace(/<a\b[^>]*href=(['"])(.*?)\1[^>]*>([\s\S]*?)<\/a>/gi, (_match, _quote, url, label) => {
+      const text = label.replace(/<[^>]*>/g, '').trim();
+      return text === url ? url : `${text} (${url})`;
+    })
+    .replace(/<br\s*\/?>|<\/(?:div|li|p)>/gi, '\n')
+    .replace(/<li\b[^>]*>/gi, '- ')
+    .replace(/<[^>]*>/g, ''))
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 
-let out = `# Programmatic G-Code & Code-First CAD — Complete Reference
-# Generated from https://kylegrover.github.io/gcode-knowledge-site/
-# Feed this to an LLM for context about code-CAD and G-code tools.
+function linkLabel(label) {
+  const knownLabels = {
+    api: 'API',
+    github: 'GitHub',
+    npm: 'npm',
+    pypi: 'PyPI',
+  };
+  return knownLabels[label.toLowerCase()] || label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+function appendItemLinks(item) {
+  const primaryUrl = item.url || item.links?.website || item.links?.github;
+  const lines = [];
+  const seen = new Set();
+
+  if (primaryUrl) {
+    lines.push(`  URL: ${primaryUrl}`);
+    seen.add(primaryUrl);
+  }
+
+  const candidates = [
+    ['github', item.github],
+    ...Object.entries(item.links || {}),
+  ];
+  for (const [label, url] of candidates) {
+    if (!url || label === 'fork' || seen.has(url)) continue;
+    seen.add(url);
+    lines.push(`  ${linkLabel(label)}: ${url}`);
+  }
+
+  return lines.join('\n');
+}
+
+export function generateLlmText(data = siteData) {
+  const totalItems = collectCatalogItems(data).length;
+  let out = `# Programmatic G-Code & Code-First CAD — Complete Reference
+# Source: ${SITE_URL}
+# Reviewed: ${data.meta?.updated || 'unknown'}
+# Curated reference; verify versions, availability, and machine-specific G-code before use.
 #
-# Total items: ${totalItems}
+# Total catalog entries: ${totalItems}
 
 `;
 
-for (const section of siteData.sections) {
-  out += '='.repeat(80) + '\n';
-  out += section.title.toUpperCase() + '\n';
-  out += '='.repeat(80) + '\n';
-  if (section.description) out += stripHTML(section.description) + '\n';
-  out += '\n';
-
-  if (section.pipeline) {
-    out += '--- HOW THIS PIPELINE WORKS ---\n\n';
-    for (const stage of section.pipeline.stages ?? []) {
-      out += `  ${stage.kicker}: ${stage.title}\n`;
-      out += `  ${stage.description}\n`;
-      if (stage.examples?.length) out += `  Examples: ${stage.examples.join(', ')}\n`;
-      out += '\n';
-    }
-
-    out += '  Manufacturing routes:\n';
-    for (const route of section.pipeline.routes ?? []) {
-      out += `  - ${route.title}: ${route.steps.join(' -> ')}\n`;
-    }
+  for (const section of data.sections || []) {
+    out += '='.repeat(80) + '\n';
+    out += `${section.title.toUpperCase()}\n`;
+    out += '='.repeat(80) + '\n';
+    if (section.description) out += `${htmlToText(section.description)}\n`;
     out += '\n';
 
-    out += '  Glossary:\n';
-    for (const item of section.pipeline.glossary ?? []) {
-      out += `  - ${item.term}: ${item.definition}\n`;
-    }
-    if (section.pipeline.note) out += `\n  ${stripHTML(section.pipeline.note)}\n`;
-    out += '\n';
-  }
-
-  for (const sub of section.subsections) {
-    if (sub.title) out += `--- ${sub.title} ---\n`;
-    if (sub.description) out += stripHTML(sub.description) + '\n';
-    out += '\n';
-
-    for (const item of sub.items) {
-      out += `  ${item.name}`;
-      if (item.year) out += ` (${item.year})`;
-      out += '\n';
-      out += `  URL: ${item.url}\n`;
-      if (item.github && item.github !== item.url) out += `  GitHub: ${item.github}\n`;
-      if (item.links) {
-        for (const [label, url] of Object.entries(item.links)) {
-          if (label === 'fork') continue;
-          out += `  ${label.charAt(0).toUpperCase() + label.slice(1)}: ${url}\n`;
-        }
+    if (section.pipeline) {
+      out += '--- HOW THIS PIPELINE WORKS ---\n\n';
+      for (const stage of section.pipeline.stages || []) {
+        out += `  ${stage.kicker}: ${stage.title}\n`;
+        out += `  ${stage.description}\n`;
+        if (stage.examples?.length) out += `  Examples: ${stage.examples.join(', ')}\n`;
+        out += '\n';
       }
-      if (item.tech?.length) out += `  Tech: ${item.tech.join(', ')}\n`;
-      if (item.tags?.length) out += `  Tags: ${item.tags.join(', ')}\n`;
-      out += `  ${stripHTML(item.description)}\n\n`;
+
+      out += '  Manufacturing routes:\n';
+      for (const route of section.pipeline.routes || []) {
+        out += `  - ${route.title}: ${(route.steps || []).join(' -> ')}\n`;
+      }
+      out += '\n';
+
+      out += '  Glossary:\n';
+      for (const item of section.pipeline.glossary || []) {
+        out += `  - ${item.term}: ${item.definition}\n`;
+      }
+      if (section.pipeline.note) out += `\n  ${htmlToText(section.pipeline.note)}\n`;
+      out += '\n';
     }
+
+    for (const subsection of section.subsections || []) {
+      if (subsection.title) out += `--- ${subsection.title} ---\n`;
+      if (subsection.description) out += `${htmlToText(subsection.description)}\n`;
+      out += '\n';
+
+      for (const item of subsection.items || []) {
+        out += `  ${item.name}`;
+        if (item.year) out += ` (${item.year})`;
+        out += '\n';
+
+        const links = appendItemLinks(item);
+        if (links) out += `${links}\n`;
+        if (item.license) out += `  License / access: ${item.license}\n`;
+        if (Number.isInteger(item.stars)) {
+          const asOf = item.starsUpdated ? ` (snapshot ${item.starsUpdated})` : '';
+          out += `  GitHub stars: ${item.stars}${asOf}\n`;
+        }
+        if (item.tech?.length) out += `  Tech: ${item.tech.join(', ')}\n`;
+        if (item.tags?.length) out += `  Tags: ${item.tags.join(', ')}\n`;
+        out += `  ${htmlToText(item.description)}\n\n`;
+      }
+    }
+    out += '\n';
   }
-  out += '\n';
+
+  return out;
 }
 
-fs.writeFileSync('llm.txt', out, 'utf8');
-console.log(`Generated llm.txt: ${out.split('\n').length} lines, ${(out.length / 1024).toFixed(1)} KB, ${totalItems} items`);
+function isMainModule() {
+  return process.argv[1]
+    && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url;
+}
+
+if (isMainModule()) {
+  const output = generateLlmText();
+  fs.writeFileSync(OUTPUT_FILE, output, 'utf8');
+  console.log(
+    `Generated llm.txt: ${output.split('\n').length} lines, `
+    + `${(output.length / 1024).toFixed(1)} KB, ${collectCatalogItems(siteData).length} entries`
+  );
+}

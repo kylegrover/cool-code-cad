@@ -15,25 +15,43 @@ export const siteData = {
             "kicker": "01 / Author",
             "title": "Describe the thing",
             "description": "Dimensions, constraints, features, code, or an AI prompt capture what the part is supposed to be.",
-            "examples": ["Sketch + dimensions", "Code / DSL", "Feature tree", "AI agent"]
+            "examples": [
+              "Sketch + dimensions",
+              "Code / DSL",
+              "Feature tree",
+              "AI agent"
+            ]
           },
           {
             "kicker": "02 / Evaluate",
             "title": "Build geometry",
             "description": "A geometry kernel evaluates booleans, fillets, intersections, topology, tolerances, and measurements.",
-            "examples": ["OCCT / B-Rep", "Manifold / mesh", "Fidget / implicit"]
+            "examples": [
+              "OCCT / B-Rep",
+              "Manifold / mesh",
+              "Fidget / implicit"
+            ]
           },
           {
             "kicker": "03 / Inspect",
             "title": "Tessellate & view",
             "description": "The exact model is converted to display triangles. The viewport is the window into the model, not usually the model itself.",
-            "examples": ["Three.js", "VTK", "WebGPU", "Measurements"]
+            "examples": [
+              "Three.js",
+              "VTK",
+              "WebGPU",
+              "Measurements"
+            ]
           },
           {
             "kicker": "04 / Exchange",
             "title": "Choose what survives",
-            "description": "STEP/BREP preserve exact surfaces and topology. STL/3MF carry a tessellated skin. DXF/SVG carry 2D curves.",
-            "examples": ["STEP = exact CAD", "STL / 3MF = mesh", "DXF / SVG = 2D"]
+            "description": "A STEP file containing B-Rep geometry can preserve analytic surfaces and topology. Typical STL/3MF exports carry a tessellated surface; DXF/SVG usually carry 2D geometry.",
+            "examples": [
+              "STEP / BREP = editable CAD",
+              "STL / 3MF = usually mesh",
+              "DXF / SVG = usually 2D"
+            ]
           }
         ],
         "routes": [
@@ -41,19 +59,37 @@ export const siteData = {
             "kind": "print",
             "label": "Additive",
             "title": "3D printing",
-            "steps": ["Solid or mesh", "Slicer", "G-code", "Printer firmware", "Printed part"]
+            "steps": [
+              "Solid or mesh",
+              "Slicer",
+              "G-code",
+              "Printer firmware",
+              "Printed part"
+            ]
           },
           {
             "kind": "cnc",
             "label": "Subtractive",
             "title": "CNC machining",
-            "steps": ["B-Rep / STEP", "CAM", "G-code", "Machine controller", "Machined part"]
+            "steps": [
+              "B-Rep / STEP",
+              "CAM",
+              "G-code",
+              "Machine controller",
+              "Machined part"
+            ]
           },
           {
             "kind": "direct",
             "label": "Direct",
             "title": "Programmatic toolpaths",
-            "steps": ["Geometry code", "Path generator", "G-code", "Controller", "Physical output"]
+            "steps": [
+              "Geometry code",
+              "Path generator",
+              "G-code",
+              "Controller",
+              "Physical output"
+            ]
           }
         ],
         "glossary": [
@@ -67,7 +103,7 @@ export const siteData = {
           },
           {
             "term": "B-Rep",
-            "definition": "Exact surfaces plus the edges and vertices that bound them. Ideal for STEP, fillets, and machining."
+            "definition": "Surface geometry plus the edges and vertices that bound it. Common in mechanical CAD, STEP exchange, filleting, and machining."
           },
           {
             "term": "Mesh",
@@ -79,10 +115,10 @@ export const siteData = {
           },
           {
             "term": "G-code",
-            "definition": "The downstream instruction stream: moves, speeds, temperatures, spindle state, and machine commands."
+            "definition": "A family of controller-specific instruction dialects for moves, speeds, temperatures, spindle state, and other machine commands."
           }
         ],
-        "note": "<strong>The important boundary:</strong> a viewer can make an STL and a STEP file look equally smooth, but only the STEP model still knows that a round wall is a cylinder. Rendering quality and geometry quality are separate concerns."
+        "note": "<strong>The important boundary:</strong> a viewer can make an STL and a B-Rep STEP file look equally smooth, but the STEP model can retain that a round wall is a cylinder while the STL stores triangles. Rendering quality and geometry quality are separate concerns."
       },
       "subsections": []
     },
@@ -94,13 +130,13 @@ export const siteData = {
         {
           "id": "brep",
           "title": "B-Rep / Solid Modeling",
-          "description": "Boundary Representation is the industry-standard approach. These tools build geometry from faces, edges, and vertices — most backed by the OpenCASCADE kernel.",
+          "description": "Boundary Representation is the dominant approach in mechanical CAD. These tools build geometry from faces, edges, and vertices — many backed by the Open CASCADE Technology (OCCT) kernel.",
           "items": [
             {
               "name": "CadQuery",
               "url": "https://github.com/CadQuery/cadquery",
               "year": 2014,
-              "stars": 4689,
+              "stars": 4697,
               "description": "Mature Python parametric CAD on OpenCASCADE. CadQuery 2.8 moved to OCP 7.9, made its free-function API non-experimental, added experimental modeling-history support, a separate B-spline geometry layer, and unit-aware STEP import/export. See also <a href=\"https://github.com/CadQuery/awesome-cadquery\" target=\"_blank\" rel=\"noopener\">awesome-cadquery</a>.",
               "tags": [
                 "python",
@@ -116,20 +152,56 @@ export const siteData = {
                 "website": "https://github.com/CadQuery/cadquery",
                 "github": "https://github.com/CadQuery/cadquery"
               },
-              "license": "Open Source"
+              "license": "Apache-2.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "CQ-editor",
               "url": "https://github.com/CadQuery/CQ-editor",
               "year": 2017,
               "description": "CadQuery's cross-platform PyQt workbench with automatic source reload, an OCCT viewport, object-stack inspection, STEP/STL export, and a graphical debugger that can step through a script while the model evolves. It can feel old-school and packaging remains a pain point, but the project and wiki were actively maintained in 2026—not abandoned.",
-              "tags": ["python", "cadquery", "opencascade", "open-source", "editor", "viewer", "debugger"],
-              "tech": ["Python", "PyQt"],
+              "tags": [
+                "python",
+                "cadquery",
+                "opencascade",
+                "open-source",
+                "editor",
+                "viewer",
+                "debugger"
+              ],
+              "tech": [
+                "Python",
+                "PyQt"
+              ],
               "links": {
                 "github": "https://github.com/CadQuery/CQ-editor",
-                "docs": "https://github.com/CadQuery/CQ-editor/wiki"
+                "docs": "https://github.com/CadQuery/CQ-editor/wiki",
+                "website": "https://github.com/CadQuery/CQ-editor"
               },
               "license": "Apache-2.0"
+            },
+            {
+              "name": "OCP CAD Viewer",
+              "url": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
+              "year": 2022,
+              "description": "Actively maintained VS Code and standalone viewer for CadQuery, build123d, and OCP models. The 4.x line adds B-Rep-backed measurements and inspection, PBR materials, screenshots, visual debugging, selection tools, and automatic reload — much more than a passive triangle viewer.",
+              "tags": [
+                "vscode",
+                "open-source",
+                "cadquery",
+                "build123d",
+                "viewer"
+              ],
+              "tech": [
+                "VS Code"
+              ],
+              "links": {
+                "website": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
+                "github": "https://github.com/bernhard-42/vscode-ocp-cad-viewer"
+              },
+              "license": "Open Source",
+              "stars": 297,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "PLaSM",
@@ -159,8 +231,8 @@ export const siteData = {
               "name": "Build123d",
               "url": "https://github.com/gumyr/build123d",
               "year": 2022,
-              "stars": 1506,
-              "description": "Pythonic B-Rep modeling evolved from CadQuery, with algebra and context-manager builder APIs that work well with ordinary Python control flow. v0.10 added draft operations, curved-surface wrapping, Gordon surfaces, C2 blend curves, and more topology-selection tools; the project is actively defining its stable 1.0 baseline. See <a href=\"https://github.com/gumyr/bd_warehouse\" target=\"_blank\" rel=\"noopener\">bd_warehouse</a> for a parametric parts library.",
+              "stars": 1513,
+              "description": "Pythonic B-Rep modeling evolved from CadQuery, with algebra and context-manager builder APIs that work well with ordinary Python control flow. v0.11 moved to OCP 7.9 without a transitive VTK dependency, expanded intersections and constrained geometry, and added DXF import and broader file-object export. The project is actively defining its stable 1.0 baseline. See <a href=\"https://github.com/gumyr/bd_warehouse\" target=\"_blank\" rel=\"noopener\">bd_warehouse</a> for a parametric parts library.",
               "tags": [
                 "python",
                 "opencascade",
@@ -175,13 +247,14 @@ export const siteData = {
                 "website": "https://github.com/gumyr/build123d",
                 "github": "https://github.com/gumyr/build123d"
               },
-              "license": "Open Source"
+              "license": "Apache-2.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "pythonOCC",
               "url": "https://github.com/tpaviot/pythonocc-core",
               "year": 2008,
-              "stars": 1848,
+              "stars": 1851,
               "description": "Low-level Python bindings to nearly all OpenCASCADE classes. STEP/IGES/STL/GLTF I/O. 400+ academic citations.",
               "tags": [
                 "python",
@@ -197,13 +270,14 @@ export const siteData = {
                 "website": "https://github.com/tpaviot/pythonocc-core",
                 "github": "https://github.com/tpaviot/pythonocc-core"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "FreeCAD",
               "url": "https://github.com/FreeCAD/FreeCAD",
               "year": 2002,
-              "stars": 29223,
+              "stars": 29360,
               "description": "Full parametric CAD application with deeply integrated Python API and macro system. Nearly every GUI action is scriptable, and full headless Python automation is standard in manufacturing pipelines.",
               "links": {
                 "website": "https://www.freecad.org/",
@@ -223,13 +297,14 @@ export const siteData = {
                 "Python",
                 "C++"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Dune3D",
               "url": "https://dune3d.org/",
               "year": 2023,
-              "stars": 1841,
+              "stars": 1869,
               "github": "https://github.com/dune3d/dune3d",
               "description": "Actively developed GUI-first parametric CAD, originally built for 3D-printed enclosures. It pairs a SolveSpace-derived constraint solver with OpenCASCADE, has fillets/chamfers and a notably fluid non-modal sketcher, but still lacks a dedicated code/model API; included as a strong GUI-centric comparison point.",
               "tags": [
@@ -249,13 +324,14 @@ export const siteData = {
                 "website": "https://dune3d.org/",
                 "github": "https://github.com/dune3d/dune3d"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "SolveSpace",
               "url": "https://solvespace.com/",
               "year": 2008,
-              "stars": 3792,
+              "stars": 3801,
               "links": {
                 "github": "https://github.com/solvespace/solvespace",
                 "website": "https://solvespace.com/"
@@ -275,13 +351,14 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "BRL-CAD",
               "url": "https://brlcad.org/",
               "year": 1979,
-              "stars": 961,
+              "stars": 962,
               "links": {
                 "github": "https://github.com/BRL-CAD/brlcad",
                 "website": "https://brlcad.org/"
@@ -300,7 +377,8 @@ export const siteData = {
                 "C",
                 "Tcl"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Replicad",
@@ -325,17 +403,29 @@ export const siteData = {
                 "TypeScript",
                 "WASM"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "oscad (openscad-occt)",
               "url": "https://github.com/dnewcome/openscad-occt",
               "year": 2026,
               "description": "Very young clean-room experiment pairing an OpenSCAD-style declarative language with OCCT B-Rep output. It already demonstrates exact STEP export, B-Rep booleans, query-selected fillets, and datum-like <code>attach()</code>, but covers only a subset of OpenSCAD and has no preview GUI yet. Public source; no license file was listed when reviewed.",
-              "tags": ["c++", "opencascade", "brep", "declarative", "scad", "experimental"],
-              "tech": ["C++", "OCCT"],
+              "tags": [
+                "c++",
+                "opencascade",
+                "brep",
+                "declarative",
+                "scad",
+                "experimental"
+              ],
+              "tech": [
+                "C++",
+                "OCCT"
+              ],
               "links": {
-                "github": "https://github.com/dnewcome/openscad-occt"
+                "github": "https://github.com/dnewcome/openscad-occt",
+                "website": "https://github.com/dnewcome/openscad-occt"
               },
               "license": "No license stated"
             },
@@ -359,7 +449,8 @@ export const siteData = {
                 "website": "https://github.com/cqparts/cqparts",
                 "github": "https://github.com/cqparts/cqparts"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Topologic",
@@ -383,7 +474,8 @@ export const siteData = {
                 "website": "https://github.com/wassimj/Topologic",
                 "github": "https://github.com/wassimj/Topologic"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         },
@@ -396,7 +488,7 @@ export const siteData = {
               "name": "OpenSCAD",
               "url": "https://openscad.org/",
               "year": 2010,
-              "stars": 9065,
+              "stars": 9080,
               "links": {
                 "github": "https://github.com/openscad/openscad",
                 "website": "https://openscad.org/"
@@ -412,7 +504,8 @@ export const siteData = {
               "tech": [
                 "OpenSCAD DSL"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "PythonSCAD",
@@ -454,13 +547,14 @@ export const siteData = {
                 "website": "https://github.com/jeff-dh/SolidPython",
                 "github": "https://github.com/jeff-dh/SolidPython"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "BOSL2",
               "url": "https://github.com/BelfrySCAD/BOSL2",
               "year": 2019,
-              "stars": 2051,
+              "stars": 2053,
               "description": "The Belfry OpenScad v2 Library — massive standard library for OpenSCAD. Threading, beziers, rounding, joints, hinges, gears, polyhedra, and much more. Essential for serious OpenSCAD work.",
               "tags": [
                 "openscad",
@@ -475,13 +569,14 @@ export const siteData = {
                 "website": "https://github.com/BelfrySCAD/BOSL2",
                 "github": "https://github.com/BelfrySCAD/BOSL2"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "NopSCADlib",
               "url": "https://github.com/nophead/NopSCADlib",
               "year": 2019,
-              "stars": 1548,
+              "stars": 1549,
               "description": "OpenSCAD library of common 3D printer/CNC parts: vitamins (screws, bearings, stepper motors, etc.), printed parts, and assemblies. Auto-generates BOMs and assembly instructions.",
               "tags": [
                 "openscad",
@@ -497,15 +592,16 @@ export const siteData = {
                 "website": "https://github.com/nophead/NopSCADlib",
                 "github": "https://github.com/nophead/NopSCADlib"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "JSCAD (OpenJSCAD)",
               "url": "https://github.com/jscad/OpenJSCAD.org",
               "year": 2012,
-              "stars": 3133,
+              "stars": 3134,
               "links": {
-                "website": "https://www.jscad.xyz/",
+                "website": "https://openjscad.xyz/",
                 "github": "https://github.com/jscad/OpenJSCAD.org"
               },
               "description": "Modular browser and CLI tools for parametric 2D/3D designs with JavaScript. Exports STL, DXF, SVG. V3 in development.",
@@ -519,13 +615,14 @@ export const siteData = {
               "tech": [
                 "JavaScript"
               ],
-              "license": "Open Source"
+              "license": "MIT",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Manifold",
               "url": "https://github.com/elalish/manifold",
               "year": 2022,
-              "stars": 1921,
+              "stars": 1924,
               "links": {
                 "website": "https://manifoldcad.org/",
                 "github": "https://github.com/elalish/manifold"
@@ -547,7 +644,8 @@ export const siteData = {
                 "Python",
                 "WASM"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "MicroCAD",
@@ -589,7 +687,8 @@ export const siteData = {
                 "website": "https://github.com/nicklockwood/ShapeScript",
                 "github": "https://github.com/nicklockwood/ShapeScript"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         },
@@ -602,7 +701,7 @@ export const siteData = {
               "name": "Fidget",
               "url": "https://github.com/mkeeter/fidget",
               "year": 2023,
-              "stars": 434,
+              "stars": 437,
               "description": "Blazing-fast implicit surface evaluation by Matt Keeter. Hand-written JIT compiler (aarch64/x86_64), interval evaluation, Manifold Dual Contouring meshing. Successor to libfive.",
               "tags": [
                 "rust",
@@ -619,7 +718,8 @@ export const siteData = {
                 "website": "https://github.com/mkeeter/fidget",
                 "github": "https://github.com/mkeeter/fidget"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "libfive",
@@ -644,7 +744,8 @@ export const siteData = {
                 "website": "https://github.com/libfive/libfive",
                 "github": "https://github.com/libfive/libfive"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "ImplicitCAD",
@@ -667,7 +768,8 @@ export const siteData = {
                 "website": "https://github.com/Haskell-Things/ImplicitCAD",
                 "github": "https://github.com/Haskell-Things/ImplicitCAD"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Curv",
@@ -691,7 +793,8 @@ export const siteData = {
                 "website": "https://github.com/curv3d/curv",
                 "github": "https://github.com/curv3d/curv"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "sdf (fogleman)",
@@ -712,7 +815,8 @@ export const siteData = {
                 "website": "https://github.com/fogleman/sdf",
                 "github": "https://github.com/fogleman/sdf"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "sdfx",
@@ -732,7 +836,8 @@ export const siteData = {
                 "website": "https://github.com/deadsy/sdfx",
                 "github": "https://github.com/deadsy/sdfx"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "SDF Modeler",
@@ -754,8 +859,8 @@ export const siteData = {
             },
             {
               "name": "SDFeditor",
-              "url": "https://www.sleditor.com/SDFeditor.html",
-              "description": "Node-graph-based web SDF editor. Visual programming approach to building SDF scenes.",
+              "url": "https://sleditor.com/lab/sdfeditor/",
+              "description": "Experimental node-graph web editor for composing SDF scenes. The author describes this version as a useful but clunky prototype, so expect rough edges.",
               "tags": [
                 "browser",
                 "sdf",
@@ -766,7 +871,7 @@ export const siteData = {
                 "Browser"
               ],
               "links": {
-                "website": "https://www.sleditor.com/SDFeditor.html"
+                "website": "https://sleditor.com/lab/sdfeditor/"
               },
               "license": "Free"
             },
@@ -833,8 +938,8 @@ export const siteData = {
           "items": [
             {
               "name": "Grasshopper (Rhino)",
-              "url": "https://www.grasshopper3d.com/",
-              "description": "The original visual programming environment for computational design. Ships with Rhino. Massive plugin ecosystem (Kangaroo physics, Ladybug environmental analysis, Karamba structural). Industry standard in architecture and industrial design.",
+              "url": "https://www.rhino3d.com/features/#grasshopper",
+              "description": "Graphical algorithm editor included with Rhino for building parametric models without writing all of the logic as text code. It also supports Python and C# scripting and a broad third-party component ecosystem.",
               "tags": [
                 "visual-programming",
                 "commercial",
@@ -848,7 +953,7 @@ export const siteData = {
                 "Python"
               ],
               "links": {
-                "website": "https://www.grasshopper3d.com/"
+                "website": "https://www.rhino3d.com/features/#grasshopper"
               },
               "license": "Proprietary"
             },
@@ -875,7 +980,7 @@ export const siteData = {
               "name": "Sverchok",
               "url": "https://github.com/nortikin/sverchok",
               "year": 2013,
-              "stars": 2432,
+              "stars": 2433,
               "description": "Powerful parametric design addon for Blender. 500+ nodes for generative art, architecture, engineering. Often compared to Grasshopper. Python-scriptable nodes.",
               "tags": [
                 "blender",
@@ -893,13 +998,14 @@ export const siteData = {
                 "website": "https://github.com/nortikin/sverchok",
                 "github": "https://github.com/nortikin/sverchok"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Antimony",
               "url": "https://github.com/mkeeter/antimony",
               "year": 2013,
-              "stars": 2181,
+              "stars": 2182,
               "description": "Node-based CAD tool by Matt Keeter (creator of libfive/Fidget). Graph-based design with implicit functions. Long-term maintenance mode (zombie project) and largely superseded by libfive/Fidget, historically significant for its influence.",
               "tags": [
                 "c++",
@@ -918,7 +1024,8 @@ export const siteData = {
                 "website": "https://github.com/mkeeter/antimony",
                 "github": "https://github.com/mkeeter/antimony"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "bitbybit",
@@ -989,7 +1096,7 @@ export const siteData = {
               "name": "CAD Sketcher",
               "url": "https://github.com/hlorus/CAD_Sketcher",
               "year": 2021,
-              "stars": 3225,
+              "stars": 3231,
               "description": "Blender addon adding constraint-based 2D sketching (like SolveSpace inside Blender). Geometric and dimensional constraints, then extrude to 3D.",
               "tags": [
                 "blender",
@@ -1006,13 +1113,14 @@ export const siteData = {
                 "website": "https://github.com/hlorus/CAD_Sketcher",
                 "github": "https://github.com/hlorus/CAD_Sketcher"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "BlenderBIM",
               "url": "https://blenderbim.org/",
               "year": 2019,
-              "stars": 2418,
+              "stars": 2421,
               "links": {
                 "github": "https://github.com/IfcOpenShell/IfcOpenShell",
                 "website": "https://blenderbim.org/"
@@ -1030,13 +1138,14 @@ export const siteData = {
                 "Blender",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Blender GIS",
               "url": "https://github.com/domlysz/BlenderGIS",
               "year": 2014,
-              "stars": 8849,
+              "stars": 8856,
               "description": "Import geographic data (shapefiles, georeferenced rasters, OSM) into Blender. Create 3D terrain and urban models for CNC/3D printing.",
               "tags": [
                 "blender",
@@ -1053,7 +1162,8 @@ export const siteData = {
                 "website": "https://github.com/domlysz/BlenderGIS",
                 "github": "https://github.com/domlysz/BlenderGIS"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         },
@@ -1066,7 +1176,7 @@ export const siteData = {
               "name": "Fornjot",
               "url": "https://github.com/hannobraun/fornjot",
               "year": 2021,
-              "stars": 2473,
+              "stars": 2474,
               "description": "Historical Rust B-Rep CAD experiment with a useful postmortem. Creator Hanno Braun <a href=\"https://archive.hannobraun.com/fornjot/blog/shutting-down-fornjot/\" target=\"_blank\" rel=\"noopener\">shut the project down</a> after roughly six years, citing the depth of the geometry problem plus scope, project-management, and funding pressures. Keep it as a reference, not a new dependency.",
               "tags": [
                 "rust",
@@ -1081,13 +1191,14 @@ export const siteData = {
                 "website": "https://github.com/hannobraun/fornjot",
                 "github": "https://github.com/hannobraun/fornjot"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Truck",
               "url": "https://github.com/ricosjp/truck",
               "year": 2021,
-              "stars": 1413,
+              "stars": 1417,
               "description": "Modular Rust shape-processing kernel with NURBS B-Rep, tessellation, STEP I/O, boolean operations, wgpu rendering utilities, and WASM bindings. Active and technically important, but a lower-level kernel project rather than an end-user modeler; it powered the CADmium experiment.",
               "tags": [
                 "rust",
@@ -1105,17 +1216,31 @@ export const siteData = {
                 "website": "https://github.com/ricosjp/truck",
                 "github": "https://github.com/ricosjp/truck"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Monstertruck",
               "url": "https://github.com/virtualritz/monstertruck",
               "year": 2023,
               "description": "Experimental hard fork of Truck focused on missing production-CAD pieces: constant and variable-radius fillets, offsets, STEP healing and assembly output, explicit errors, and improved meshing. A promising research quarry, not a production-safe kernel: its boolean rewrite was reverted after orientation regressions and the project has a bus factor of one.",
-              "tags": ["rust", "open-source", "brep", "kernel", "fillet", "step", "experimental"],
-              "tech": ["Rust", "WASM", "wgpu"],
+              "tags": [
+                "rust",
+                "open-source",
+                "brep",
+                "kernel",
+                "fillet",
+                "step",
+                "experimental"
+              ],
+              "tech": [
+                "Rust",
+                "WASM",
+                "wgpu"
+              ],
               "links": {
-                "github": "https://github.com/virtualritz/monstertruck"
+                "github": "https://github.com/virtualritz/monstertruck",
+                "website": "https://github.com/virtualritz/monstertruck"
               },
               "license": "Apache-2.0"
             },
@@ -1124,8 +1249,21 @@ export const siteData = {
               "url": "https://github.com/ecto/vcad",
               "year": 2026,
               "description": "Ambitious new Apache-2.0 Rust/WASM B-Rep stack pitched as parametric CAD for the AI era, spanning a web/desktop app, CLI, sketch constraints, assemblies, simulation, STEP, and an MCP server. The surface area is unusually broad for such a young project, so treat the feature claims as a watch-and-test list rather than an established robustness record.",
-              "tags": ["rust", "open-source", "brep", "kernel", "wasm", "ai", "mcp", "experimental"],
-              "tech": ["Rust", "WASM", "Tauri"],
+              "tags": [
+                "rust",
+                "open-source",
+                "brep",
+                "kernel",
+                "wasm",
+                "ai",
+                "mcp",
+                "experimental"
+              ],
+              "tech": [
+                "Rust",
+                "WASM",
+                "Tauri"
+              ],
               "links": {
                 "website": "https://vcad.io/",
                 "github": "https://github.com/ecto/vcad"
@@ -1137,8 +1275,20 @@ export const siteData = {
               "url": "https://github.com/andymai/brepkit",
               "year": 2026,
               "description": "New from-scratch exact B-Rep engine in Rust/WASM with a higher-level TypeScript API in <a href=\"https://github.com/andymai/brepjs\" target=\"_blank\" rel=\"noopener\">brepjs</a>. It publishes a broad, status-labeled feature matrix, public cross-kernel benchmarks, STEP I/O, fillets, shelling, healing, and a sketch solver—but also documents mesh fallbacks and immature subsystems. v3+ is AGPL-3.0 with a commercial-license option; earlier 2.x releases remain permissive.",
-              "tags": ["rust", "brep", "kernel", "wasm", "typescript", "agpl", "experimental"],
-              "tech": ["Rust", "WASM", "TypeScript"],
+              "tags": [
+                "rust",
+                "brep",
+                "kernel",
+                "wasm",
+                "typescript",
+                "agpl",
+                "experimental"
+              ],
+              "tech": [
+                "Rust",
+                "WASM",
+                "TypeScript"
+              ],
               "links": {
                 "website": "https://brepjs.dev/",
                 "github": "https://github.com/andymai/brepkit",
@@ -1152,24 +1302,24 @@ export const siteData = {
     },
     {
       "id": "gcode-gen",
-      "title": "Programmatic G-Code Generation",
-      "description": "Write code to produce machine instructions directly, instead of going through a slicer. This enables parametric designs, mathematical patterns, and geometries impossible with conventional workflows.",
+      "title": "Programmatic G-Code",
+      "description": "Use code to generate, parse, inspect, or transform machine instructions. Direct generation enables parametric paths and unusual fabrication strategies, but output must match the target controller's G-code dialect and machine limits.",
       "subsections": [
         {
           "id": "gcode-libs",
-          "title": "G-Code Generation Libraries",
+          "title": "G-Code Generation & Processing Libraries",
           "description": null,
           "items": [
             {
               "name": "FullControl",
               "url": "https://github.com/FullControlXYZ/fullcontrol",
               "year": 2022,
-              "stars": 935,
+              "stars": 939,
               "links": {
                 "website": "https://fullcontrol.xyz/",
                 "github": "https://github.com/FullControlXYZ/fullcontrol"
               },
-              "description": "The leading open-source Python library for programmatic G-code. Design everything about a print path: every point, speed, temperature, and extrusion parameter. Think \"hotmelt glue gun\" — you decide exactly where it moves. Includes <a href=\"https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/tutorials/colab/contents_colab.ipynb\" target=\"_blank\" rel=\"noopener\">interactive Colab tutorials</a>, a <a href=\"https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/models/colab/design_template_colab.ipynb\" target=\"_blank\" rel=\"noopener\">design template</a>, and a <a href=\"https://www.youtube.com/playlist?list=PLXIkSZPJTLeVXNktt3HfyeytS7fG2byuG\" target=\"_blank\" rel=\"noopener\">YouTube playlist</a>. Pre-made parametric designs at <a href=\"https://fullcontrol.xyz/\" target=\"_blank\" rel=\"noopener\">fullcontrol.xyz</a>.",
+              "description": "Open-source Python library for explicitly designing 3D-printer paths and settings: points, speeds, temperatures, extrusion, and other state changes. Think \"hotmelt glue gun\" — you decide exactly where it moves. Includes <a href=\"https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/tutorials/colab/contents_colab.ipynb\" target=\"_blank\" rel=\"noopener\">interactive Colab tutorials</a>, a <a href=\"https://colab.research.google.com/github/FullControlXYZ/fullcontrol/blob/master/models/colab/design_template_colab.ipynb\" target=\"_blank\" rel=\"noopener\">design template</a>, and a <a href=\"https://www.youtube.com/playlist?list=PLXIkSZPJTLeVXNktt3HfyeytS7fG2byuG\" target=\"_blank\" rel=\"noopener\">YouTube playlist</a>. Pre-made parametric designs are available at <a href=\"https://fullcontrol.xyz/\" target=\"_blank\" rel=\"noopener\">fullcontrol.xyz</a>.",
               "tags": [
                 "python",
                 "open-source",
@@ -1183,7 +1333,8 @@ export const siteData = {
               "featured": true,
               "badge": "Core Library",
               "tagline": "Unconstrained 3D Print Path Design",
-              "license": "Open Source"
+              "license": "GPL-3.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "fullcontrol-js",
@@ -1196,7 +1347,7 @@ export const siteData = {
                 "website": "https://github.com/kylegrover/fullcontrol-js",
                 "github": "https://github.com/kylegrover/fullcontrol-js"
               },
-              "description": "Complete TypeScript rewrite of FullControl. Browser-first, Node-compatible, zero dependencies, tree-shakeable. 23 automated parity tests all passing against Python v0.1.2. 13 geometry modules, 20+ printer profiles, visualization pipeline with color gradients.",
+              "description": "Browser-first TypeScript implementation of FullControl's core design, G-code, and visualization pipelines. It is Node-compatible, dependency-free, and tree-shakeable; its parity harness currently reports 23 paired scenarios passing against its pinned Python reference, while additional advanced parity remains on the roadmap.",
               "tags": [
                 "typescript",
                 "open-source",
@@ -1212,8 +1363,9 @@ export const siteData = {
               ],
               "featured": true,
               "badge": "Library",
-              "tagline": "TypeScript Port of FullControl — 100% Parity",
-              "license": "Open Source"
+              "tagline": "Parity-Tested TypeScript Port of FullControl",
+              "license": "GPL-3.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "mecode",
@@ -1233,7 +1385,8 @@ export const siteData = {
                 "website": "https://github.com/jminardi/mecode",
                 "github": "https://github.com/jminardi/mecode"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "pygcode",
@@ -1291,26 +1444,9 @@ export const siteData = {
                 "website": "https://github.com/WillAdams/gcodepreview",
                 "github": "https://github.com/WillAdams/gcodepreview"
               },
-              "license": "Open Source"
-            },
-            {
-              "name": "NIST RS274NGC Interpreter",
-              "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=823374",
-              "description": "Authoritative RS-274/NGC G-code language reference. Key standard for LinuxCNC and many other CNC interpreters.",
-              "tags": [
-                "reference",
-                "gcode",
-                "nist",
-                "rs274",
-                "standard"
-              ],
-              "tech": [
-                "PDF",
-                "Documentation"
-              ],
-              "links": {
-                "website": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=823374"
-              }
+              "license": "Open Source",
+              "stars": 80,
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "pygdk",
@@ -1331,12 +1467,13 @@ export const siteData = {
                 "website": "https://github.com/cilynx/pygdk",
                 "github": "https://github.com/cilynx/pygdk"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "LinuxCNC G-Code Generators",
               "url": "https://github.com/LinuxCNC/simple-gcode-generators",
-              "stars": 273,
+              "stars": 274,
               "description": "Collection of simple Python G-code generators from the LinuxCNC project.",
               "tags": [
                 "python",
@@ -1352,7 +1489,8 @@ export const siteData = {
                 "website": "https://github.com/LinuxCNC/simple-gcode-generators",
                 "github": "https://github.com/LinuxCNC/simple-gcode-generators"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         },
@@ -1365,23 +1503,18 @@ export const siteData = {
               "name": "py2g",
               "url": "https://py2g.com",
               "year": 2024,
-              "description": "Write Python in the browser to generate G-code — no install needed. Uses <a href=\"https://pyodide.org/\" target=\"_blank\" rel=\"noopener\">Pyodide</a> WASM to run FullControl natively in-browser. Monaco editor with AI-assisted coding, WebGPU 3D preview via <a href=\"https://usegpu.live/\" target=\"_blank\" rel=\"noopener\">@use-gpu</a>. Also available as a Tauri desktop app with bundled <a href=\"https://github.com/astral-sh/uv\" target=\"_blank\" rel=\"noopener\">uv</a> Python environment. Future plans include <a href=\"https://github.com/CadQuery/cadquery\" target=\"_blank\" rel=\"noopener\">CadQuery</a> / <a href=\"https://github.com/gumyr/build123d\" target=\"_blank\" rel=\"noopener\">Build123d</a> integration.",
+              "description": "Write Python in the browser to generate G-code with FullControl — no local install needed. <a href=\"https://pyodide.org/\" target=\"_blank\" rel=\"noopener\">Pyodide</a> runs Python in-browser; the editor provides parameter controls, toolpath and G-code previews, and shareable community sketches. The desktop edition is listed as forthcoming.",
               "tags": [
                 "typescript",
                 "python",
-                "open-source",
                 "gcode",
                 "browser",
                 "ide",
-                "webgpu",
-                "ai",
                 "pyodide"
               ],
               "tech": [
                 "Next.js",
                 "Pyodide",
-                "WebGPU",
-                "Tauri",
                 "Monaco"
               ],
               "featured": true,
@@ -1390,28 +1523,24 @@ export const siteData = {
               "links": {
                 "website": "https://py2g.com"
               },
-              "license": "Open Source"
+              "license": "Free web app (beta)"
             },
             {
               "name": "js2g",
               "url": "https://js2g.com",
               "year": 2025,
-              "description": "Write JavaScript in the browser to generate G-code using <a href=\"https://github.com/kylegrover/fullcontrol-js\" target=\"_blank\" rel=\"noopener\">fullcontrol-js</a>. Same platform as py2g with shared Monaco editor, AI code assist, and WebGPU 3D preview — but runs pure JS with zero WASM overhead. Instant execution, no compilation step.",
+              "description": "Write JavaScript in the browser to generate G-code using the open-source <a href=\"https://github.com/kylegrover/fullcontrol-js\" target=\"_blank\" rel=\"noopener\">fullcontrol-js</a> library. It shares py2g's browser editor and community-sketch workflow while executing JavaScript directly.",
               "tags": [
                 "typescript",
                 "javascript",
-                "open-source",
                 "gcode",
                 "browser",
                 "ide",
-                "webgpu",
-                "ai",
                 "fullcontrol-js"
               ],
               "tech": [
                 "Next.js",
                 "fullcontrol-js",
-                "WebGPU",
                 "Monaco"
               ],
               "featured": true,
@@ -1420,7 +1549,7 @@ export const siteData = {
               "links": {
                 "website": "https://js2g.com"
               },
-              "license": "Open Source"
+              "license": "Free web app (beta)"
             }
           ]
         }
@@ -1434,13 +1563,13 @@ export const siteData = {
         {
           "id": "slicers",
           "title": "Open-Source Slicers",
-          "description": "All of these have CLI interfaces and can be driven programmatically — essential for automated pipelines.",
+          "description": "These projects expose command-line or other automation paths, though supported workflows and flags vary by slicer and release.",
           "items": [
             {
               "name": "PrusaSlicer",
               "url": "https://github.com/prusa3d/PrusaSlicer",
               "year": 2018,
-              "stars": 8905,
+              "stars": 8913,
               "links": {
                 "website": "https://www.prusa3d.com/page/prusaslicer_424/",
                 "github": "https://github.com/prusa3d/PrusaSlicer"
@@ -1459,13 +1588,14 @@ export const siteData = {
                 "C++",
                 "CLI"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "OrcaSlicer",
               "url": "https://github.com/SoftFever/OrcaSlicer",
               "year": 2023,
-              "stars": 13020,
+              "stars": 13049,
               "description": "Community-driven slicer forked from Bambu Studio/PrusaSlicer. Multi-printer support, auto-calibration, Klipper integration. CLI available. Rapidly growing community.",
               "tags": [
                 "c++",
@@ -1483,13 +1613,14 @@ export const siteData = {
                 "website": "https://github.com/SoftFever/OrcaSlicer",
                 "github": "https://github.com/SoftFever/OrcaSlicer"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "CuraEngine",
               "url": "https://github.com/Ultimaker/CuraEngine",
               "year": 2013,
-              "stars": 1812,
+              "stars": 1815,
               "description": "The slicing engine behind Ultimaker Cura. C++ library that can be integrated into other applications or driven via CLI. Powerful and well-documented.",
               "tags": [
                 "c++",
@@ -1506,7 +1637,8 @@ export const siteData = {
                 "website": "https://github.com/Ultimaker/CuraEngine",
                 "github": "https://github.com/Ultimaker/CuraEngine"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Slic3r",
@@ -1531,7 +1663,8 @@ export const siteData = {
                 "C++",
                 "Perl"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "SuperSlicer",
@@ -1552,11 +1685,12 @@ export const siteData = {
                 "website": "https://github.com/supermerill/SuperSlicer",
                 "github": "https://github.com/supermerill/SuperSlicer"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "IceSL",
-              "url": "https://icesl.github.io/",
+              "url": "https://icesl.loria.fr/",
               "description": "Lua-scripted code-first slicer/modeler combining CSG, SDF, and voxel techniques. Generates both geometry and G-code with variable layer heights and custom infill patterns. Freeware (source not fully open), community scripts are shared openly.",
               "tags": [
                 "lua",
@@ -1568,7 +1702,7 @@ export const siteData = {
                 "Lua"
               ],
               "links": {
-                "website": "https://icesl.github.io/"
+                "website": "https://icesl.loria.fr/"
               }
             }
           ]
@@ -1582,7 +1716,7 @@ export const siteData = {
               "name": "Kiri:Moto",
               "url": "https://grid.space/kiri/",
               "year": 2014,
-              "stars": 839,
+              "stars": 841,
               "links": {
                 "github": "https://github.com/GridSpace/grid-apps",
                 "website": "https://grid.space/kiri/"
@@ -1601,7 +1735,8 @@ export const siteData = {
                 "JavaScript",
                 "Browser"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "FreeCAD Path Workbench",
@@ -1625,11 +1760,11 @@ export const siteData = {
             },
             {
               "name": "PyCAM",
-              "url": "https://github.com/SebKuworking/pycam",
+              "url": "https://github.com/SebKuzminsky/pycam",
               "year": 2008,
               "links": {
                 "website": "https://pycam.sourceforge.io/",
-                "github": "https://github.com/SebKuworking/pycam"
+                "github": "https://github.com/SebKuzminsky/pycam"
               },
               "description": "Open-source 3-axis CAM toolpath generator. Imports STL/DXF, generates G-code for CNC milling. Supports contour, surface, and engrave strategies.",
               "tags": [
@@ -1642,7 +1777,7 @@ export const siteData = {
               "tech": [
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "GPL-3.0"
             },
             {
               "name": "dxf2gcode",
@@ -1685,7 +1820,8 @@ export const siteData = {
                 "website": "https://github.com/aewallin/opencamlib",
                 "github": "https://github.com/aewallin/opencamlib"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Blender CAM",
@@ -1708,7 +1844,8 @@ export const siteData = {
                 "website": "https://github.com/vilemduha/blendercam",
                 "github": "https://github.com/vilemduha/blendercam"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "F-Engrave",
@@ -1730,7 +1867,8 @@ export const siteData = {
                 "website": "https://github.com/stephenhouser/f-engrave",
                 "github": "https://github.com/stephenhouser/f-engrave"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         },
@@ -1786,8 +1924,8 @@ export const siteData = {
           "items": [
             {
               "name": "FlatCAM",
-              "url": "https://github.com/pcbmodE/FlatCAM",
-              "description": "Python-based PCB CAM utility with GUI and CLI. Imports Gerbers/Excellon, performs isolation routing, and exports G-code for CNC mills.",
+              "url": "https://flatcam.org/",
+              "description": "Python-based PCB CAM utility with GUI and a command shell. Imports Gerber and Excellon data, creates isolation-routing and drilling jobs, and exports G-code. The original project is mature but its upstream development is comparatively quiet.",
               "tags": [
                 "python",
                 "open-source",
@@ -1800,14 +1938,13 @@ export const siteData = {
                 "Python"
               ],
               "links": {
-                "website": "https://github.com/pcbmodE/FlatCAM",
-                "github": "https://github.com/pcbmodE/FlatCAM"
+                "website": "https://flatcam.org/"
               },
-              "license": "Open Source"
+              "license": "MIT"
             },
             {
               "name": "pcb2gcode",
-              "url": "https://github.com/tinyvps/pcb2gcode",
+              "url": "https://github.com/pcb2gcode/pcb2gcode",
               "description": "C++ command-line converter from Gerber/Excellon to CNC router G-code for PCB isolation routing and drilling.",
               "tags": [
                 "c++",
@@ -1821,8 +1958,8 @@ export const siteData = {
                 "C++"
               ],
               "links": {
-                "website": "https://github.com/tinyvps/pcb2gcode",
-                "github": "https://github.com/tinyvps/pcb2gcode"
+                "website": "https://github.com/pcb2gcode/pcb2gcode",
+                "github": "https://github.com/pcb2gcode/pcb2gcode"
               },
               "license": "Open Source"
             }
@@ -1837,7 +1974,7 @@ export const siteData = {
               "name": "Klipper",
               "url": "https://www.klipper3d.org/",
               "year": 2016,
-              "stars": 11380,
+              "stars": 11382,
               "links": {
                 "github": "https://github.com/Klipper3d/klipper",
                 "website": "https://www.klipper3d.org/"
@@ -1855,7 +1992,8 @@ export const siteData = {
                 "Python",
                 "C"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Marlin",
@@ -1866,7 +2004,7 @@ export const siteData = {
                 "github": "https://github.com/MarlinFirmware/Marlin",
                 "website": "https://marlinfw.org/"
               },
-              "description": "The most widely-used open-source 3D printer firmware. Runs on AVR and ARM boards. Extensive G-code support, linear advance, auto bed leveling.",
+              "description": "Widely used open-source 3D-printer firmware for many AVR- and ARM-based controller boards, with broad G-code support, linear advance, and bed-leveling features.",
               "tags": [
                 "c++",
                 "open-source",
@@ -1876,14 +2014,15 @@ export const siteData = {
               "tech": [
                 "C++"
               ],
-              "license": "Open Source"
+              "license": "GPL-3.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "grbl",
               "url": "https://github.com/gnea/grbl",
               "year": 2009,
               "stars": 4444,
-              "description": "High-performance G-code interpreter for Arduino/AVR. The standard for hobby CNC mills, laser engravers, and small routers. Compact, fast, well-understood.",
+              "description": "Compact, well-established G-code interpreter for Arduino/AVR boards, commonly used with hobby CNC mills, laser engravers, and small routers.",
               "tags": [
                 "c",
                 "open-source",
@@ -1898,13 +2037,14 @@ export const siteData = {
                 "website": "https://github.com/gnea/grbl",
                 "github": "https://github.com/gnea/grbl"
               },
-              "license": "Open Source"
+              "license": "GPL-3.0",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "FluidNC",
               "url": "https://github.com/bdring/FluidNC",
               "year": 2021,
-              "stars": 2307,
+              "stars": 2308,
               "description": "Next-gen CNC firmware for ESP32. YAML-based configuration, WiFi, Bluetooth, SD card. grbl-compatible. Modern replacement for Grbl_ESP32.",
               "tags": [
                 "c++",
@@ -1922,13 +2062,14 @@ export const siteData = {
                 "website": "https://github.com/bdring/FluidNC",
                 "github": "https://github.com/bdring/FluidNC"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "LinuxCNC",
               "url": "https://linuxcnc.org/",
               "year": 1993,
-              "stars": 2224,
+              "stars": 2227,
               "links": {
                 "github": "https://github.com/LinuxCNC/linuxcnc",
                 "website": "https://linuxcnc.org/"
@@ -1948,7 +2089,8 @@ export const siteData = {
                 "Python",
                 "Linux"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "RepRapFirmware",
@@ -1971,7 +2113,8 @@ export const siteData = {
                 "website": "https://github.com/Duet3D/RepRapFirmware",
                 "github": "https://github.com/Duet3D/RepRapFirmware"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "grblHAL",
@@ -2015,13 +2158,14 @@ export const siteData = {
                 "website": "https://github.com/Smoothieware/Smoothieware",
                 "github": "https://github.com/Smoothieware/Smoothieware"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "TinyG",
               "url": "https://github.com/synthetos/TinyG",
               "year": 2012,
-              "stars": 940,
+              "stars": 941,
               "description": "6-axis motion control system by Synthetos. JSON-based API, jerk-controlled motion planning. Foundation for g2core (next-gen ARM port).",
               "tags": [
                 "c",
@@ -2038,7 +2182,8 @@ export const siteData = {
                 "website": "https://github.com/synthetos/TinyG",
                 "github": "https://github.com/synthetos/TinyG"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             }
           ]
         }
@@ -2079,7 +2224,7 @@ export const siteData = {
               "name": "CGAL",
               "url": "https://www.cgal.org/",
               "year": 1996,
-              "stars": 5808,
+              "stars": 5811,
               "links": {
                 "github": "https://github.com/CGAL/cgal",
                 "website": "https://www.cgal.org/"
@@ -2097,7 +2242,8 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "OpenCascade.js",
@@ -2131,7 +2277,7 @@ export const siteData = {
               "name": "Trimesh",
               "url": "https://github.com/mikedh/trimesh",
               "year": 2014,
-              "stars": 3524,
+              "stars": 3525,
               "description": "The go-to Python library for triangle meshes. Load/save 30+ formats, boolean operations, ray casting, voxelization, convex decomposition, section planes, repair. Used everywhere.",
               "tags": [
                 "python",
@@ -2147,7 +2293,8 @@ export const siteData = {
                 "website": "https://github.com/mikedh/trimesh",
                 "github": "https://github.com/mikedh/trimesh"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "numpy-stl",
@@ -2169,7 +2316,8 @@ export const siteData = {
                 "website": "https://github.com/WoLpH/numpy-stl",
                 "github": "https://github.com/WoLpH/numpy-stl"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "Open3D",
@@ -2192,7 +2340,9 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 13423,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "libigl",
@@ -2215,7 +2365,9 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 4993,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "PyMesh",
@@ -2238,7 +2390,9 @@ export const siteData = {
                 "website": "https://github.com/PyMesh/PyMesh",
                 "github": "https://github.com/PyMesh/PyMesh"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 2033,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "MeshLab (PyMeshLab)",
@@ -2262,7 +2416,9 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 5614,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "VTK",
@@ -2285,7 +2441,9 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 3110,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -2314,7 +2472,9 @@ export const siteData = {
                 "C++",
                 "Python"
               ],
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 287,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Assimp",
@@ -2335,7 +2495,9 @@ export const siteData = {
                 "website": "https://github.com/assimp/assimp",
                 "github": "https://github.com/assimp/assimp"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 12823,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "ezdxf",
@@ -2378,7 +2540,7 @@ export const siteData = {
             },
             {
               "name": "MeshFix",
-              "url": "https://github.com/MarcoAttworking/MeshFix-V2.1",
+              "url": "https://github.com/MarcoAttene/MeshFix-V2.1",
               "year": 2010,
               "description": "Automatic repair of triangle meshes. Fixes holes, self-intersections, degenerate faces. Produces watertight meshes suitable for 3D printing.",
               "tags": [
@@ -2392,8 +2554,8 @@ export const siteData = {
                 "C++"
               ],
               "links": {
-                "website": "https://github.com/MarcoAttworking/MeshFix-V2.1",
-                "github": "https://github.com/MarcoAttworking/MeshFix-V2.1"
+                "website": "https://github.com/MarcoAttene/MeshFix-V2.1",
+                "github": "https://github.com/MarcoAttene/MeshFix-V2.1"
               },
               "license": "Open Source"
             }
@@ -2576,7 +2738,7 @@ export const siteData = {
               "name": "gcode-preview",
               "url": "https://github.com/xyz-tools/gcode-preview",
               "year": 2020,
-              "description": "The most popular npm G-code library. TypeScript parser & 3D previewer using Three.js. Multi-tool coloring, arc support. v3.0.0-alpha in development.",
+              "description": "TypeScript G-code parser and Three.js preview library focused on 3D printing. Supports multi-tool coloring, tube geometry, G2/G3 arcs, embedded thumbnails, build-volume display, and examples for several web frameworks.",
               "tags": [
                 "typescript",
                 "open-source",
@@ -2590,10 +2752,13 @@ export const siteData = {
                 "npm"
               ],
               "links": {
-                "website": "https://github.com/xyz-tools/gcode-preview",
+                "website": "https://gcode-preview.web.app/",
+                "docs": "https://gcode-preview.web.app/docs/",
                 "github": "https://github.com/xyz-tools/gcode-preview"
               },
-              "license": "Open Source"
+              "license": "MIT",
+              "stars": 196,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "gcode-viewer (aligator)",
@@ -2613,7 +2778,9 @@ export const siteData = {
                 "website": "https://github.com/aligator/gcode-viewer",
                 "github": "https://github.com/aligator/gcode-viewer"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 51,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "@polar3d/gcode-viewer",
@@ -2633,7 +2800,9 @@ export const siteData = {
                 "website": "https://github.com/Polar3D/gcode-viewer",
                 "github": "https://github.com/Polar3D/gcode-viewer"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 1,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "@sindarius/gcodeviewer",
@@ -2673,7 +2842,9 @@ export const siteData = {
                 "website": "https://github.com/gabotechs/react-gcode-viewer",
                 "github": "https://github.com/gabotechs/react-gcode-viewer"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 40,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Three.js GCodeLoader",
@@ -2842,7 +3013,9 @@ export const siteData = {
                 "website": "https://github.com/Denvi/Candle",
                 "github": "https://github.com/Denvi/Candle"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 1602,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "bCNC",
@@ -2864,7 +3037,9 @@ export const siteData = {
                 "website": "https://github.com/vlachoudis/bCNC",
                 "github": "https://github.com/vlachoudis/bCNC"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 1718,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -2875,8 +3050,8 @@ export const siteData = {
           "items": [
             {
               "name": "Mainsail G-Code Viewer",
-              "url": "https://docs.mainsail.xyz/overview/settings/g-code-viewer",
-              "description": "Built-in 3D viewer in Mainsail (Klipper web UI). Most powerful of the Klipper frontends with customizable colors.",
+              "url": "https://docs.mainsail.xyz/settings/gcode-viewer/",
+              "description": "Built-in 3D viewer in the Mainsail Klipper web UI. It follows print progress and supports configurable axes, grid, progress, extruder, and feed-rate colors.",
               "tags": [
                 "browser",
                 "open-source",
@@ -2888,14 +3063,14 @@ export const siteData = {
                 "Vue.js"
               ],
               "links": {
-                "website": "https://docs.mainsail.xyz/overview/settings/g-code-viewer"
+                "website": "https://docs.mainsail.xyz/settings/gcode-viewer/"
               },
               "license": "Open Source"
             },
             {
               "name": "Fluidd G-Code Viewer",
-              "url": "https://docs.fluidd.xyz/features/gcode-viewer",
-              "description": "2D layer-by-layer visualization in Fluidd (Klipper). Auto-follows print progress with Exclude Object support.",
+              "url": "https://docs.fluidd.xyz/features/printing/",
+              "description": "2D layer-by-layer visualization in the Fluidd Klipper web UI. It can follow print progress, distinguish multiple tools, and support Exclude Object when Moonraker and the slicer are configured for it.",
               "tags": [
                 "browser",
                 "open-source",
@@ -2907,7 +3082,7 @@ export const siteData = {
                 "Vue.js"
               ],
               "links": {
-                "website": "https://docs.fluidd.xyz/features/gcode-viewer"
+                "website": "https://docs.fluidd.xyz/features/printing/"
               },
               "license": "Open Source"
             },
@@ -2929,7 +3104,9 @@ export const siteData = {
                 "website": "https://github.com/Kragrathea/OctoPrint-PrettyGCode",
                 "github": "https://github.com/Kragrathea/OctoPrint-PrettyGCode"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 120,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "PrintTimeGenius",
@@ -2946,9 +3123,10 @@ export const siteData = {
                 "OctoPrint"
               ],
               "links": {
-                "website": "https://plugins.octoprint.org/plugins/PrintTimeGenius/"
+                "website": "https://plugins.octoprint.org/plugins/PrintTimeGenius/",
+                "github": "https://github.com/eyal0/OctoPrint-PrintTimeGenius"
               },
-              "license": "Open Source"
+              "license": "AGPL-3.0"
             }
           ]
         },
@@ -2976,7 +3154,9 @@ export const siteData = {
                 "website": "https://github.com/FAST-LB/pyGCodeDecode",
                 "github": "https://github.com/FAST-LB/pyGCodeDecode"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 16,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "gcode-simulator",
@@ -3023,8 +3203,8 @@ export const siteData = {
           "items": [
             {
               "name": "gcode-rs",
-              "url": "https://crates.io/crates/g-code",
-              "description": "Streaming G-code parser for <code>#[no_std]</code> embedded use. Retains source spans for error reporting.",
+              "url": "https://github.com/Michael-F-Bryan/gcode-rs",
+              "description": "Streaming G-code parser designed for embedded and <code>#[no_std]</code> use. Supports a zero-allocation visitor API and reports parser diagnostics.",
               "tags": [
                 "rust",
                 "open-source",
@@ -3037,9 +3217,10 @@ export const siteData = {
                 "Rust"
               ],
               "links": {
-                "website": "https://crates.io/crates/g-code"
+                "website": "https://docs.rs/gcode/latest/gcode/",
+                "github": "https://github.com/Michael-F-Bryan/gcode-rs"
               },
-              "license": "Open Source"
+              "license": "MIT OR Apache-2.0"
             },
             {
               "name": "gcode-nom",
@@ -3058,7 +3239,9 @@ export const siteData = {
                 "website": "https://github.com/martinfrances107/gcode-nom",
                 "github": "https://github.com/martinfrances107/gcode-nom"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 7,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "gcode2obj",
@@ -3087,27 +3270,6 @@ export const siteData = {
           "title": "VS Code Extensions",
           "description": null,
           "items": [
-            {
-              "name": "OCP CAD Viewer",
-              "url": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
-              "year": 2022,
-              "description": "Actively maintained VS Code and standalone viewer for CadQuery/Build123d/OCP models. The 4.x line adds richer B-Rep-backed measurements and inspection, PBR materials, screenshots, visual debugging, selection tools, and automatic reload—much more than a passive triangle viewer.",
-              "tags": [
-                "vscode",
-                "open-source",
-                "cadquery",
-                "build123d",
-                "viewer"
-              ],
-              "tech": [
-                "VS Code"
-              ],
-              "links": {
-                "website": "https://github.com/bernhard-42/vscode-ocp-cad-viewer",
-                "github": "https://github.com/bernhard-42/vscode-ocp-cad-viewer"
-              },
-              "license": "Open Source"
-            },
             {
               "name": "G-code Genius",
               "url": "https://marketplace.visualstudio.com/items?itemName=pavver.gcode-genius",
@@ -3224,7 +3386,9 @@ export const siteData = {
                 "website": "https://github.com/NCalu/NCneticNpp",
                 "github": "https://github.com/NCalu/NCneticNpp"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 83,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -3271,7 +3435,9 @@ export const siteData = {
                 "website": "https://github.com/apetsiuk/GCode-Parser-and-Viz",
                 "github": "https://github.com/apetsiuk/GCode-Parser-and-Viz"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 3,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -3284,7 +3450,7 @@ export const siteData = {
               "name": "Vericut",
               "url": "https://vericut.com/",
               "year": 1988,
-              "description": "Industry-leading CNC simulation (since 1988). Digital twin approach, collision checking, multi-axis material removal. Commercial.",
+              "description": "Long-running commercial CNC verification and simulation suite from CGTech. Uses machine digital twins for collision checking, multi-axis material-removal simulation, and NC-program optimization.",
               "tags": [
                 "commercial",
                 "cnc",
@@ -3302,8 +3468,8 @@ export const siteData = {
             },
             {
               "name": "NCSIMUL",
-              "url": "https://cn.ncsimul.com/",
-              "description": "Comprehensive G-code verification for turning, drilling, 3-5 axis milling. Reportedly 3x faster than Vericut. Hexagon. Commercial.",
+              "url": "https://hexagon.com/products/ncsimul",
+              "description": "Commercial Hexagon suite for CNC-code verification, machine simulation, collision detection, cycle-time estimation, and toolpath or feed-rate optimization.",
               "tags": [
                 "commercial",
                 "cnc",
@@ -3314,7 +3480,7 @@ export const siteData = {
                 "Commercial"
               ],
               "links": {
-                "website": "https://cn.ncsimul.com/"
+                "website": "https://hexagon.com/products/ncsimul"
               },
               "license": "Proprietary"
             },
@@ -3369,7 +3535,9 @@ export const siteData = {
                 "website": "https://github.com/FullControlXYZ/volco",
                 "github": "https://github.com/FullControlXYZ/volco"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 11,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "VolcoGUI",
@@ -3397,7 +3565,9 @@ export const siteData = {
                 "website": "https://github.com/kylegrover/volcogui",
                 "github": "https://github.com/kylegrover/volcogui"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 2,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "AdditiveFOAM",
@@ -3419,7 +3589,9 @@ export const siteData = {
                 "website": "https://github.com/ORNL/AdditiveFOAM",
                 "github": "https://github.com/ORNL/AdditiveFOAM"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 56,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "OpenAM-SimCCX",
@@ -3499,7 +3671,9 @@ export const siteData = {
                 "website": "https://github.com/drlukeparry/pyslm",
                 "github": "https://github.com/drlukeparry/pyslm"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 168,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Helio Additive \"Dragon\"",
@@ -3623,7 +3797,9 @@ export const siteData = {
                 "website": "https://github.com/printpal-io/OctoPrint-PrintWatch",
                 "github": "https://github.com/printpal-io/OctoPrint-PrintWatch"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 48,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -3717,7 +3893,7 @@ export const siteData = {
     {
       "id": "browser-cad",
       "title": "Browser-Based CAD & Manufacturing",
-      "description": "Design and manufacture without installing anything. These tools compile CAD kernels to WebAssembly and run entirely client-side.",
+      "description": "Browser-hosted modeling and manufacturing tools, plus the runtimes that enable them. Some run a geometry kernel fully client-side through WebAssembly; others are web front ends or scripting environments with different execution models.",
       "subsections": [
         {
           "id": "browser-tools",
@@ -3727,50 +3903,42 @@ export const siteData = {
             {
               "name": "py2g",
               "url": "https://py2g.com",
-              "github": "https://github.com/kylegrover/py2g",
               "year": 2024,
-              "description": "Browser IDE for Python → G-code via FullControl + Pyodide WASM. WebGPU visualization, AI code assist. Also Tauri desktop app.",
+              "description": "Browser IDE for Python-to-G-code work with FullControl and Pyodide. Includes code editing, parameter controls, previews, and shareable community sketches; the desktop edition is listed as forthcoming.",
               "tags": [
                 "browser",
-                "open-source",
                 "gcode",
                 "ide",
-                "wasm",
-                "webgpu"
+                "wasm"
               ],
               "tech": [
                 "Next.js",
                 "WASM"
               ],
               "links": {
-                "website": "https://py2g.com",
-                "github": "https://github.com/kylegrover/py2g"
+                "website": "https://py2g.com"
               },
-              "license": "Open Source"
+              "license": "Free web app (beta)"
             },
             {
               "name": "js2g",
               "url": "https://js2g.com",
-              "github": "https://github.com/kylegrover/py2g",
               "year": 2025,
-              "description": "Browser IDE for JavaScript → G-code via fullcontrol-js. Zero WASM overhead, instant execution. Shares platform with py2g.",
+              "description": "Browser IDE for JavaScript-to-G-code work through the open-source fullcontrol-js library. Shares py2g's editor and community-sketch workflow while executing JavaScript directly.",
               "tags": [
                 "browser",
-                "open-source",
                 "gcode",
                 "ide",
-                "javascript",
-                "webgpu"
+                "javascript"
               ],
               "tech": [
                 "Next.js",
                 "fullcontrol-js"
               ],
               "links": {
-                "website": "https://js2g.com",
-                "github": "https://github.com/kylegrover/py2g"
+                "website": "https://js2g.com"
               },
-              "license": "Open Source"
+              "license": "Free web app (beta)"
             },
             {
               "name": "ManifoldCAD",
@@ -3796,7 +3964,7 @@ export const siteData = {
               "name": "Chili3D",
               "url": "https://chili3d.com/",
               "year": 2023,
-              "description": "Active AGPL browser CAD on OpenCASCADE/WASM + Three.js, with sketches, booleans, fillets, measurements, document history, assemblies, and STEP/IGES/BREP import/export. v0.6.1 shipped in January 2026; newer main-branch work moves to OCCT 8 and adds an early MCP server with both live-browser and headless CAD tools. Still alpha: APIs can break and documentation is developing.",
+              "description": "Active AGPL browser CAD on Open CASCADE/WASM + Three.js, with sketches, booleans, fillets, measurements, history, and STEP/IGES/BREP import/export. v0.7.0 shipped in August 2026 with OCCT 8.0.1, shape checking and repair, a plugin system, a JavaScript/TypeScript macro editor, and visual programming; main also contains an early MCP server. Still young: APIs and workflows can change.",
               "tags": [
                 "browser",
                 "open-source",
@@ -3837,7 +4005,9 @@ export const siteData = {
                 "website": "https://github.com/CADmium-Co/CADmium",
                 "github": "https://github.com/CADmium-Co/CADmium"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 1627,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "CascadeStudio",
@@ -3884,11 +4054,12 @@ export const siteData = {
                 "website": "https://replicad.xyz/",
                 "github": "https://github.com/sgenoud/replicad"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "starsUpdated": "2026-03-26"
             },
             {
               "name": "JSCAD",
-              "url": "https://www.jscad.xyz/",
+              "url": "https://openjscad.xyz/",
               "description": "Runs entirely in the browser. Also CLI for server-side and experimental desktop app.",
               "tags": [
                 "browser",
@@ -3900,9 +4071,10 @@ export const siteData = {
                 "JavaScript"
               ],
               "links": {
-                "website": "https://www.jscad.xyz/"
+                "website": "https://openjscad.xyz/",
+                "github": "https://github.com/jscad/OpenJSCAD.org"
               },
-              "license": "Open Source"
+              "license": "MIT"
             },
             {
               "name": "CadHub",
@@ -4002,27 +4174,28 @@ export const siteData = {
                 "website": "https://github.com/abey79/vpype",
                 "github": "https://github.com/abey79/vpype"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 879,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "DrawingBotV3",
-              "url": "https://github.com/gkbrk/DrawingBotV3",
-              "description": "Image/vector-to-plotter pipeline with pathfinding, stippling, and hatching optimization to generate efficient G-code/SVG for drawing machines.",
+              "url": "https://drawingbotv3.com/",
+              "description": "Desktop image-to-vector application for plotter art with path-finding, stippling, hatching, path optimization, and SVG/G-code export. A GPL free edition and a closed-source premium edition are available.",
               "tags": [
-                "python",
                 "open-source",
                 "plotter",
-                "G-code",
+                "gcode",
                 "vector"
               ],
               "tech": [
-                "Python"
+                "Java"
               ],
               "links": {
-                "website": "https://github.com/gkbrk/DrawingBotV3",
-                "github": "https://github.com/gkbrk/DrawingBotV3"
+                "website": "https://drawingbotv3.com/",
+                "github": "https://github.com/SonarSonic/DrawingBotV3"
               },
-              "license": "Open Source"
+              "license": "GPL-3.0 (free) / proprietary (premium)"
             },
             {
               "name": "AxiDraw / NextDraw Software",
@@ -4043,7 +4216,9 @@ export const siteData = {
                 "website": "https://github.com/evil-mad/axidraw",
                 "github": "https://github.com/evil-mad/axidraw"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 459,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "DrawBot",
@@ -4085,7 +4260,9 @@ export const siteData = {
                 "website": "https://github.com/abey79/vsketch",
                 "github": "https://github.com/abey79/vsketch"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 573,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Cuttle.xyz",
@@ -4142,9 +4319,22 @@ export const siteData = {
               "name": "ChiselCAD (LTKMN)",
               "url": "https://chiselcad.brennan.computer/",
               "year": 2026,
-              "description": "A strikingly complete browser workbench forked from CascadeStudio: OCCT 8 B-Rep, Monaco, in-viewport constrained sketching that emits readable JavaScript, live parameters, feature commands, code↔geometry linking, and a Playwright-friendly <code>window.CascadeAPI</code>. It also offers optional local-browser LLM chat with user-supplied keys and no central model server. License caveat: upstream remains MIT, while ChiselCAD's additions are source-available and prohibit selling, repackaging, or embedding the editor commercially without permission.",
-              "tags": ["browser", "brep", "opencascade", "javascript", "ai", "agent-api", "source-available"],
-              "tech": ["JavaScript", "WASM", "Three.js", "Monaco"],
+              "description": "Feature-rich browser workbench forked from CascadeStudio: OCCT 8 B-Rep, Monaco, in-viewport constrained sketching that emits readable JavaScript, live parameters, feature commands, code↔geometry linking, and a Playwright-friendly <code>window.CascadeAPI</code>. It also offers optional local-browser LLM chat with user-supplied keys and no central model server. License caveat: upstream remains MIT, while ChiselCAD's additions are source-available and prohibit selling, repackaging, or embedding the editor commercially without permission.",
+              "tags": [
+                "browser",
+                "brep",
+                "opencascade",
+                "javascript",
+                "ai",
+                "agent-api",
+                "source-available"
+              ],
+              "tech": [
+                "JavaScript",
+                "WASM",
+                "Three.js",
+                "Monaco"
+              ],
               "featured": true,
               "badge": "New in 2026",
               "tagline": "Sketch in the viewport; keep the model as code",
@@ -4159,14 +4349,28 @@ export const siteData = {
               "url": "https://github.com/pzfreo/build123d-mcp",
               "year": 2026,
               "description": "Local MCP toolbox that gives coding agents a persistent build123d session plus rendering, B-Rep measurements, feature inspection, validation, repair guidance, snapshots, and STEP/STL/DXF/SVG export. It closes more of the verification loop than simply asking an LLM to write Python. One caveat for durable projects: a canonical full source-file workflow is still being designed, so keep your own <code>part.py</code> as the source of truth.",
-              "tags": ["python", "build123d", "opencascade", "open-source", "ai", "mcp", "local", "validation"],
-              "tech": ["Python", "MCP", "build123d"],
+              "tags": [
+                "python",
+                "build123d",
+                "opencascade",
+                "open-source",
+                "ai",
+                "mcp",
+                "local",
+                "validation"
+              ],
+              "tech": [
+                "Python",
+                "MCP",
+                "build123d"
+              ],
               "featured": true,
               "badge": "Agent tooling",
               "tagline": "Render, measure, validate, and export—not just generate code",
               "links": {
                 "github": "https://github.com/pzfreo/build123d-mcp",
-                "pypi": "https://pypi.org/project/build123d-mcp/"
+                "pypi": "https://pypi.org/project/build123d-mcp/",
+                "website": "https://github.com/pzfreo/build123d-mcp"
               },
               "license": "Apache-2.0"
             }
@@ -4181,7 +4385,7 @@ export const siteData = {
               "name": "Zoo.dev (formerly KittyCAD)",
               "url": "https://zoo.dev/",
               "year": 2021,
-              "description": "Fast-moving KCL-based modeling app with sketching, code/geometry source mapping, and the Zookeeper AI assistant; v1.3.10 shipped in August 2026. The desktop/web app and KCL tooling are MIT-licensed, but model execution streams commands to Zoo's proprietary hosted geometry engine over WebSocket and requires Zoo authentication—open client, centralized CAD service.",
+              "description": "Fast-moving KCL-based modeling app with sketching, code/geometry source mapping, and the Zookeeper AI assistant; v1.4.2 shipped in August 2026. The desktop/web app and KCL tooling are MIT-licensed, but model execution streams commands to Zoo's proprietary hosted geometry engine over WebSocket and requires Zoo authentication — open client, centralized CAD service.",
               "tags": [
                 "commercial",
                 "ai",
@@ -4246,7 +4450,9 @@ export const siteData = {
                 "website": "https://github.com/williamhunter/topy",
                 "github": "https://github.com/williamhunter/topy"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 556,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "FreeCAD FEM + Topology",
@@ -4288,7 +4494,9 @@ export const siteData = {
                 "website": "https://github.com/dl4to/dl4to",
                 "github": "https://github.com/dl4to/dl4to"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 125,
+              "starsUpdated": "2026-03-27"
             }
           ]
         },
@@ -4396,7 +4604,9 @@ export const siteData = {
                 "website": "https://github.com/ericrosenbaum/BeetleBlocks",
                 "github": "https://github.com/ericrosenbaum/BeetleBlocks"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 84,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Tinkercad Codeblocks",
@@ -4440,7 +4650,9 @@ export const siteData = {
                 "website": "https://github.com/JuliaGeometry/Descartes.jl",
                 "github": "https://github.com/JuliaGeometry/Descartes.jl"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 51,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Comodo.jl",
@@ -4461,7 +4673,9 @@ export const siteData = {
                 "website": "https://github.com/COMODO-research/Comodo.jl",
                 "github": "https://github.com/COMODO-research/Comodo.jl"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 72,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "Meshes.jl",
@@ -4481,7 +4695,9 @@ export const siteData = {
                 "website": "https://github.com/JuliaGeometry/Meshes.jl",
                 "github": "https://github.com/JuliaGeometry/Meshes.jl"
               },
-              "license": "Open Source"
+              "license": "Open Source",
+              "stars": 453,
+              "starsUpdated": "2026-03-27"
             }
           ]
         }
@@ -4512,6 +4728,25 @@ export const siteData = {
               ],
               "links": {
                 "website": "https://www.klipper3d.org/G-Codes.html"
+              }
+            },
+            {
+              "name": "NIST RS274/NGC Interpreter Specification",
+              "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/IR/nistir6556.pdf",
+              "description": "The NIST report for the RS274/NGC interpreter (Version 3), a foundational reference for the LinuxCNC dialect and related CNC interpreters. It is a historical specification, not a universal definition of every controller's G-code.",
+              "tags": [
+                "reference",
+                "gcode",
+                "nist",
+                "rs274",
+                "specification"
+              ],
+              "tech": [
+                "PDF",
+                "Documentation"
+              ],
+              "links": {
+                "website": "https://www.nist.gov/publications/nist-rs274ngc-interpreter-version-3"
               }
             },
             {
@@ -4606,7 +4841,9 @@ export const siteData = {
               "links": {
                 "website": "https://github.com/Irev-Dev/curated-code-cad",
                 "github": "https://github.com/Irev-Dev/curated-code-cad"
-              }
+              },
+              "stars": 311,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "awesome-cadquery",
@@ -4624,7 +4861,9 @@ export const siteData = {
               "links": {
                 "website": "https://github.com/CadQuery/awesome-cadquery",
                 "github": "https://github.com/CadQuery/awesome-cadquery"
-              }
+              },
+              "stars": 163,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "awesome-plotters",
@@ -4642,7 +4881,9 @@ export const siteData = {
               "links": {
                 "website": "https://github.com/beardicus/awesome-plotters",
                 "github": "https://github.com/beardicus/awesome-plotters"
-              }
+              },
+              "stars": 1373,
+              "starsUpdated": "2026-03-27"
             },
             {
               "name": "PlotterFiles",

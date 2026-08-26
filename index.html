@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programmatic G-Code & Code-First CAD — A Field Guide</title>
   <meta name="description" content="A curated field guide to code-first CAD, geometry kernels, B-Rep and mesh workflows, viewers, CAM, slicing, G-code, simulation, and browser-based manufacturing.">
+  <meta name="theme-color" content="#090e1a">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside id="toc-sidebar" class="toc-sidebar"></aside>
+  <a class="skip-link" href="#app">Skip to catalog</a>
+  <aside id="toc-sidebar" class="toc-sidebar" aria-label="Table of contents" aria-hidden="true" inert></aside>
   <div class="wrapper">
-    <button id="toc-float-btn" class="toc-float-btn" title="Table of Contents" aria-label="Table of Contents">
+    <button id="toc-float-btn" class="toc-float-btn" type="button" title="Table of contents" aria-label="Open table of contents" aria-controls="toc-sidebar" aria-expanded="false">
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="4" y="7" width="20" height="2.5" rx="1.25" fill="currentColor"/>
         <rect x="4" y="13" width="20" height="2.5" rx="1.25" fill="currentColor"/>
@@ -20,7 +23,7 @@
 
     <header class="hero" id="top">
       <div class="hero-bg"></div>
-      <canvas id="hero-canvas"></canvas>
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
       <div class="container hero-content">
         <h1 id="hero-title"></h1>
         <p class="subtitle" id="hero-subtitle"></p>
@@ -29,20 +32,27 @@
 
     <div class="sticky-bar" id="sticky-bar">
       <div class="container sticky-bar-inner">
-        <input type="text" id="search" class="search-input" placeholder="Search tools, libraries, and resources..." autocomplete="off" />
-        <nav class="sticky-nav" id="hero-nav"></nav>
-        <div class="search-meta" id="search-meta"></div>
+        <label class="sr-only" for="search">Search the catalog</label>
+        <input type="search" id="search" class="search-input" placeholder="Search tools, libraries, and resources..." autocomplete="off" aria-describedby="search-meta" />
+        <nav class="sticky-nav" id="hero-nav" aria-label="Catalog sections"></nav>
+        <div class="search-meta" id="search-meta" role="status" aria-live="polite"></div>
       </div>
     </div>
 
-    <main id="app"></main>
+    <main id="app" tabindex="-1">
+      <noscript>
+        <div class="container noscript-message">
+          This catalog needs JavaScript to render. You can still read the
+          <a href="llm.txt">plain-text reference</a>.
+        </div>
+      </noscript>
+    </main>
 
     <footer class="site-footer">
       <div class="container">
         <p>
           Built by <a href="https://github.com/kylegrover" target="_blank" rel="noopener">Kyle Grover</a>. Contributions welcome.
           <a href="llm.txt" target="_blank" rel="noopener">LLM-friendly version</a> &mdash;
-          <!-- TOC link removed, now a floating icon -->
           <a href="https://github.com/kylegrover/cool-code-cad" target="_blank" rel="noopener">GitHub Repo</a>
         </p>
       </div>
