@@ -1,5 +1,6 @@
 import { siteData } from './data.js';
 import { itemAnchorId, subsectionAnchorId } from './catalog-utils.js';
+import { pipelineFormatVisual, pipelineVisual } from './pipeline-visuals.js';
 
 // ============================================================================
 // Renderer — turns siteData into DOM
@@ -172,93 +173,6 @@ function renderLinkCard(item, anchorId, headingLevel) {
 }
 
 // --- CAD pipeline infographic ----------------------------------------------
-
-function pipelineVisual(kind) {
-  const common = 'class="pipeline-visual" viewBox="0 0 240 150" aria-hidden="true" focusable="false"';
-
-  if (kind === 'blueprint') {
-    return `<svg ${common}>
-      <rect class="pipeline-visual-frame" x="1" y="1" width="238" height="148" rx="8" />
-      <path class="pipeline-blueprint-grid" d="M1 30h238M1 59h238M1 89h238M1 118h238M40 1v148M80 1v148M120 1v148M160 1v148M200 1v148" />
-      <path class="pipeline-visual-fill" d="M27 105V80h58l30-36h54a36 36 0 0 1 0 72H80l-17-11H27Z" />
-      <circle class="pipeline-visual-cut" cx="169" cy="80" r="19" />
-      <circle class="pipeline-visual-cut" cx="169" cy="80" r="11" />
-      <circle class="pipeline-visual-cut" cx="55" cy="92" r="7" />
-      <path class="pipeline-blueprint-centerline" d="M169 51v58M140 80h58M55 79v26M42 92h26" />
-      <path class="pipeline-visual-dimension" d="M27 122v17m178-23v23M27 134h178M214 44h15m-15 72h15M224 44v72M115 36V20m54 17V20M115 25h54" />
-      <path class="pipeline-visual-tick" d="m27 134 7-4m-7 4 7 4m171-4-7-4m7 4-7 4m26-90-4 7m4-7 4 7m-4 65-4-7m4 7 4-7m-109-84 7-4m-7 4 7 4m47-4-7-4m7 4-7 4" />
-      <path class="pipeline-blueprint-leader" d="m151 64-22-21H98" />
-      <text x="116" y="131">80 mm</text><text x="142" y="22">Ø20</text><text x="222" y="83" transform="rotate(-90 222 83)">40 mm</text><text x="85" y="40">R5 FILLET</text>
-    </svg>`;
-  }
-
-  if (kind === 'solid') {
-    return `<svg ${common}>
-      <ellipse class="pipeline-visual-shadow" cx="121" cy="130" rx="98" ry="12" />
-      <path class="pipeline-solid-base-side" d="m23 101 128 21 66-38v14l-66 40-128-22Z" />
-      <path class="pipeline-solid-base-top" d="m23 101 59-34 135 17-66 38Z" />
-      <path class="pipeline-solid-web-side" d="m82 67 38-22 36 19v54l-26-4-30-33Z" />
-      <path class="pipeline-solid-upright-side" d="m120 45 48-28 39 22v56l-51 29V64Z" />
-      <path class="pipeline-solid-upright-front" d="m168 17 39 22v56l-39-22Z" />
-      <ellipse class="pipeline-solid-boss" cx="177" cy="49" rx="25" ry="29" transform="rotate(-28 177 49)" />
-      <ellipse class="pipeline-visual-cut" cx="177" cy="49" rx="11" ry="16" transform="rotate(-28 177 49)" />
-      <ellipse class="pipeline-solid-hole-rim" cx="63" cy="98" rx="15" ry="8" />
-      <ellipse class="pipeline-visual-cut" cx="63" cy="98" rx="10" ry="5" />
-      <path class="pipeline-solid-highlight" d="m27 99 56-29 132 16M123 44l45-24 35 20M153 120V66" />
-      <path class="pipeline-visual-edge" d="m23 101 128 21 66-38M151 122v16M217 84v14M82 67l48 47m-10-69 36 19 51-25" />
-    </svg>`;
-  }
-
-  if (kind === 'wireframe') {
-    return `<svg ${common}>
-      <rect class="pipeline-viewport-frame" x="1" y="1" width="238" height="148" rx="8" />
-      <path class="pipeline-viewport-grid" d="M18 128 121 69l101 51M38 140l103-59m-70 66 91-52m-142 24 119 20m-99-32 119 20m-99-32 119 20" />
-      <path class="pipeline-wire-fill" d="m19 105 59-34 38-22 48-28 39 22v56l-55 33-129-14Z" />
-      <path class="pipeline-wire-edge" d="m19 105 59-34 70 17 55-45M19 105l129 27 55-33M78 71l38-22 48-28 39 22M116 49l32 39v44M164 21l39 78M78 71l22 48m48-31 55 11M19 105l129-17M45 90l55 29m-22-48 70 61m0-44 55-45m-87 6 48 51m0-79v79M43 119l57-47m0 47 48-31m0 44 55-89M19 105l59-5 70 32m-70-61 70 17m-32-39 87 50" />
-      <ellipse class="pipeline-wire-boss" cx="174" cy="54" rx="25" ry="29" transform="rotate(-28 174 54)" />
-      <path class="pipeline-wire-facets" d="m153 37 41 33m-45-11 49 5m-44 15 36-47m-35 67 38-56M152 44l44 28M149 70l47-22" />
-      <ellipse class="pipeline-visual-cut" cx="174" cy="54" rx="11" ry="16" transform="rotate(-28 174 54)" />
-      <ellipse class="pipeline-wire-boss" cx="59" cy="101" rx="15" ry="8" />
-      <ellipse class="pipeline-visual-cut" cx="59" cy="101" rx="9" ry="4.5" />
-      <g class="pipeline-viewport-tools"><circle cx="224" cy="18" r="5" /><path d="m221 18 3-3 3 3m-3-3v7M219 35h10m-5-5v10M220 49l8 8m0-8-8 8" /></g>
-    </svg>`;
-  }
-
-  if (kind === 'model') {
-    return `<svg class="pipeline-visual pipeline-visual--model" viewBox="0 0 160 160" aria-hidden="true" focusable="false">
-      <path class="pipeline-model-face pipeline-model-face--top" d="m80 18 55 31-55 32-55-32Z" />
-      <path class="pipeline-model-face pipeline-model-face--left" d="M25 49v63l55 31V81Z" />
-      <path class="pipeline-model-face pipeline-model-face--right" d="m80 81 55-32v63l-55 31Z" />
-      <ellipse class="pipeline-model-hole" cx="80" cy="50" rx="22" ry="12" />
-      <ellipse class="pipeline-model-hole" cx="108" cy="103" rx="12" ry="19" />
-    </svg>`;
-  }
-
-  return '';
-}
-
-function pipelineFormatVisual(kind) {
-  if (kind === 'exact') {
-    return `<svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
-      <ellipse class="pipeline-format-shadow" cx="59" cy="62" rx="49" ry="5" />
-      <path class="pipeline-format-side" d="m10 45 65 11 35-20v8L75 65 10 53Z" />
-      <path class="pipeline-format-fill" d="m10 45 31-18 69 9-35 20Z" />
-      <path class="pipeline-format-fill" d="m43 27 20-12 21 11v29l-21 11V36Z" />
-      <path class="pipeline-format-highlight" d="m63 15 21 11v29L63 44Z" />
-      <ellipse class="pipeline-format-boss" cx="68" cy="27" rx="13" ry="15" transform="rotate(-28 68 27)" />
-      <ellipse class="pipeline-format-cut" cx="68" cy="27" rx="6" ry="8" transform="rotate(-28 68 27)" />
-      <ellipse class="pipeline-format-cut" cx="29" cy="44" rx="7" ry="3.5" />
-      <path class="pipeline-format-edge" d="m10 45 65 11 35-20M75 56v9M43 27l20 9 21-10" />
-    </svg>`;
-  }
-
-  return `<svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
-    <ellipse class="pipeline-format-shadow" cx="59" cy="62" rx="49" ry="5" />
-    <path class="pipeline-format-mesh-fill" d="m10 45 31-18 22-12 21 11 26 10v8L75 65 10 53Z" />
-    <path class="pipeline-format-edge" d="m10 45 65 11 35-20M10 45l65 20m0-9v9m35-29v8M41 27l22-12 21 11v29M63 15v51M41 27l43 28M10 45l65 11M29 34l46 31m-34-38 69 17M63 15l47 29M84 26 10 29M41 27l-12 27m55-28L63 66M10 45l74-19M29 54l81-18" />
-    <ellipse class="pipeline-format-edge" cx="68" cy="27" rx="13" ry="15" transform="rotate(-28 68 27)" />
-  </svg>`;
-}
 
 function pipelineRouteIcon(kind) {
   if (kind === 'print') {

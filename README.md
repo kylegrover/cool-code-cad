@@ -85,7 +85,7 @@ npm run generate
 ## Repository map
 
 - `data.js` — canonical catalog content and pipeline explainer data.
-- `script.js`, `style.css`, `hero-canvas.js`, `favicon.svg` — browser presentation.
+- `script.js`, `style.css`, `hero-canvas.js`, `pipeline-visuals.js`, `favicon.svg` — browser presentation (`pipeline-visuals.js` renders every illustration in the CAD-stack infographic from one parametric bracket model).
 - `serve.mjs` — dependency-free local preview server used by `npm start`.
 - `normalize-data.mjs` — normalizes links and license/access metadata.
 - `fetch-stars.mjs` — refreshes dated GitHub star snapshots.

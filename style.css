@@ -967,6 +967,9 @@ a:hover { color: #93b0ff; }
 }
 
 .pipeline-visual {
+  --pv-ink: #070b16;
+  --pv-edge: color-mix(in srgb, currentColor 72%, var(--text));
+  --pv-wire: color-mix(in srgb, currentColor 78%, white);
   display: block;
   width: 100%;
   max-height: 168px;
@@ -975,181 +978,84 @@ a:hover { color: #93b0ff; }
   filter: drop-shadow(0 9px 12px rgba(0, 0, 0, 0.18));
 }
 
-.pipeline-visual-frame,
-.pipeline-visual-fill,
-.pipeline-visual-shade,
-.pipeline-visual-highlight,
-.pipeline-visual-cut,
-.pipeline-visual-edge,
-.pipeline-visual-dimension,
-.pipeline-visual-tick {
-  vector-effect: non-scaling-stroke;
+.pipeline-visual * { vector-effect: non-scaling-stroke; }
+
+/* Shared primitives emitted by pipeline-visuals.js */
+.pv-face {
+  stroke-width: 0.6;
+  stroke-linejoin: round;
 }
 
-.pipeline-visual-frame {
-  fill: rgba(4, 9, 24, 0.28);
-  stroke: color-mix(in srgb, currentColor 38%, transparent);
+.pv-edge {
+  fill: none;
+  stroke: var(--pv-edge);
+  stroke-width: 1.05;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-.pipeline-visual-fill {
-  fill: color-mix(in srgb, currentColor 15%, var(--surface));
+.pv-tri {
+  stroke: var(--pv-wire);
+  stroke-width: 0.6;
+  stroke-linejoin: round;
+}
+
+.pv-shadow { fill: rgba(0, 0, 0, 0.26); }
+
+.pv-frame {
+  fill: rgba(4, 9, 24, 0.3);
+  stroke: color-mix(in srgb, currentColor 36%, transparent);
+  stroke-width: 1;
+}
+
+.pv-grid {
+  fill: none;
+  stroke: color-mix(in srgb, currentColor 13%, transparent);
+  stroke-width: 0.7;
+}
+
+.pv-outline {
+  fill: color-mix(in srgb, currentColor 8%, var(--surface));
   stroke: color-mix(in srgb, currentColor 72%, var(--text));
+  stroke-linejoin: round;
   stroke-width: 1.4;
 }
 
-.pipeline-visual-shade {
-  fill: color-mix(in srgb, currentColor 23%, var(--surface));
-  stroke: color-mix(in srgb, currentColor 68%, var(--text));
-  stroke-width: 1.2;
-}
-
-.pipeline-visual-highlight {
-  fill: color-mix(in srgb, currentColor 10%, var(--surface));
-  stroke: color-mix(in srgb, currentColor 68%, var(--text));
-  stroke-width: 1.2;
-}
-
-.pipeline-visual-shadow { fill: rgba(0, 0, 0, 0.24); }
-
-.pipeline-visual-cut {
+.pv-cut {
   fill: var(--surface);
   stroke: color-mix(in srgb, currentColor 76%, var(--text));
   stroke-width: 1.3;
 }
 
-.pipeline-visual-edge,
-.pipeline-visual-dimension,
-.pipeline-visual-tick {
+.pv-line {
   fill: none;
   stroke: color-mix(in srgb, currentColor 65%, var(--text));
+  stroke-linecap: round;
+  stroke-linejoin: round;
   stroke-width: 1;
 }
 
-.pipeline-visual-dimension { stroke-dasharray: 3 3; }
-
-.pipeline-blueprint-grid,
-.pipeline-blueprint-centerline,
-.pipeline-blueprint-leader,
-.pipeline-solid-base-side,
-.pipeline-solid-base-top,
-.pipeline-solid-web-side,
-.pipeline-solid-upright-side,
-.pipeline-solid-upright-front,
-.pipeline-solid-boss,
-.pipeline-solid-hole-rim,
-.pipeline-solid-highlight,
-.pipeline-wire-fill,
-.pipeline-wire-edge,
-.pipeline-wire-boss,
-.pipeline-wire-facets,
-.pipeline-viewport-frame,
-.pipeline-viewport-grid,
-.pipeline-viewport-tools * {
-  vector-effect: non-scaling-stroke;
+.pv-hidden {
+  fill: none;
+  stroke: color-mix(in srgb, currentColor 55%, var(--text));
+  stroke-dasharray: 3 2;
+  stroke-width: 0.8;
 }
 
-.pipeline-blueprint-grid {
+.pv-centerline {
   fill: none;
-  stroke: color-mix(in srgb, currentColor 12%, transparent);
-  stroke-width: 0.7;
-}
-
-.pipeline-blueprint-centerline {
-  fill: none;
-  stroke: color-mix(in srgb, currentColor 42%, transparent);
+  stroke: color-mix(in srgb, currentColor 45%, transparent);
   stroke-dasharray: 5 3 1 3;
   stroke-width: 0.8;
 }
 
-.pipeline-blueprint-leader {
+.pv-dimension {
   fill: none;
-  stroke: color-mix(in srgb, currentColor 70%, var(--text));
-  stroke-width: 0.9;
+  stroke: color-mix(in srgb, currentColor 55%, var(--text));
+  stroke-width: 0.8;
 }
 
-.pipeline-stage--author .pipeline-visual-fill {
-  fill: color-mix(in srgb, currentColor 7%, var(--surface));
-  stroke-width: 1.45;
-}
-
-.pipeline-solid-base-side {
-  fill: color-mix(in srgb, currentColor 20%, #090d18);
-  stroke: color-mix(in srgb, currentColor 62%, var(--text));
-  stroke-width: 1.2;
-}
-
-.pipeline-solid-base-top {
-  fill: color-mix(in srgb, currentColor 32%, #172038);
-  stroke: color-mix(in srgb, currentColor 78%, var(--text));
-  stroke-width: 1.25;
-}
-
-.pipeline-solid-web-side {
-  fill: color-mix(in srgb, currentColor 24%, #11182a);
-  stroke: color-mix(in srgb, currentColor 68%, var(--text));
-  stroke-width: 1.2;
-}
-
-.pipeline-solid-upright-side {
-  fill: color-mix(in srgb, currentColor 18%, #0f1729);
-  stroke: color-mix(in srgb, currentColor 72%, var(--text));
-  stroke-width: 1.25;
-}
-
-.pipeline-solid-upright-front {
-  fill: color-mix(in srgb, currentColor 36%, #1a2037);
-  stroke: color-mix(in srgb, currentColor 78%, var(--text));
-  stroke-width: 1.15;
-}
-
-.pipeline-solid-boss,
-.pipeline-solid-hole-rim {
-  fill: color-mix(in srgb, currentColor 42%, #20273d);
-  stroke: color-mix(in srgb, currentColor 86%, white);
-  stroke-width: 1.2;
-}
-
-.pipeline-solid-highlight {
-  fill: none;
-  stroke: color-mix(in srgb, currentColor 42%, white);
-  stroke-linecap: round;
-  stroke-width: 0.9;
-}
-
-.pipeline-viewport-frame {
-  fill: rgba(2, 8, 18, 0.28);
-  stroke: color-mix(in srgb, currentColor 28%, transparent);
-}
-
-.pipeline-viewport-grid {
-  fill: none;
-  stroke: color-mix(in srgb, currentColor 14%, transparent);
-  stroke-width: 0.7;
-}
-
-.pipeline-wire-fill {
-  fill: color-mix(in srgb, currentColor 8%, var(--surface));
-  stroke: color-mix(in srgb, currentColor 82%, white);
-  stroke-width: 1.05;
-}
-
-.pipeline-wire-edge,
-.pipeline-wire-boss,
-.pipeline-wire-facets {
-  fill: none;
-  stroke: color-mix(in srgb, currentColor 78%, white);
-  stroke-linejoin: round;
-  stroke-width: 0.72;
-}
-
-.pipeline-wire-boss { stroke-width: 1.05; }
-
-.pipeline-wire-facets {
-  stroke: color-mix(in srgb, currentColor 55%, white);
-  stroke-width: 0.6;
-}
-
-.pipeline-viewport-tools {
+.pv-tools {
   fill: none;
   stroke: color-mix(in srgb, currentColor 70%, white);
   stroke-linecap: round;
@@ -1160,7 +1066,7 @@ a:hover { color: #93b0ff; }
 .pipeline-visual text {
   fill: var(--text-muted);
   font-family: inherit;
-  font-size: 9px;
+  font-size: 10px;
   text-anchor: middle;
 }
 
@@ -1223,27 +1129,12 @@ a:hover { color: #93b0ff; }
 }
 
 .pipeline-model .pipeline-visual {
-  width: min(140px, 100%);
+  --pv-ink: #0b1630;
+  --pv-edge: #e6eeff;
+  width: min(212px, 100%);
   margin: auto 0;
-  color: #dce8ff;
+  color: var(--accent);
   filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.28));
-}
-
-.pipeline-model-face {
-  stroke: currentColor;
-  stroke-width: 2;
-  vector-effect: non-scaling-stroke;
-}
-
-.pipeline-model-face--top { fill: rgba(122, 168, 255, 0.2); }
-.pipeline-model-face--left { fill: rgba(122, 168, 255, 0.08); }
-.pipeline-model-face--right { fill: rgba(34, 211, 238, 0.1); }
-
-.pipeline-model-hole {
-  fill: #10213a;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  vector-effect: non-scaling-stroke;
 }
 
 .pipeline-model-caption {
@@ -1398,45 +1289,7 @@ a:hover { color: #93b0ff; }
   line-height: 1.2;
 }
 
-.pipeline-format-fill {
-  fill: color-mix(in srgb, currentColor 19%, var(--surface));
-  stroke: currentColor;
-  stroke-width: 1.2;
-}
 
-.pipeline-format-side {
-  fill: color-mix(in srgb, currentColor 12%, #080c17);
-  stroke: currentColor;
-  stroke-width: 1;
-}
-
-.pipeline-format-highlight,
-.pipeline-format-boss {
-  fill: color-mix(in srgb, currentColor 28%, #171c2d);
-  stroke: currentColor;
-  stroke-width: 1;
-}
-
-.pipeline-format-mesh-fill {
-  fill: color-mix(in srgb, currentColor 8%, var(--surface));
-  stroke: currentColor;
-  stroke-width: 1;
-}
-
-.pipeline-format-shadow { fill: rgba(0, 0, 0, 0.28); }
-
-.pipeline-format-cut {
-  fill: var(--surface);
-  stroke: currentColor;
-  stroke-width: 1.2;
-}
-
-.pipeline-format-edge {
-  fill: none;
-  stroke: currentColor;
-  stroke-linejoin: round;
-  stroke-width: 0.65;
-}
 
 .pipeline-model-drop {
   position: relative;
