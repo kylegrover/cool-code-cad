@@ -9,30 +9,40 @@
 ================================================================================
 HOW THE CAD STACK FITS TOGETHER
 ================================================================================
-A CAD product is a stack, not one magic program. Authoring tools preserve design intent; kernels calculate geometry; viewers draw a temporary mesh; CAM and slicers turn shape into motion; controllers make the machine move.
+A CAD product is a stack, not one magic program. Authoring captures intent and a kernel evaluates it into a model. Inspection, interchange, and manufacturing are separate downstream uses of that model—not required steps in one linear pipeline.
 
 --- HOW THIS PIPELINE WORKS ---
 
+  Creation path:
   01 / Author: Describe the thing
   Dimensions, constraints, features, code, or an AI prompt capture what the part is supposed to be.
-  Examples: Sketch + dimensions, Code / DSL, Feature tree, AI agent
+  Examples: Sketch + dimensions, Code / DSL, Feature history
 
   02 / Evaluate: Build geometry
   A geometry kernel evaluates booleans, fillets, intersections, topology, tolerances, and measurements.
-  Examples: OCCT / B-Rep, Manifold / mesh, Fidget / implicit
+  Examples: B-Rep · OCCT, Mesh · Manifold, Implicit / SDF · Fidget
 
-  03 / Inspect: Tessellate & view
+  The model: Source of truth
+  Authoring intent plus kernel evaluation produce the representation the application works from.
+  Inspection and exchange branch independently from here. Manufacturing may use the model—or direct toolpath code may bypass it.
+
+  Independent downstream uses of the model:
+  03 / Inspect: Tessellate for display
   The exact model is converted to display triangles. The viewport is the window into the model, not usually the model itself.
-  Examples: Three.js, VTK, WebGPU, Measurements
+  Key distinction: Display triangles ≠ source geometry
+  Examples: Viewport, Measurements
 
   04 / Exchange: Choose what survives
-  A STEP file containing B-Rep geometry can preserve analytic surfaces and topology. Typical STL/3MF exports carry a tessellated surface; DXF/SVG usually carry 2D geometry.
-  Examples: STEP / BREP = editable CAD, STL / 3MF = usually mesh, DXF / SVG = usually 2D
+  STEP can preserve analytic surfaces and topology; STL/3MF commonly carry tessellated surfaces. DXF/SVG are primarily used for 2D/vector exchange, though DXF can also contain 3D entities.
+  Formats: STEP / B-Rep (Surfaces + topology), STL / 3MF (Tessellated surface)
+
+  05 / Manufacture: When geometry becomes a manufacturing plan
+  Slicers and CAM turn geometry into machine motion; direct toolpath systems can generate motion without conventional CAD/CAM.
 
   Manufacturing routes:
-  - 3D printing: Solid or mesh -> Slicer -> G-code -> Printer firmware -> Printed part
-  - CNC machining: B-Rep / STEP -> CAM -> G-code -> Machine controller -> Machined part
-  - Programmatic toolpaths: Geometry code -> Path generator -> G-code -> Controller -> Physical output
+  - 3D printing — Layer-by-layer deposition: Model / mesh -> Slicer -> Toolpath / G-code -> Printer firmware -> Printed part
+  - CNC machining — Material removal: Model geometry / STEP -> CAM -> Toolpath / G-code -> Machine controller -> Machined part
+  - Programmatic toolpaths — Can bypass a conventional CAD/CAM model: Geometry code -> Path generator -> Toolpath / G-code -> Controller -> Physical output
 
   Glossary:
   - Modeler / workbench: The editor, UI, feature history, and file workflow a person or agent operates.

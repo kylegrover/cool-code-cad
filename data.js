@@ -8,61 +8,92 @@ export const siteData = {
     {
       "id": "cad-pipeline",
       "title": "How the CAD Stack Fits Together",
-      "description": "A CAD product is a stack, not one magic program. Authoring tools preserve design intent; kernels calculate geometry; viewers draw a temporary mesh; CAM and slicers turn shape into motion; controllers make the machine move.",
+      "description": "A CAD product is a stack, not one magic program. Authoring captures intent and a kernel evaluates it into a model. Inspection, interchange, and manufacturing are separate downstream uses of that model—not required steps in one linear pipeline.",
       "pipeline": {
         "stages": [
           {
-            "kicker": "01 / Author",
+            "role": "author",
+            "number": "01",
+            "label": "Author",
             "title": "Describe the thing",
             "description": "Dimensions, constraints, features, code, or an AI prompt capture what the part is supposed to be.",
             "examples": [
               "Sketch + dimensions",
               "Code / DSL",
-              "Feature tree",
-              "AI agent"
-            ]
+              "Feature history"
+            ],
+            "visual": "blueprint"
           },
           {
-            "kicker": "02 / Evaluate",
+            "role": "evaluate",
+            "number": "02",
+            "label": "Evaluate",
             "title": "Build geometry",
             "description": "A geometry kernel evaluates booleans, fillets, intersections, topology, tolerances, and measurements.",
+            "examplesLabel": "Example representations",
             "examples": [
-              "OCCT / B-Rep",
-              "Manifold / mesh",
-              "Fidget / implicit"
-            ]
+              "B-Rep · OCCT",
+              "Mesh · Manifold",
+              "Implicit / SDF · Fidget"
+            ],
+            "visual": "solid"
           },
           {
-            "kicker": "03 / Inspect",
-            "title": "Tessellate & view",
+            "role": "inspect",
+            "number": "03",
+            "label": "Inspect",
+            "title": "Tessellate for display",
             "description": "The exact model is converted to display triangles. The viewport is the window into the model, not usually the model itself.",
+            "emphasis": "Display triangles ≠ source geometry",
             "examples": [
-              "Three.js",
-              "VTK",
-              "WebGPU",
+              "Viewport",
               "Measurements"
-            ]
+            ],
+            "visual": "wireframe"
           },
           {
-            "kicker": "04 / Exchange",
+            "role": "exchange",
+            "number": "04",
+            "label": "Exchange",
             "title": "Choose what survives",
-            "description": "A STEP file containing B-Rep geometry can preserve analytic surfaces and topology. Typical STL/3MF exports carry a tessellated surface; DXF/SVG usually carry 2D geometry.",
-            "examples": [
-              "STEP / BREP = editable CAD",
-              "STL / 3MF = usually mesh",
-              "DXF / SVG = usually 2D"
+            "description": "STEP can preserve analytic surfaces and topology; STL/3MF commonly carry tessellated surfaces. DXF/SVG are primarily used for 2D/vector exchange, though DXF can also contain 3D entities.",
+            "formats": [
+              {
+                "name": "STEP / B-Rep",
+                "detail": "Surfaces + topology",
+                "kind": "exact"
+              },
+              {
+                "name": "STL / 3MF",
+                "detail": "Tessellated surface",
+                "kind": "mesh"
+              }
             ]
           }
         ],
+        "hub": {
+          "label": "The model",
+          "title": "Source of truth",
+          "description": "Authoring intent plus kernel evaluation produce the representation the application works from.",
+          "caption": "Inspection and exchange branch independently from here. Manufacturing may use the model—or direct toolpath code may bypass it.",
+          "visual": "model"
+        },
+        "manufacturing": {
+          "number": "05",
+          "label": "Manufacture",
+          "title": "When geometry becomes a manufacturing plan",
+          "description": "Slicers and CAM turn geometry into machine motion; direct toolpath systems can generate motion without conventional CAD/CAM."
+        },
         "routes": [
           {
             "kind": "print",
             "label": "Additive",
             "title": "3D printing",
+            "caption": "Layer-by-layer deposition",
             "steps": [
-              "Solid or mesh",
+              "Model / mesh",
               "Slicer",
-              "G-code",
+              "Toolpath / G-code",
               "Printer firmware",
               "Printed part"
             ]
@@ -71,10 +102,11 @@ export const siteData = {
             "kind": "cnc",
             "label": "Subtractive",
             "title": "CNC machining",
+            "caption": "Material removal",
             "steps": [
-              "B-Rep / STEP",
+              "Model geometry / STEP",
               "CAM",
-              "G-code",
+              "Toolpath / G-code",
               "Machine controller",
               "Machined part"
             ]
@@ -83,10 +115,11 @@ export const siteData = {
             "kind": "direct",
             "label": "Direct",
             "title": "Programmatic toolpaths",
+            "caption": "Can bypass a conventional CAD/CAM model",
             "steps": [
               "Geometry code",
               "Path generator",
-              "G-code",
+              "Toolpath / G-code",
               "Controller",
               "Physical output"
             ]

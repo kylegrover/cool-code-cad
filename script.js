@@ -173,32 +173,196 @@ function renderLinkCard(item, anchorId, headingLevel) {
 
 // --- CAD pipeline infographic ----------------------------------------------
 
+function pipelineVisual(kind) {
+  const common = 'class="pipeline-visual" viewBox="0 0 240 132" aria-hidden="true" focusable="false"';
+
+  if (kind === 'blueprint') {
+    return `<svg ${common}>
+      <rect class="pipeline-visual-frame" x="1" y="1" width="238" height="130" rx="8" />
+      <path class="pipeline-visual-fill" d="M29 99V75h54l28-31h58c19 0 35 15 35 34s-16 34-35 34H78L61 99H29Z" />
+      <circle class="pipeline-visual-cut" cx="169" cy="78" r="17" />
+      <circle class="pipeline-visual-cut" cx="55" cy="87" r="7" />
+      <path class="pipeline-visual-dimension" d="M29 116v10m175-10v10M29 122h175M43 22h126m0 0v38M43 22v53" />
+      <path class="pipeline-visual-tick" d="m29 122 7-4m-7 4 7 4m168-4-7-4m7 4-7 4M43 22l4 7m-4-7-4 7m130-7 4 7m-4-7-4 7" />
+      <text x="108" y="119">80</text><text x="103" y="18">Ø20</text>
+    </svg>`;
+  }
+
+  if (kind === 'solid') {
+    return `<svg ${common}>
+      <path class="pipeline-visual-shadow" d="M35 108 93 76l111 10-57 34Z" />
+      <path class="pipeline-visual-fill" d="M29 91 86 60h45V28l45-15 30 20v66l-58 31-119-18Z" />
+      <path class="pipeline-visual-shade" d="m86 60 61 14v56L29 112V91Z" />
+      <path class="pipeline-visual-highlight" d="m147 74 59-31v56l-59 31Z" />
+      <ellipse class="pipeline-visual-cut" cx="173" cy="53" rx="17" ry="21" />
+      <ellipse class="pipeline-visual-cut" cx="66" cy="91" rx="13" ry="7" />
+      <path class="pipeline-visual-edge" d="M86 60 147 74l59-31M147 74v56M131 28l45-15 30 20" />
+    </svg>`;
+  }
+
+  if (kind === 'wireframe') {
+    return `<svg ${common}>
+      <path class="pipeline-visual-fill" d="M27 102 80 70h48V34l44-14 39 22v61l-58 25-126-12Z" />
+      <path class="pipeline-visual-edge" d="M27 102 80 70l73 17 58-45M80 70l30 52m18-88 25 53v41m58-86-83-8M27 102l126-15m-73-17 73 58m0-41 58 16M48 89l62 33m18-88 44 45m0-59v59m-19 8 19-8 39 24" />
+      <ellipse class="pipeline-visual-cut" cx="175" cy="56" rx="17" ry="20" />
+      <ellipse class="pipeline-visual-cut" cx="62" cy="101" rx="12" ry="6" />
+    </svg>`;
+  }
+
+  if (kind === 'model') {
+    return `<svg class="pipeline-visual pipeline-visual--model" viewBox="0 0 160 160" aria-hidden="true" focusable="false">
+      <path class="pipeline-model-face pipeline-model-face--top" d="m80 18 55 31-55 32-55-32Z" />
+      <path class="pipeline-model-face pipeline-model-face--left" d="M25 49v63l55 31V81Z" />
+      <path class="pipeline-model-face pipeline-model-face--right" d="m80 81 55-32v63l-55 31Z" />
+      <ellipse class="pipeline-model-hole" cx="80" cy="50" rx="22" ry="12" />
+      <ellipse class="pipeline-model-hole" cx="108" cy="103" rx="12" ry="19" />
+    </svg>`;
+  }
+
+  return '';
+}
+
+function pipelineFormatVisual(kind) {
+  if (kind === 'exact') {
+    return `<svg viewBox="0 0 88 54" aria-hidden="true" focusable="false">
+      <path class="pipeline-format-fill" d="M10 42V27h22l12-15h24l10 9v21Z" />
+      <circle class="pipeline-format-cut" cx="60" cy="24" r="9" />
+      <path class="pipeline-format-edge" d="M10 27h25l9-15m0 0v30" />
+    </svg>`;
+  }
+
+  return `<svg viewBox="0 0 88 54" aria-hidden="true" focusable="false">
+    <path class="pipeline-format-fill" d="M10 42V27h22l12-15h24l10 9v21Z" />
+    <path class="pipeline-format-edge" d="M10 27h25l9-15m0 0v30M10 27l34 15m-9-15 33-15m-24 0 34 30M44 42l24-30M44 12l34 9M35 27l43-6" />
+  </svg>`;
+}
+
+function pipelineRouteIcon(kind) {
+  if (kind === 'print') {
+    return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <path d="M12 9h24M24 9v8m-7 0h14l-3 6h-8l-3-6Zm7 6v5m-10 3h20v10H14zM10 43h28" />
+    </svg>`;
+  }
+  if (kind === 'cnc') {
+    return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+      <path d="M16 7h16l-4 8v8l-4 5-4-5v-8l-4-8Zm8 21v7m-13 8h26M14 35h20v8H14z" />
+    </svg>`;
+  }
+  return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+    <rect x="7" y="8" width="34" height="26" rx="2" />
+    <path d="m18 17-5 4 5 4m12-8 5 4-5 4m-8 4 4-16M17 40h14m-7-6v6" />
+  </svg>`;
+}
+
+function renderPipelineStage(stage) {
+  const article = document.createElement('article');
+  const role = stage.role || 'generic';
+  article.className = `pipeline-stage pipeline-stage--${esc(role)}`;
+
+  const examplesLabel = stage.examplesLabel
+    ? `<p class="pipeline-examples-label">${esc(stage.examplesLabel)}</p>`
+    : '';
+  const examples = stage.examples?.length
+    ? `<div class="pipeline-chips">${stage.examples.map(example => `<span>${esc(example)}</span>`).join('')}</div>`
+    : '';
+  const emphasis = stage.emphasis
+    ? `<p class="pipeline-stage-emphasis">${esc(stage.emphasis)}</p>`
+    : '';
+  const formats = stage.formats?.length
+    ? `<div class="pipeline-format-compare">${stage.formats.map(format => `
+        <div class="pipeline-format pipeline-format--${esc(format.kind)}">
+          <strong>${esc(format.name)}</strong>
+          ${pipelineFormatVisual(format.kind)}
+          <span>${esc(format.detail)}</span>
+        </div>`).join('')}</div>`
+    : '';
+
+  article.innerHTML = `
+    <div class="pipeline-stage-kicker">
+      <span class="pipeline-stage-number">${esc(stage.number)}</span>
+      <span>${esc(stage.label)}</span>
+    </div>
+    <h3>${esc(stage.title)}</h3>
+    <p class="pipeline-stage-description">${esc(stage.description)}</p>
+    ${emphasis}
+    ${examplesLabel}
+    ${examples}
+    ${formats}
+    ${stage.visual ? pipelineVisual(stage.visual) : ''}
+  `;
+  return article;
+}
+
 function renderPipeline(pipeline, container) {
   const graphic = document.createElement('div');
   graphic.className = 'pipeline-graphic';
-  graphic.setAttribute('aria-label', 'CAD product development pipeline');
+  graphic.setAttribute('aria-label', 'How a CAD model feeds inspection, exchange, and manufacturing');
 
-  const flow = document.createElement('div');
-  flow.className = 'pipeline-flow';
-  for (const stage of pipeline.stages || []) {
-    const article = document.createElement('article');
-    article.className = 'pipeline-stage';
-    article.innerHTML = `
-      <p class="pipeline-kicker">${esc(stage.kicker)}</p>
-      <h3>${esc(stage.title)}</h3>
-      <p>${esc(stage.description)}</p>
-      <div class="pipeline-chips">
-        ${(stage.examples || []).map(example => `<span>${esc(example)}</span>`).join('')}
+  const stages = pipeline.stages || [];
+  const stageByRole = role => stages.find(stage => stage.role === role);
+  const architecture = document.createElement('div');
+  architecture.className = 'pipeline-architecture';
+
+  architecture.appendChild(renderPipelineStage(stageByRole('author') || stages[0]));
+
+  const authorArrow = document.createElement('div');
+  authorArrow.className = 'pipeline-flow-arrow pipeline-flow-arrow--author';
+  authorArrow.setAttribute('aria-hidden', 'true');
+  authorArrow.textContent = '→';
+  architecture.appendChild(authorArrow);
+
+  architecture.appendChild(renderPipelineStage(stageByRole('evaluate') || stages[1]));
+
+  const evaluateArrow = document.createElement('div');
+  evaluateArrow.className = 'pipeline-flow-arrow pipeline-flow-arrow--evaluate';
+  evaluateArrow.setAttribute('aria-hidden', 'true');
+  evaluateArrow.textContent = '→';
+  architecture.appendChild(evaluateArrow);
+
+  const hub = pipeline.hub || {};
+  const model = document.createElement('article');
+  model.className = 'pipeline-model';
+  model.innerHTML = `
+    <p class="pipeline-model-label">${esc(hub.label || 'The model')}</p>
+    <h3>${esc(hub.title || 'Source of truth')}</h3>
+    <p>${esc(hub.description)}</p>
+    ${pipelineVisual(hub.visual || 'model')}
+    <p class="pipeline-model-caption">${esc(hub.caption)}</p>
+  `;
+  architecture.appendChild(model);
+
+  const fork = document.createElement('div');
+  fork.className = 'pipeline-fork';
+  fork.setAttribute('aria-hidden', 'true');
+  fork.innerHTML = '<span class="pipeline-fork-arm pipeline-fork-arm--top"></span><span class="pipeline-fork-arm pipeline-fork-arm--bottom"></span>';
+  architecture.appendChild(fork);
+
+  const outcomes = document.createElement('div');
+  outcomes.className = 'pipeline-outcomes';
+  outcomes.innerHTML = '<p class="pipeline-outcomes-label">Independent uses of the model</p>';
+  outcomes.appendChild(renderPipelineStage(stageByRole('inspect') || stages[2]));
+  outcomes.appendChild(renderPipelineStage(stageByRole('exchange') || stages[3]));
+  architecture.appendChild(outcomes);
+
+  const modelDrop = document.createElement('div');
+  modelDrop.className = 'pipeline-model-drop';
+  modelDrop.setAttribute('aria-hidden', 'true');
+  modelDrop.innerHTML = '<span>↓</span>';
+  architecture.appendChild(modelDrop);
+
+  const manufacturing = pipeline.manufacturing || {};
+  const manufacturingSection = document.createElement('div');
+  manufacturingSection.className = 'pipeline-manufacturing';
+  manufacturingSection.innerHTML = `
+    <div class="pipeline-manufacturing-header">
+      <span class="pipeline-manufacturing-number">${esc(manufacturing.number || '05')}</span>
+      <div>
+        <p>${esc(manufacturing.label || 'Manufacture')}</p>
+        <h3>${esc(manufacturing.title || 'When geometry becomes a manufacturing plan')}</h3>
+        <span>${esc(manufacturing.description)}</span>
       </div>
-    `;
-    flow.appendChild(article);
-  }
-  graphic.appendChild(flow);
-
-  const splitLabel = document.createElement('div');
-  splitLabel.className = 'pipeline-split-label';
-  splitLabel.innerHTML = '<span>Geometry becomes a manufacturing plan</span>';
-  graphic.appendChild(splitLabel);
+    </div>
+  `;
 
   const routes = document.createElement('div');
   routes.className = 'pipeline-routes';
@@ -206,28 +370,34 @@ function renderPipeline(pipeline, container) {
     const article = document.createElement('article');
     article.className = `pipeline-route pipeline-route--${esc(route.kind)}`;
 
-    const steps = (route.steps || []).map((step, index) => {
-      const arrow = index < route.steps.length - 1
-        ? '<span class="pipeline-route-arrow" aria-hidden="true">→</span>'
-        : '';
-      return `<span class="pipeline-route-step">${esc(step)}</span>${arrow}`;
-    }).join('');
+    const steps = (route.steps || []).map((step, index) => `
+      <li class="pipeline-route-step">
+        <span class="pipeline-route-step-number" aria-hidden="true">${index + 1}</span>
+        <span>${esc(step)}</span>
+      </li>`).join('');
 
     article.innerHTML = `
       <div class="pipeline-route-heading">
-        <span>${esc(route.label)}</span>
-        <h3>${esc(route.title)}</h3>
+        ${pipelineRouteIcon(route.kind)}
+        <div>
+          <span>${esc(route.label)}</span>
+          <h4>${esc(route.title)}</h4>
+          <p>${esc(route.caption)}</p>
+        </div>
       </div>
-      <div class="pipeline-route-steps">${steps}</div>
+      <ol class="pipeline-route-steps">${steps}</ol>
     `;
     routes.appendChild(article);
   }
-  graphic.appendChild(routes);
+  manufacturingSection.appendChild(routes);
+  architecture.appendChild(manufacturingSection);
+  graphic.appendChild(architecture);
 
   if (pipeline.note) {
-    const note = document.createElement('p');
+    const note = document.createElement('aside');
     note.className = 'pipeline-note';
-    note.innerHTML = pipeline.note;
+    note.setAttribute('aria-label', 'Important geometry boundary');
+    note.innerHTML = `<span class="pipeline-note-icon" aria-hidden="true">i</span><p>${pipeline.note}</p>`;
     graphic.appendChild(note);
   }
 

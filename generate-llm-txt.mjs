@@ -101,16 +101,47 @@ export function generateLlmText(data = siteData) {
 
     if (section.pipeline) {
       out += '--- HOW THIS PIPELINE WORKS ---\n\n';
-      for (const stage of section.pipeline.stages || []) {
-        out += `  ${stage.kicker}: ${stage.title}\n`;
+      const stages = section.pipeline.stages || [];
+      const writeStage = stage => {
+        const label = [stage.number, stage.label].filter(Boolean).join(' / ');
+        out += `  ${label}: ${stage.title}\n`;
         out += `  ${stage.description}\n`;
+        if (stage.emphasis) out += `  Key distinction: ${stage.emphasis}\n`;
         if (stage.examples?.length) out += `  Examples: ${stage.examples.join(', ')}\n`;
+        if (stage.formats?.length) {
+          out += `  Formats: ${stage.formats.map(format => `${format.name} (${format.detail})`).join(', ')}\n`;
+        }
         out += '\n';
+      };
+
+      out += '  Creation path:\n';
+      for (const stage of stages.filter(stage => ['author', 'evaluate'].includes(stage.role))) {
+        writeStage(stage);
+      }
+
+      if (section.pipeline.hub) {
+        const hub = section.pipeline.hub;
+        out += `  ${hub.label}: ${hub.title}\n`;
+        out += `  ${hub.description}\n`;
+        if (hub.caption) out += `  ${hub.caption}\n`;
+        out += '\n';
+      }
+
+      out += '  Independent downstream uses of the model:\n';
+      for (const stage of stages.filter(stage => ['inspect', 'exchange'].includes(stage.role))) {
+        writeStage(stage);
+      }
+
+      if (section.pipeline.manufacturing) {
+        const manufacturing = section.pipeline.manufacturing;
+        out += `  ${manufacturing.number} / ${manufacturing.label}: ${manufacturing.title}\n`;
+        out += `  ${manufacturing.description}\n\n`;
       }
 
       out += '  Manufacturing routes:\n';
       for (const route of section.pipeline.routes || []) {
-        out += `  - ${route.title}: ${(route.steps || []).join(' -> ')}\n`;
+        const caption = route.caption ? ` — ${route.caption}` : '';
+        out += `  - ${route.title}${caption}: ${(route.steps || []).join(' -> ')}\n`;
       }
       out += '\n';
 
