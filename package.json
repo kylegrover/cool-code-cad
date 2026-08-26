@@ -2,6 +2,7 @@
   "name": "cool-code-cad",
   "private": true,
   "type": "module",
+  "license": "CC0-1.0",
   "scripts": {
     "start": "node serve.mjs",
     "test": "npm run validate",

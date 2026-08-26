@@ -84,6 +84,7 @@ export function generateLlmText(data = siteData) {
   const totalItems = collectCatalogItems(data).length;
   let out = `# Programmatic G-Code & Code-First CAD — Complete Reference
 # Source: ${SITE_URL}
+# Repository license: CC0 1.0 Universal — https://creativecommons.org/publicdomain/zero/1.0/
 # Reviewed: ${data.meta?.updated || 'unknown'}
 # Curated reference; verify versions, availability, and machine-specific G-code before use.
 #

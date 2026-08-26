@@ -108,7 +108,10 @@ welcome.
 
 ## License
 
-This repository does not yet include a standard license file. The maintainer's
-stated intent is to permit reuse of the code and content, with a link back
-appreciated but not required. If your use requires standard license terms, open
-an issue with the maintainer before relying on this informal grant.
+The code and original catalog content in this repository are dedicated to the
+public domain under [CC0 1.0 Universal](LICENSE). You may copy, modify,
+distribute, and use them for any purpose without permission or attribution.
+
+CC0 applies only to rights held by this repository's contributors. Third-party
+project names, trademarks, and linked materials remain subject to their
+respective owners' rights and terms.
