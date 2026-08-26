@@ -174,38 +174,53 @@ function renderLinkCard(item, anchorId, headingLevel) {
 // --- CAD pipeline infographic ----------------------------------------------
 
 function pipelineVisual(kind) {
-  const common = 'class="pipeline-visual" viewBox="0 0 240 132" aria-hidden="true" focusable="false"';
+  const common = 'class="pipeline-visual" viewBox="0 0 240 150" aria-hidden="true" focusable="false"';
 
   if (kind === 'blueprint') {
     return `<svg ${common}>
-      <rect class="pipeline-visual-frame" x="1" y="1" width="238" height="130" rx="8" />
-      <path class="pipeline-visual-fill" d="M29 99V75h54l28-31h58c19 0 35 15 35 34s-16 34-35 34H78L61 99H29Z" />
-      <circle class="pipeline-visual-cut" cx="169" cy="78" r="17" />
-      <circle class="pipeline-visual-cut" cx="55" cy="87" r="7" />
-      <path class="pipeline-visual-dimension" d="M29 116v10m175-10v10M29 122h175M43 22h126m0 0v38M43 22v53" />
-      <path class="pipeline-visual-tick" d="m29 122 7-4m-7 4 7 4m168-4-7-4m7 4-7 4M43 22l4 7m-4-7-4 7m130-7 4 7m-4-7-4 7" />
-      <text x="108" y="119">80</text><text x="103" y="18">Ø20</text>
+      <rect class="pipeline-visual-frame" x="1" y="1" width="238" height="148" rx="8" />
+      <path class="pipeline-blueprint-grid" d="M1 30h238M1 59h238M1 89h238M1 118h238M40 1v148M80 1v148M120 1v148M160 1v148M200 1v148" />
+      <path class="pipeline-visual-fill" d="M27 105V80h58l30-36h54a36 36 0 0 1 0 72H80l-17-11H27Z" />
+      <circle class="pipeline-visual-cut" cx="169" cy="80" r="19" />
+      <circle class="pipeline-visual-cut" cx="169" cy="80" r="11" />
+      <circle class="pipeline-visual-cut" cx="55" cy="92" r="7" />
+      <path class="pipeline-blueprint-centerline" d="M169 51v58M140 80h58M55 79v26M42 92h26" />
+      <path class="pipeline-visual-dimension" d="M27 122v17m178-23v23M27 134h178M214 44h15m-15 72h15M224 44v72M115 36V20m54 17V20M115 25h54" />
+      <path class="pipeline-visual-tick" d="m27 134 7-4m-7 4 7 4m171-4-7-4m7 4-7 4m26-90-4 7m4-7 4 7m-4 65-4-7m4 7 4-7m-109-84 7-4m-7 4 7 4m47-4-7-4m7 4-7 4" />
+      <path class="pipeline-blueprint-leader" d="m151 64-22-21H98" />
+      <text x="116" y="131">80 mm</text><text x="142" y="22">Ø20</text><text x="222" y="83" transform="rotate(-90 222 83)">40 mm</text><text x="85" y="40">R5 FILLET</text>
     </svg>`;
   }
 
   if (kind === 'solid') {
     return `<svg ${common}>
-      <path class="pipeline-visual-shadow" d="M35 108 93 76l111 10-57 34Z" />
-      <path class="pipeline-visual-fill" d="M29 91 86 60h45V28l45-15 30 20v66l-58 31-119-18Z" />
-      <path class="pipeline-visual-shade" d="m86 60 61 14v56L29 112V91Z" />
-      <path class="pipeline-visual-highlight" d="m147 74 59-31v56l-59 31Z" />
-      <ellipse class="pipeline-visual-cut" cx="173" cy="53" rx="17" ry="21" />
-      <ellipse class="pipeline-visual-cut" cx="66" cy="91" rx="13" ry="7" />
-      <path class="pipeline-visual-edge" d="M86 60 147 74l59-31M147 74v56M131 28l45-15 30 20" />
+      <ellipse class="pipeline-visual-shadow" cx="121" cy="130" rx="98" ry="12" />
+      <path class="pipeline-solid-base-side" d="m23 101 128 21 66-38v14l-66 40-128-22Z" />
+      <path class="pipeline-solid-base-top" d="m23 101 59-34 135 17-66 38Z" />
+      <path class="pipeline-solid-web-side" d="m82 67 38-22 36 19v54l-26-4-30-33Z" />
+      <path class="pipeline-solid-upright-side" d="m120 45 48-28 39 22v56l-51 29V64Z" />
+      <path class="pipeline-solid-upright-front" d="m168 17 39 22v56l-39-22Z" />
+      <ellipse class="pipeline-solid-boss" cx="177" cy="49" rx="25" ry="29" transform="rotate(-28 177 49)" />
+      <ellipse class="pipeline-visual-cut" cx="177" cy="49" rx="11" ry="16" transform="rotate(-28 177 49)" />
+      <ellipse class="pipeline-solid-hole-rim" cx="63" cy="98" rx="15" ry="8" />
+      <ellipse class="pipeline-visual-cut" cx="63" cy="98" rx="10" ry="5" />
+      <path class="pipeline-solid-highlight" d="m27 99 56-29 132 16M123 44l45-24 35 20M153 120V66" />
+      <path class="pipeline-visual-edge" d="m23 101 128 21 66-38M151 122v16M217 84v14M82 67l48 47m-10-69 36 19 51-25" />
     </svg>`;
   }
 
   if (kind === 'wireframe') {
     return `<svg ${common}>
-      <path class="pipeline-visual-fill" d="M27 102 80 70h48V34l44-14 39 22v61l-58 25-126-12Z" />
-      <path class="pipeline-visual-edge" d="M27 102 80 70l73 17 58-45M80 70l30 52m18-88 25 53v41m58-86-83-8M27 102l126-15m-73-17 73 58m0-41 58 16M48 89l62 33m18-88 44 45m0-59v59m-19 8 19-8 39 24" />
-      <ellipse class="pipeline-visual-cut" cx="175" cy="56" rx="17" ry="20" />
-      <ellipse class="pipeline-visual-cut" cx="62" cy="101" rx="12" ry="6" />
+      <rect class="pipeline-viewport-frame" x="1" y="1" width="238" height="148" rx="8" />
+      <path class="pipeline-viewport-grid" d="M18 128 121 69l101 51M38 140l103-59m-70 66 91-52m-142 24 119 20m-99-32 119 20m-99-32 119 20" />
+      <path class="pipeline-wire-fill" d="m19 105 59-34 38-22 48-28 39 22v56l-55 33-129-14Z" />
+      <path class="pipeline-wire-edge" d="m19 105 59-34 70 17 55-45M19 105l129 27 55-33M78 71l38-22 48-28 39 22M116 49l32 39v44M164 21l39 78M78 71l22 48m48-31 55 11M19 105l129-17M45 90l55 29m-22-48 70 61m0-44 55-45m-87 6 48 51m0-79v79M43 119l57-47m0 47 48-31m0 44 55-89M19 105l59-5 70 32m-70-61 70 17m-32-39 87 50" />
+      <ellipse class="pipeline-wire-boss" cx="174" cy="54" rx="25" ry="29" transform="rotate(-28 174 54)" />
+      <path class="pipeline-wire-facets" d="m153 37 41 33m-45-11 49 5m-44 15 36-47m-35 67 38-56M152 44l44 28M149 70l47-22" />
+      <ellipse class="pipeline-visual-cut" cx="174" cy="54" rx="11" ry="16" transform="rotate(-28 174 54)" />
+      <ellipse class="pipeline-wire-boss" cx="59" cy="101" rx="15" ry="8" />
+      <ellipse class="pipeline-visual-cut" cx="59" cy="101" rx="9" ry="4.5" />
+      <g class="pipeline-viewport-tools"><circle cx="224" cy="18" r="5" /><path d="m221 18 3-3 3 3m-3-3v7M219 35h10m-5-5v10M220 49l8 8m0-8-8 8" /></g>
     </svg>`;
   }
 
@@ -224,16 +239,24 @@ function pipelineVisual(kind) {
 
 function pipelineFormatVisual(kind) {
   if (kind === 'exact') {
-    return `<svg viewBox="0 0 88 54" aria-hidden="true" focusable="false">
-      <path class="pipeline-format-fill" d="M10 42V27h22l12-15h24l10 9v21Z" />
-      <circle class="pipeline-format-cut" cx="60" cy="24" r="9" />
-      <path class="pipeline-format-edge" d="M10 27h25l9-15m0 0v30" />
+    return `<svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
+      <ellipse class="pipeline-format-shadow" cx="59" cy="62" rx="49" ry="5" />
+      <path class="pipeline-format-side" d="m10 45 65 11 35-20v8L75 65 10 53Z" />
+      <path class="pipeline-format-fill" d="m10 45 31-18 69 9-35 20Z" />
+      <path class="pipeline-format-fill" d="m43 27 20-12 21 11v29l-21 11V36Z" />
+      <path class="pipeline-format-highlight" d="m63 15 21 11v29L63 44Z" />
+      <ellipse class="pipeline-format-boss" cx="68" cy="27" rx="13" ry="15" transform="rotate(-28 68 27)" />
+      <ellipse class="pipeline-format-cut" cx="68" cy="27" rx="6" ry="8" transform="rotate(-28 68 27)" />
+      <ellipse class="pipeline-format-cut" cx="29" cy="44" rx="7" ry="3.5" />
+      <path class="pipeline-format-edge" d="m10 45 65 11 35-20M75 56v9M43 27l20 9 21-10" />
     </svg>`;
   }
 
-  return `<svg viewBox="0 0 88 54" aria-hidden="true" focusable="false">
-    <path class="pipeline-format-fill" d="M10 42V27h22l12-15h24l10 9v21Z" />
-    <path class="pipeline-format-edge" d="M10 27h25l9-15m0 0v30M10 27l34 15m-9-15 33-15m-24 0 34 30M44 42l24-30M44 12l34 9M35 27l43-6" />
+  return `<svg viewBox="0 0 120 72" aria-hidden="true" focusable="false">
+    <ellipse class="pipeline-format-shadow" cx="59" cy="62" rx="49" ry="5" />
+    <path class="pipeline-format-mesh-fill" d="m10 45 31-18 22-12 21 11 26 10v8L75 65 10 53Z" />
+    <path class="pipeline-format-edge" d="m10 45 65 11 35-20M10 45l65 20m0-9v9m35-29v8M41 27l22-12 21 11v29M63 15v51M41 27l43 28M10 45l65 11M29 34l46 31m-34-38 69 17M63 15l47 29M84 26 10 29M41 27l-12 27m55-28L63 66M10 45l74-19M29 54l81-18" />
+    <ellipse class="pipeline-format-edge" cx="68" cy="27" rx="13" ry="15" transform="rotate(-28 68 27)" />
   </svg>`;
 }
 
@@ -252,6 +275,34 @@ function pipelineRouteIcon(kind) {
     <rect x="7" y="8" width="34" height="26" rx="2" />
     <path d="m18 17-5 4 5 4m12-8 5 4-5 4m-8 4 4-16M17 40h14m-7-6v6" />
   </svg>`;
+}
+
+function pipelineRouteStepIcon(kind, index) {
+  const icons = {
+    print: [
+      '<path d="m14 5 10 6-10 6-10-6 10-6Zm-10 6v11l10 7 10-7V11M14 17v12" />',
+      '<path d="m4 9 10 5 10-5-10-5L4 9Zm0 6 10 5 10-5M4 21l10 5 10-5" />',
+      '<rect x="4" y="6" width="20" height="17" rx="2" /><path d="m11 11-3 3 3 3m6-6 3 3-3 3m-3 4V8" />',
+      '<rect x="7" y="7" width="14" height="14" rx="2" /><path d="M10 2v5m4-5v5m4-5v5m-8 14v5m4-5v5m4-5v5M2 10h5m-5 4h5m-5 4h5m14-8h5m-5 4h5m-5 4h5" />',
+      '<path d="m14 5 10 6-10 6-10-6 10-6Zm-10 6v11l10 7 10-7V11M14 17v12M9 24l5 3 5-3" />'
+    ],
+    cnc: [
+      '<path d="m14 5 10 6-10 6-10-6 10-6Zm-10 6v11l10 7 10-7V11M14 17v12" />',
+      '<path d="M8 4h12l-3 6v7l-3 4-3-4v-7L8 4Zm6 17v5M4 27h20" />',
+      '<rect x="4" y="6" width="20" height="17" rx="2" /><path d="m11 11-3 3 3 3m6-6 3 3-3 3m-3 4V8" />',
+      '<rect x="4" y="6" width="20" height="17" rx="2" /><circle cx="9" cy="11" r="1.5" /><circle cx="14" cy="11" r="1.5" /><path d="M8 18h12M8 21h8" />',
+      '<path d="M5 23v-9h6l4-6h8v15H5Zm11-8h5m-2-4v8M3 26h22" />'
+    ],
+    direct: [
+      '<rect x="3" y="5" width="22" height="17" rx="2" /><path d="m10 10-4 3.5 4 3.5m8-7 4 3.5-4 3.5m-5 3 3-14M9 26h10" />',
+      '<circle cx="6" cy="8" r="2.5" /><circle cx="22" cy="7" r="2.5" /><circle cx="14" cy="23" r="2.5" /><path d="M8 9.5c6 1 2 8 6 11m6-12c-6 2-2 8-6 12" />',
+      '<rect x="4" y="6" width="20" height="17" rx="2" /><path d="m11 11-3 3 3 3m6-6 3 3-3 3m-3 4V8" />',
+      '<rect x="4" y="6" width="20" height="17" rx="2" /><circle cx="9" cy="11" r="1.5" /><circle cx="14" cy="11" r="1.5" /><path d="M8 18h12M8 21h8" />',
+      '<circle cx="14" cy="14" r="10" /><circle cx="14" cy="14" r="5" /><path d="M14 1v6m0 14v6M1 14h6m14 0h6" />'
+    ]
+  };
+  const body = (icons[kind] || icons.direct)[index] || '';
+  return `<svg class="pipeline-route-step-icon" viewBox="0 0 28 30" aria-hidden="true" focusable="false">${body}</svg>`;
 }
 
 function renderPipelineStage(stage) {
@@ -372,7 +423,7 @@ function renderPipeline(pipeline, container) {
 
     const steps = (route.steps || []).map((step, index) => `
       <li class="pipeline-route-step">
-        <span class="pipeline-route-step-number" aria-hidden="true">${index + 1}</span>
+        ${pipelineRouteStepIcon(route.kind, index)}
         <span>${esc(step)}</span>
       </li>`).join('');
 
