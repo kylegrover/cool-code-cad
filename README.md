@@ -6,9 +6,10 @@ CAM, slicing, visualization, simulation, and programmatic manufacturing.
 Browse the published guide at
 [kylegrover.github.io/cool-code-cad](https://kylegrover.github.io/cool-code-cad/).
 
-Last curated research pass: **2026-08-25**. This pass added the CAD-to-machine
-pipeline explainer, refreshed active B-Rep and agent-tooling projects, and added
-ChiselCAD, build123d-mcp, oscad, Monstertruck, vcad, and brepkit/brepjs.
+Last curated research pass: **2026-09-07**. This pass added Rig Cad. The prior
+pass added the CAD-to-machine pipeline explainer, refreshed active B-Rep and
+agent-tooling projects, and added ChiselCAD, build123d-mcp, oscad, Monstertruck,
+vcad, and brepkit/brepjs.
 
 ## Scope and caveats
 

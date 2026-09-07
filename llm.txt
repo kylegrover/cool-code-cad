@@ -1,10 +1,10 @@
 # Programmatic G-Code & Code-First CAD — Complete Reference
 # Source: https://kylegrover.github.io/cool-code-cad/
 # Repository license: CC0 1.0 Universal — https://creativecommons.org/publicdomain/zero/1.0/
-# Reviewed: 2026-08-25
+# Reviewed: 2026-09-07
 # Curated reference; verify versions, availability, and machine-specific G-code before use.
 #
-# Total catalog entries: 204
+# Total catalog entries: 205
 
 ================================================================================
 HOW THE CAD STACK FITS TOGETHER
@@ -1407,6 +1407,13 @@ Browser-hosted modeling and manufacturing tools, plus the runtimes that enable t
   Tech: Next.js, fullcontrol-js
   Tags: browser, gcode, ide, javascript
   Browser IDE for JavaScript-to-G-code work through the open-source fullcontrol-js library. Shares py2g's editor and community-sketch workflow while executing JavaScript directly.
+
+  Rig Cad (2026)
+  URL: https://rigcad.com/
+  License / access: Freemium web app
+  Tech: WebGL, Manifold
+  Tags: browser, commercial, parametric, implicit, sdf, csg, mesh, gui
+  Freemium browser-based parametric CAD built around a visual CSG tree. It can mix implicit SDF modeling for smooth blends, offsets, shells, lattices, and field-driven detail with watertight Manifold mesh operations, constrained 2D sketches, NURBS surfaces, and voxels. Projects save locally with optional cloud sync and can expose parameters as shareable configurators; exports include STL, 3MF, OBJ, glTF/GLB, PLY, DXF, and SVG.
 
   ManifoldCAD (2022)
   URL: https://manifoldcad.org/

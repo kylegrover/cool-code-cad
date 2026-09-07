@@ -2,7 +2,7 @@ export const siteData = {
   "meta": {
     "title": "Programmatic G-Code\n& <span class=\"accent\">Code-First CAD</span>",
     "subtitle": "A field guide to writing code instead of clicking buttons — from CAD kernels and exact solids to viewers, slicers, toolpaths, G-code, and the machines at the other end.",
-    "updated": "2026-08-25"
+    "updated": "2026-09-07"
   },
   "sections": [
     {
@@ -3972,6 +3972,30 @@ export const siteData = {
                 "website": "https://js2g.com"
               },
               "license": "Free web app (beta)"
+            },
+            {
+              "name": "Rig Cad",
+              "url": "https://rigcad.com/",
+              "year": 2026,
+              "description": "Freemium browser-based parametric CAD built around a visual CSG tree. It can mix implicit SDF modeling for smooth blends, offsets, shells, lattices, and field-driven detail with watertight Manifold mesh operations, constrained 2D sketches, NURBS surfaces, and voxels. Projects save locally with optional cloud sync and can expose parameters as shareable configurators; exports include STL, 3MF, OBJ, glTF/GLB, PLY, DXF, and SVG.",
+              "tags": [
+                "browser",
+                "commercial",
+                "parametric",
+                "implicit",
+                "sdf",
+                "csg",
+                "mesh",
+                "gui"
+              ],
+              "tech": [
+                "WebGL",
+                "Manifold"
+              ],
+              "links": {
+                "website": "https://rigcad.com/"
+              },
+              "license": "Freemium web app"
             },
             {
               "name": "ManifoldCAD",
