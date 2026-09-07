@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node serve.mjs",
     "test": "npm run validate",
-    "generate": "node normalize-data.mjs && node generate-llm-txt.mjs && node generate-toc.mjs",
+    "generate": "node normalize-data.mjs && node generate-llm-txt.mjs && node generate-toc.mjs && node generate-readme.mjs",
     "refresh": "node run-all.mjs",
     "validate": "node validate-data.mjs",
     "validate:links": "node validate-data.mjs --links"

@@ -12,6 +12,7 @@ const scripts = [
   'fetch-stars.mjs',
   'generate-llm-txt.mjs',
   'generate-toc.mjs',
+  'generate-readme.mjs',
   'validate-data.mjs',
 ];
 

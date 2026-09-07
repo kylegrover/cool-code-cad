@@ -11,6 +11,7 @@ import {
   subsectionAnchorId,
 } from './catalog-utils.js';
 import { generateLlmText } from './generate-llm-txt.mjs';
+import { generateReadme } from './generate-readme.mjs';
 import { generateToc } from './generate-toc.mjs';
 
 const PROJECT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -174,6 +175,7 @@ for (const [url, locations] of duplicatePrimaryUrls) {
 }
 
 const generatedFiles = [
+  ['README.md', generateReadme(siteData)],
   ['llm.txt', generateLlmText(siteData)],
   ['toc.txt', generateToc(siteData)],
 ];

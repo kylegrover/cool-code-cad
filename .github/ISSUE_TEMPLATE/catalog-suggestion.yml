@@ -1,0 +1,60 @@
+name: Suggest a catalog addition or change
+description: Suggest a new project, correction, update, or removal for Cool Code CAD.
+title: "[Catalog suggestion]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Cool Code CAD. Rough notes are welcome—you do not need to research or format a complete catalog entry.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of change is this?
+      options:
+        - Add a project or resource
+        - Correct or update an existing entry
+        - Remove or mark an entry as inactive
+        - Reorganize or recategorize content
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Project or resource name
+      placeholder: e.g. CadQuery
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Primary URL
+      description: Prefer an official website, repository, documentation page, release, or paper.
+      placeholder: https://example.com/project
+    validations:
+      required: true
+
+  - type: input
+    id: category
+    attributes:
+      label: Suggested category
+      description: Leave this blank if you are unsure.
+      placeholder: e.g. Code-First CAD / B-Rep
+
+  - type: textarea
+    id: change
+    attributes:
+      label: Suggested addition or change
+      description: Tell us what should be added or changed and why. Links to supporting sources are especially useful.
+      placeholder: A short description or rough notes are enough.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Optional caveats, license details, maintenance status, comparisons, or other useful context.

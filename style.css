@@ -181,6 +181,38 @@ a:hover { color: #93b0ff; }
   line-height: 1.6;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 18px;
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  color: var(--text);
+  background: rgba(13, 19, 34, 0.7);
+  font-size: 0.88rem;
+  font-weight: 650;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+
+.hero-action:hover {
+  border-color: var(--accent-dim);
+  background: var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.hero-action--primary {
+  border-color: rgba(106, 129, 255, 0.7);
+  background: rgba(106, 129, 255, 0.18);
+}
+
 /* ===== Sticky Bar ===== */
 .sticky-bar {
   position: sticky;
